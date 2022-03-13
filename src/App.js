@@ -1,5 +1,4 @@
 import "./App.css";
-import PlayfairDisplay from "./fonts/PlayfairDisplaySC-Regular.ttf";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Main from "./components/Main";
 

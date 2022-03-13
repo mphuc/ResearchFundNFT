@@ -1,26 +1,14 @@
-import logo from "../logo1.png";
 import { makeStyles } from "@mui/styles";
 import { Box, Button, Container, Typography } from "@mui/material";
+import NFTCards from "./NFTCards";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "grid",
-    gridTemplateColumns: "1fr auto",
-    gridTemplateRows: "1fr auto",
-    [theme.breakpoints.down("sm")]: {
-      gridTemplateColumns: "100%",
-    },
-  },
   introContent: {
-    maxWidth: "80%",
-    minHeight: "44vh",
-    display: "flex",
-    flexDirection: "column",
+    minHeight: "50vh",
+    marginTop: "10%",
+    textAlign: "center",
     justifyContent: "center",
     padding: theme.spacing(2, 0),
-    "& > * + *": {
-      marginTop: theme.spacing(2),
-    },
 
     "& p": {
       fontSize: "1rem",
@@ -28,12 +16,6 @@ const useStyles = makeStyles((theme) => ({
     },
     "& button": {
       maxWidth: "350px",
-    },
-
-    [theme.breakpoints.down("sm")]: {
-      gridRow: "2 / 3",
-      textAlign: "center",
-      display: "block",
     },
   },
   logo: {
@@ -63,28 +45,33 @@ const Main = () => {
 
   return (
     <Container className="App">
-      <div className={classes.root}>
-        <div className={classes.introContent}>
-          <Typography variant="h5">
-            The NFT project dedicated to becoming the largest donor to global
-            research institutions studying the world's deadliest diseases.
-          </Typography>
-          <div>
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={() =>
-                (window.location.href = "https://discord.gg/b6qdYN8zzr")
-              }
-            >
-              Join Discord
-            </Button>
-          </div>
+      <Box className={classes.introContent}>
+        <Typography variant="h2" style={{ margin: "20px 0" }}>
+          Research Funding Club
+        </Typography>
+        <Typography
+          variant="h5"
+          style={{ margin: "20px auto", maxWidth: "80%" }}
+        >
+          The NFT project dedicated to becoming the largest donor to global
+          research institutions studying the world's deadliest diseases.
+        </Typography>
+        <div style={{ margin: "20px 0" }}>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() =>
+              (window.location.href = "https://discord.gg/b6qdYN8zzr")
+            }
+          >
+            Join Discord
+          </Button>
         </div>
-        <div>
-          <img className={classes.logo} src={logo} alt="logo" />
-        </div>
-      </div>
+      </Box>
+
+      <Box style={{ width: "90%", margin: "20px auto" }}>
+        <NFTCards />
+      </Box>
 
       <Box className={classes.card}>
         <Typography variant="h4" gutterBottom className={classes.green}>
@@ -120,17 +107,25 @@ const Main = () => {
         <Typography variant="h4" gutterBottom className={classes.green}>
           Why Buy One of Our NFT's?
         </Typography>
-        <Typography variant="h6">
-          On our first drop, we'll donate 5% of all proceeds to the American
-          Heart Association, and another 5% to American Cancer Society. For
-          every transaction that occurs after the first drop, 5% of the
-          royalties will be set aside for donation. We'll let our owners decide
-          the institution.
-        </Typography>
-        <Typography variant="h6">
-          In the roadmap, we're also looking at building a token that our owners
-          will be able to accumulate for everyday that they own one of our
-          NFT's. That token will be able to be exchanged for ETH.
+        <Typography variant="h6" style={{ margin: "5px 0" }}>
+          <ol>
+            <li>
+              On our first drop, we'll donate 5% of all proceeds to the American
+              Heart Association, and another 5% to American Cancer Society. For
+              every transaction that occurs after the first drop, 5% of the
+              royalties will be set aside for donation. We'll let our owners
+              decide the institution.
+            </li>
+            <li>
+              We'll eventually have a token that our owners will be able to
+              accumulate for everyday that they own one of our NFT's. That token
+              will be able to be exchanged for ETH.
+            </li>
+            <li>
+              Collect all 5 versions of the same portrait, and we'll mint the
+              original photograph as an NFT and transfer it to you.
+            </li>
+          </ol>
         </Typography>
       </Box>
 

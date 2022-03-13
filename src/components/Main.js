@@ -95,10 +95,18 @@ const Main = () => {
           What Are Our NFT's?
         </Typography>
         <Typography variant="h6">
-          The first drop is a collection of 25 NFT's that are portrait's of my
-          mother and my father. There's 5 different portrait's all done by a
-          different artist. Each portrait has 5 different versions, with
-          different backgrounds and different visual effects. There's one "punk"
+          Research Funding Club are NFTs following the{" "}
+          <a href="https://eips.ethereum.org/EIPS/eip-721" target="_blank">
+            ERC-721
+          </a>{" "}
+          standard. The first drop is a collection of 25 NFT's that are
+          portrait's of my mother and my father. There's 5 different portrait's
+          all done by a different artist. Each portrait has 5 different
+          versions, with different backgrounds and different visual effects.
+          There's one{" "}
+          <a href="https://www.larvalabs.com/cryptopunks" target="_blank">
+            punk{" "}
+          </a>
           inspired version of each portrait.
         </Typography>
       </Box>

@@ -1,8 +1,12 @@
 import "./App.css";
+import PlayfairDisplay from "./fonts/PlayfairDisplaySC-Regular.ttf";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Main from "./components/Main";
 
 const theme = createTheme({
+  typography: {
+    fontFamily: "PlayfairDisplay, Arial",
+  },
   palette: {
     primary: {
       main: "#175c4c",

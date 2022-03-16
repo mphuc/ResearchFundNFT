@@ -1,6 +1,7 @@
 import { makeStyles } from "@mui/styles";
 import { Box, Button, Container, Typography } from "@mui/material";
 import NFTCards from "./NFTCards";
+import NFTCalendarLogo from "../images/nftcalendar-500x500.png";
 
 const useStyles = makeStyles((theme) => ({
   introContent: {
@@ -67,6 +68,18 @@ const Main = () => {
             Join Discord
           </Button>
         </div>
+        <Box style={{ width: "90%", margin: "20px auto", textAlign: "center" }}>
+          <Typography variant="h6" className={classes.green}>
+            As Seen On
+          </Typography>
+
+          <a
+            href="https://nftcalendar.io/event/research-funding-club-drop-1/"
+            target="_blank"
+          >
+            <img height={150} width="auto" src={NFTCalendarLogo} />
+          </a>
+        </Box>
       </Box>
 
       <Box style={{ width: "90%", margin: "20px auto" }}>

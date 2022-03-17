@@ -18,8 +18,8 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable {
 
     bool public paused = false;
     string public baseExtension = ".json";
-    uint256 public MIN_SUPPLY = 25; // for random number generation
-    uint256 public MAX_SUPPLY = 50;
+    uint256 public MIN_SUPPLY = 1; // for random number generation
+    uint256 public MAX_SUPPLY = 10;
     uint256 public PRICE = 0.0001 ether;
     uint256 public MAX_PER_MINT = 1;
     mapping(address => uint256) public addressMintedBalance;
@@ -80,10 +80,33 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable {
         @description - Iteratively chooses a random number that has not been minted yet.
         @returns <uint> - unminted random number
     */
-    function selectRandomNumber(uint256 randomNo) internal view returns (uint256) {
-        uint256 mintNumber = rand(msg.sender, randomNo);
 
-        return mintNumber;
+    // cleaner
+    // function selectRandomNumber(uint256 randomNo) internal view returns (uint256) {
+    //     uint256 supply = totalSupply();
+    //     require(supply < MAX_SUPPLY, "Ran out of numbers.");
+
+    //     uint256 mintNumber = rand(msg.sender, randomNo);        
+    //     if (ERC721.testOwnerOf(mintNumber) == false) return mintNumber;
+    //     return selectRandomNumber(mintNumber + randomNo);
+    // }
+
+    function selectRandomNumber(uint256 randomNo) internal view returns (uint256) {
+        uint256 supply = totalSupply();
+        require(supply < MAX_SUPPLY, "no numbers left.");
+
+        uint256 mintNumber = rand(msg.sender, randomNo);
+        
+        console.log("random number: ", mintNumber);
+
+        // if (ERC721.testOwnerOf(mintNumber) == false) return mintNumber;
+        if (ERC721.testOwnerOf(mintNumber) == false) {
+            console.log("Found final mint number: ", mintNumber);
+            return mintNumber;
+        }
+
+        console.log("Oops mint number was duplicate.");
+        return selectRandomNumber(mintNumber + randomNo);
     }
 
     function mint(uint256 _mintAmount, uint256 mintNumber) public payable {
@@ -106,14 +129,10 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable {
         _safeMint(msg.sender, mintNumber);
     }
 
-    function newOwner(uint256 tokenId) public view virtual override returns (address) {
-        address owner = ERC721._owners[tokenId];
-        console.log(owner);
-        return owner;
-    }
+    function generateRandomNumber() public view returns (uint256) {
+        return selectRandomNumber(0);
 
-    function generateRandomNumber() public onlyOwner {
-        
+        // console.log(ERC721.testOwnerOf(1));
         // if (ownerOf(1)) {
         //     console.log("found");
         // } else {
@@ -126,7 +145,7 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable {
         //     console.log("no owners");
         // }
 
-        console.log(ownerOf(1));
+        // console.log(ownerOf(1));
         // console.log(ERC721._owners[0]);
 
 

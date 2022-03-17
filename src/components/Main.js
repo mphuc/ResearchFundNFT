@@ -91,15 +91,19 @@ const Main = () => {
           Our Story
         </Typography>
         <Typography variant="h6">
-          I'm Sean. In 2019, I lost my mother to a long battle with cancer. 2
-          years later, I lost my father to a cardiac event. When my brothers and
-          I found boxes of old family photos, I thought it'd be cool to get some
-          of them made into digital art and mint them as NFT's. A software
-          engineer by trade (I've founded and scaled Web2 companies), I've
-          always wanted to get into the Web3 ecosystem. This was a perfect
-          chance. As an outlet for me to grieve and commemorate my parents, as
-          well as raise money to study the diseases that took my parents, I
-          began working on Research Funding Club.
+          I started working on Research Funding Club as a way to explore the
+          Web3 ecosystem (I'm a software engineer and have founded and scaled
+          Web2 tech companies - and have been following Web3 for a couple years
+          now).
+        </Typography>
+        <Typography variant="h6">
+          I lost both of my parents over the span of 2 years, one to cancer and
+          one to a cardiac event. After finding boxes of old photos in our
+          parents house, I thought about getting some of them made into nice
+          pieces of art and minting them as NFTs. Originally I just wanted to
+          preserve some memories, and learn about Web3. After seeing some of the
+          other charity projects in the Web3 space, I thought it would be
+          awesome to work on an NFT project for a good cause.
         </Typography>
       </Box>
 
@@ -113,10 +117,10 @@ const Main = () => {
             ERC-721
           </a>{" "}
           standard. The first drop is a collection of 25 NFT's that are
-          portrait's of my mother and my father. There's 5 different portrait's
-          all done by a different artist. Each portrait has 5 different
-          versions, with different backgrounds and different visual effects.
-          There's one{" "}
+          portrait's of different photos we found of our family. There's 5
+          different portrait's in the first drop - all done by a different
+          artist. Each portrait has 5 different versions, with different
+          backgrounds and different visual effects. There's one{" "}
           <a href="https://www.larvalabs.com/cryptopunks" target="_blank">
             punk{" "}
           </a>

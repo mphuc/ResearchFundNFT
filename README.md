@@ -1,6 +1,6 @@
 # Research Funding Club
 
-See [Website](https://researchfundingclub.com) for more info.
+See [Website](https://researchfundingclub.com) for more info. Drop is verified on [NFTCalender](https://nftcalendar.io/event/research-funding-club-drop-1/).
 
 # Setup
 

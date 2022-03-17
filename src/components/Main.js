@@ -76,6 +76,7 @@ const Main = () => {
           <a
             href="https://nftcalendar.io/event/research-funding-club-drop-1/"
             target="_blank"
+            rel="noreferrer"
           >
             <img height={150} width="auto" src={NFTCalendarLogo} />
           </a>
@@ -113,7 +114,11 @@ const Main = () => {
         </Typography>
         <Typography variant="h6">
           Research Funding Club are NFTs following the{" "}
-          <a href="https://eips.ethereum.org/EIPS/eip-721" target="_blank">
+          <a
+            href="https://eips.ethereum.org/EIPS/eip-721"
+            target="_blank"
+            rel="noreferrer"
+          >
             ERC-721
           </a>{" "}
           standard. The first drop is a collection of 25 NFT's that are
@@ -121,7 +126,11 @@ const Main = () => {
           different portrait's in the first drop - all done by a different
           artist. Each portrait has 5 different versions, with different
           backgrounds and different visual effects. There's one{" "}
-          <a href="https://www.larvalabs.com/cryptopunks" target="_blank">
+          <a
+            href="https://www.larvalabs.com/cryptopunks"
+            target="_blank"
+            rel="noreferrer"
+          >
             punk{" "}
           </a>
           inspired version of each portrait.

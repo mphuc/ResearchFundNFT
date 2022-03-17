@@ -5,6 +5,12 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "hardhat/console.sol";
 
+/*
+    Understanding the smart contract so far.
+
+    - ERC721URIStorage -- expensive method of storing token ids
+ */
+
 contract ResearchFundingClub is ERC721URIStorage {
     string public baseTokenURI;
     using Counters for Counters.Counter;

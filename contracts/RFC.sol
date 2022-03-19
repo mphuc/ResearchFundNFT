@@ -1349,9 +1349,6 @@ abstract contract ERC721URIStorage is ERC721 {
     }
 }
 
-
-// need to pull all the contract to access the private variables
-// TODO: need to add the URIStorage here
 contract ResearchFundingClub3 is ERC721Enumerable, Ownable, ERC721URIStorage {
     string public baseTokenURI;
 
@@ -1361,7 +1358,6 @@ contract ResearchFundingClub3 is ERC721Enumerable, Ownable, ERC721URIStorage {
     uint256 public MAX_SUPPLY = 10;
     uint256 public PRICE = 0.0001 ether;
     uint256 public MAX_PER_MINT = 1;
-    mapping(address => uint256) public addressMintedBalance;
 
     constructor(string memory baseURI) ERC721("Research Funding Club", "RFC") {
         setBaseURI(baseURI);
@@ -1378,18 +1374,6 @@ contract ResearchFundingClub3 is ERC721Enumerable, Ownable, ERC721URIStorage {
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
         super._burn(tokenId);
     }
-
-    // function tokenURI(uint256 tokenId)
-    //     public
-    //     view
-    //     override(ERC721, ERC721URIStorage)
-    //     returns (string memory)
-    // {
-    //     return super.tokenURI(tokenId);
-    //     // string memory tokenUri = super.tokenURI(tokenId);
-    //     // return abi.encodePacked(tokenUri, baseExtension);
-    //     // return ERC721URIStorage._tokenURIs[tokenId];
-    // }
 
     function tokenURI(uint256 tokenId)
         public 
@@ -1415,15 +1399,7 @@ contract ResearchFundingClub3 is ERC721Enumerable, Ownable, ERC721URIStorage {
         return super.supportsInterface(interfaceId);
     }
 
-    // function _baseURI() internal view virtual override returns (string memory) {
-    //     return baseTokenURI;
-    // }
-
-    // function _baseURI() internal view override returns (string memory) {
-
-    function _baseURI() internal pure override returns (string memory) {
-        return "";
-    }
+    function _baseURI() internal pure override returns (string memory) {return "";}
 
     function tokensOfOwner(address _owner)
         external
@@ -1469,7 +1445,6 @@ contract ResearchFundingClub3 is ERC721Enumerable, Ownable, ERC721URIStorage {
         @description - Iteratively chooses a random number that has not been minted yet.
         @returns <uint> - unminted random number
     */
-
     function selectRandomNumber(uint256 randomNo) internal view returns (uint256) {
         uint256 supply = totalSupply();
         require(supply < MAX_SUPPLY, "Ran out of numbers.");
@@ -1479,50 +1454,33 @@ contract ResearchFundingClub3 is ERC721Enumerable, Ownable, ERC721URIStorage {
         return selectRandomNumber(mintNumber + randomNo);
     }
 
-    // function selectRandomNumber(uint256 randomNo) internal view returns (uint256) {
-    //     uint256 supply = totalSupply();
-    //     require(supply < MAX_SUPPLY, "no numbers left.");
-
-    //     uint256 mintNumber = rand(msg.sender, randomNo);
-    //     console.log("random number: ", mintNumber);
-
-    //     if (ERC721.testOwnerOf(mintNumber) == false) {
-    //         console.log("Found final mint number: ", mintNumber);
-    //         return mintNumber;
-    //     }
-
-    //     console.log("Oops mint number was duplicate.");
-    //     return selectRandomNumber(mintNumber + randomNo);
-    // }
-
-    // mint amout does not matter
+    /*
+        @function mint()
+        @description - Mints the an NFT the sender based on a random number selection
+    */
     function mint(uint256 _mintAmount) public payable {
         require(!paused, "The contract is paused");
         uint256 supply = totalSupply();
         require(_mintAmount > 0, "mint atleast 1 NFT");
         require(supply + _mintAmount <= MAX_SUPPLY, "max NFT limit exceeded"); // multiple minting
-
-        // Production
-        // require(_mintAmount <= MAX_PER_MINT, "max NFT per address exceeded");
-        // require(supply + _mintAmount <= MAX_SUPPLY, "max NFT limit exceeded");
-
-        // // prevent remints through token transfers  
-        // uint256 ownerMintedCount = addressMintedBalance[msg.sender];
-        // require(ownerMintedCount + _mintAmount <= MAX_PER_MINT, "max NFT per address exceeded");
+        require(_mintAmount <= MAX_PER_MINT, "max NFT per address exceeded");
 
         uint256 mintNumber = selectRandomNumber(0);
         require(msg.value >= PRICE * _mintAmount, "insufficient funds");  
         
-        addressMintedBalance[msg.sender]++;
         _safeMint(msg.sender, mintNumber);
-
-        // string memory mintNumberstr = Strings.toString(mintNumber);
         _setTokenURI(mintNumber, string(abi.encodePacked(baseTokenURI, Strings.toString(mintNumber), baseExtension)));
-        // _setTokenURI(mintNumber, value);
     }
 
-    function generateRandomNumber() public view returns (uint256) {
-        return selectRandomNumber(0);
+    /*
+        @function newDrop()
+        @description - Set the next NFT collection drop: increase max supply and the base uri
+        @params - updated max mint supply, new base uri
+    */
+    function newDrop(uint256 _newMaxSupply, string memory _newBaseURI) public onlyOwner {
+        require(totalSupply() == MAX_SUPPLY, "Previous drop sales has not finished yet.");
+        MAX_SUPPLY = _newMaxSupply;
+        setBaseURI(_newBaseURI);
     }
 
     function setmaxMintAmount(uint256 _limit) public onlyOwner {
@@ -1550,14 +1508,10 @@ contract ResearchFundingClub3 is ERC721Enumerable, Ownable, ERC721URIStorage {
     }
     
     function withdraw() public payable onlyOwner {
-        // developer fee 2%? 
+        // developer fee 3%? 
         uint256 balance = address(this).balance;
         require(balance > 0, "No ether left to withdraw.");
         (bool success, ) = (msg.sender).call{value: balance}("");
         require(success, "Transfer failed.");
     }
 }
-
-/*
-    Developed by Manish Gotame - https://manishgotame.com.np/
- */

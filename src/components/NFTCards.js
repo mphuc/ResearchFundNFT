@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import MomDadBlue from "../nfts/MomDadBlue.png";
 import MomDadPunks from "../nfts/MomDadPunksPixel2.png";
@@ -87,12 +87,6 @@ function NFTCards() {
           <div key={i}>
             <Card style={{ width: "90%", margin: "5px auto" }}>
               <CardContent style={{ margin: "10px auto" }}>
-                <Typography
-                  style={{ textAlign: "center", margin: "10px" }}
-                  variant="h6"
-                >
-                  {image.name}
-                </Typography>
                 <div
                   style={{
                     textAlign: "center",

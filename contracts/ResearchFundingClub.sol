@@ -99,7 +99,11 @@ contract ResearchFundingClub3 is ERC721Enumerable, Ownable, ERC721URIStorage {
         require(msg.value >= PRICE * _mintAmount, "insufficient funds");  
         
         _safeMint(msg.sender, mintNumber);
-        _setTokenURI(mintNumber, string(abi.encodePacked(baseTokenURI, Strings.toString(mintNumber), baseExtension)));
+        if (MIN_SUPPLY <= 1) {
+            _setTokenURI(mintNumber, string(abi.encodePacked(baseTokenURI, Strings.toString(mintNumber), baseExtension)));
+        } else {
+            _setTokenURI(mintNumber, string(abi.encodePacked(baseTokenURI, Strings.toString(mintNumber - (MIN_SUPPLY)), baseExtension)));
+        }
     }
 
     /*

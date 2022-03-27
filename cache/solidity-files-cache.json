@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "G:\\dapps\\rfc-nft\\contracts\\ResearchFundingClub.sol": {
-      "lastModificationDate": 1648367983417,
-      "contentHash": "0ac12bf598710619597b88fae7baf191",
+      "lastModificationDate": 1648370922200,
+      "contentHash": "7e6b91fa6718b0ca8fe99ede340d7df0",
       "sourceName": "contracts/ResearchFundingClub.sol",
       "solcConfig": {
         "version": "0.8.7",
@@ -32,6 +32,7 @@
         "@openzeppelin/contracts/utils/Strings.sol",
         "@openzeppelin/contracts/utils/Counters.sol",
         "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/security/ReentrancyGuard.sol",
         "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
         "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
         "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
@@ -641,6 +642,41 @@
         "Ownable",
         "ResearchFundingClub3",
         "Strings"
+      ]
+    },
+    "G:\\dapps\\rfc-nft\\node_modules\\@openzeppelin\\contracts\\security\\ReentrancyGuard.sol": {
+      "lastModificationDate": 1647440072289,
+      "contentHash": "92f9448b23a90ea3bb932ee55cc3ccce",
+      "sourceName": "@openzeppelin/contracts/security/ReentrancyGuard.sol",
+      "solcConfig": {
+        "version": "0.8.7",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ReentrancyGuard"
       ]
     }
   }

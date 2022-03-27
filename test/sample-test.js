@@ -161,7 +161,7 @@ describe("RFC Tests", function () {
     }
 
     var userOwner = await rfc.tokensOfOwner(owner.address);
-    var revealIt = await rfc.reveal();
+    // await rfc.reveal();
     for (var i=0; i < userOwner.length; i++) {
       var eachtokenId = userOwner[i].toString();
 
@@ -189,8 +189,20 @@ describe("RFC Tests", function () {
       testSupplyVal++;
     }
 
+    console.log("==== not revealed ====");
     var userOwner = await rfc.tokensOfOwner(owner.address);
-    var revealIt = await rfc.reveal();
+    // await rfc.reveal();
+
+    for (var i=0; i < userOwner.length; i++) {
+      var eachtokenId = userOwner[i].toString();
+
+      const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
+      console.log("changed uri: ",tokenURI);
+    }
+
+    console.log("==== revealed ====");
+    var userOwner = await rfc.tokensOfOwner(owner.address);
+    await rfc.reveal();
 
     for (var i=0; i < userOwner.length; i++) {
       var eachtokenId = userOwner[i].toString();

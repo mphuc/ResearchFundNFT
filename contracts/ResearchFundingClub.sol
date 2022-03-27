@@ -5,18 +5,20 @@ pragma solidity ^0.8.7;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "hardhat/console.sol";
 
-contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage {
+
+contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, ReentrancyGuard {
     string public baseTokenURI;
 
     bool public paused = false;
     string public baseExtension = ".json";
     string public notRevealedURI = "not revealed yet";
-    uint256 public MIN_SUPPLY = 1; // for random number generation
+    uint256 public MIN_SUPPLY = 0; // only used for multi-drop reveals
     uint256 public MAX_SUPPLY = 10;
     uint256 public PRICE = 0.0001 ether;
     uint256 public MAX_PER_MINT = 1;
@@ -54,6 +56,7 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage {
             "ERC721URIStorage: URI query for nonexistent token"
         );
 
+        // if (revealed == false and tokenId > MIN_SUPPLY)
         if (!revealed && tokenId > MIN_SUPPLY ) {
             // console.log("this is the token id: ", tokenId);
             // console.log("min supply:", MIN_SUPPLY);
@@ -103,11 +106,11 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage {
         require(msg.value >= PRICE * _mintAmount, "insufficient funds");  
         
         _safeMint(msg.sender, mintNumber);
-        if (MIN_SUPPLY <= 1) {
-            _setTokenURI(mintNumber, string(abi.encodePacked(baseTokenURI, Strings.toString(mintNumber), baseExtension)));
-        } else {
-            _setTokenURI(mintNumber, string(abi.encodePacked(baseTokenURI, Strings.toString(mintNumber - (MIN_SUPPLY)), baseExtension)));
-        }
+        // if (MIN_SUPPLY <= 1) {
+        //     _setTokenURI(mintNumber, string(abi.encodePacked(baseTokenURI, Strings.toString(mintNumber), baseExtension)));
+        // } else {
+        // }
+        _setTokenURI(mintNumber, string(abi.encodePacked(baseTokenURI, Strings.toString(mintNumber - (MIN_SUPPLY)), baseExtension)));
     }
 
     /*
@@ -155,7 +158,7 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage {
         paused = _state;
     }
     
-    function withdraw() public payable onlyOwner {
+    function withdraw() public payable onlyOwner nonReentrant {
         // developer fee 3%? 
         uint256 balance = address(this).balance;
         require(balance > 0, "No ether left to withdraw.");

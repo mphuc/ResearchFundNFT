@@ -166,7 +166,7 @@ describe("RFC Tests", function () {
       var eachtokenId = userOwner[i].toString();
 
       const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log("changed uri: ",tokenURI);
+      console.log(eachtokenId, ": changed uri: ",tokenURI);
     }
 
 
@@ -197,7 +197,7 @@ describe("RFC Tests", function () {
       var eachtokenId = userOwner[i].toString();
 
       const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log("changed uri: ",tokenURI);
+      console.log(eachtokenId, ": changed uri: ",tokenURI);
     }
 
     console.log("==== revealed ====");
@@ -208,7 +208,7 @@ describe("RFC Tests", function () {
       var eachtokenId = userOwner[i].toString();
 
       const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log("changed uri: ",tokenURI);
+      console.log(eachtokenId, ": changed uri: ",tokenURI);
     }
 
     // third drop
@@ -236,7 +236,7 @@ describe("RFC Tests", function () {
       var eachtokenId = userOwner[i].toString();
 
       const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log("changed uri: ",tokenURI);
+      console.log(eachtokenId, ": changed uri: ",tokenURI);
     }
 
     var revealIt = await rfc.reveal();
@@ -246,7 +246,7 @@ describe("RFC Tests", function () {
       var eachtokenId = userOwner[i].toString();
 
       const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log("changed uri: ",tokenURI);
+      console.log(eachtokenId, ": changed uri: ",tokenURI);
     }
 
 

@@ -25,7 +25,9 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, Ree
     bool public revealed = false;
 
     // Wallets
-    
+    address public charityWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
+    address public devWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
+    address public medicalCharityWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
 
 
     constructor(string memory baseURI) ERC721("Research Funding Club", "RFC") {
@@ -157,12 +159,25 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, Ree
     function pause(bool _state) public onlyOwner {
         paused = _state;
     }
-    
+
     function withdraw() public payable onlyOwner nonReentrant {
-        // developer fee 3%? 
         uint256 balance = address(this).balance;
         require(balance > 0, "No ether left to withdraw.");
-        (bool success, ) = (msg.sender).call{value: balance}("");
+        
+        // charity = 5%
+        (bool cw, ) = (msg.sender).call{value: address(this).balance * 5 / 100}("");
+        require(cw, "Charity Transfer failed.");
+
+        // medical field charity = 10%
+        (bool mfc, ) = (msg.sender).call{value: address(this).balance * 10 / 100}("");
+        require(mfc, "Medical Field Charity Transfer failed.");
+
+        // developer fee
+        (bool df, ) = (msg.sender).call{value: address(this).balance * 4 / 100}("");
+        require(df, "Developer Transfer failed.");
+
+        // owner
+        (bool success, ) = (msg.sender).call{value: address(this).balance}("");
         require(success, "Transfer failed.");
     }
 }

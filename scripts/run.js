@@ -2,7 +2,7 @@ async function main() {
   const baseTokenURI = "ipfs://QmZbWNKJPAjxXuNFSEaksCJVd1M6DaKQViJBYPK2BdpDEP/";
 
   const contractFactory = await hre.ethers.getContractFactory(
-    "ResearchFundingClub"
+    "ResearchFundingClub3"
   );
 
   const contract = await contractFactory.deploy(baseTokenURI);

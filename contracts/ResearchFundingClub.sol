@@ -10,7 +10,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "hardhat/console.sol";
 
-contract ResearchFundingClub3 is ERC721Enumerable, Ownable, ERC721URIStorage {
+contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage {
     string public baseTokenURI;
 
     bool public paused = false;
@@ -21,6 +21,10 @@ contract ResearchFundingClub3 is ERC721Enumerable, Ownable, ERC721URIStorage {
     uint256 public PRICE = 0.0001 ether;
     uint256 public MAX_PER_MINT = 1;
     bool public revealed = false;
+
+    // Wallets
+    
+
 
     constructor(string memory baseURI) ERC721("Research Funding Club", "RFC") {
         setBaseURI(baseURI);

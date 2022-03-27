@@ -5,7 +5,7 @@ pragma solidity ^0.8.7;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
@@ -58,7 +58,6 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, Ree
             "ERC721URIStorage: URI query for nonexistent token"
         );
 
-        // if (revealed == false and tokenId > MIN_SUPPLY)
         if (!revealed && tokenId > MIN_SUPPLY ) {
             // console.log("this is the token id: ", tokenId);
             // console.log("min supply:", MIN_SUPPLY);
@@ -104,14 +103,10 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, Ree
         require(supply + _mintAmount <= MAX_SUPPLY, "max NFT limit exceeded"); // multiple minting
         // require(_mintAmount <= MAX_PER_MINT, "max NFT per address exceeded");
 
-        uint256 mintNumber = supply + 1;
+        uint256 mintNumber = supply + _mintAmount;
         require(msg.value >= PRICE * _mintAmount, "insufficient funds");  
         
         _safeMint(msg.sender, mintNumber);
-        // if (MIN_SUPPLY <= 1) {
-        //     _setTokenURI(mintNumber, string(abi.encodePacked(baseTokenURI, Strings.toString(mintNumber), baseExtension)));
-        // } else {
-        // }
         _setTokenURI(mintNumber, string(abi.encodePacked(baseTokenURI, Strings.toString(mintNumber - (MIN_SUPPLY)), baseExtension)));
     }
 
@@ -149,8 +144,10 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, Ree
     }
 
     function setBaseURI(string memory _baseTokenURI) public onlyOwner {
+    
         baseTokenURI = _baseTokenURI;
     }
+
 
     function setBaseExtension(string memory _newBaseExtension) public onlyOwner {
         baseExtension = _newBaseExtension;
@@ -160,20 +157,20 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, Ree
         paused = _state;
     }
 
-    function withdraw() public payable onlyOwner nonReentrant {
+    function withdraw() public onlyOwner nonReentrant {
         uint256 balance = address(this).balance;
         require(balance > 0, "No ether left to withdraw.");
         
         // charity = 5%
-        (bool cw, ) = (msg.sender).call{value: address(this).balance * 5 / 100}("");
+        (bool cw, ) = (charityWallet).call{value: address(this).balance * 5 / 100}("");
         require(cw, "Charity Transfer failed.");
 
         // medical field charity = 10%
-        (bool mfc, ) = (msg.sender).call{value: address(this).balance * 10 / 100}("");
+        (bool mfc, ) = (medicalCharityWallet).call{value: address(this).balance * 10 / 100}("");
         require(mfc, "Medical Field Charity Transfer failed.");
 
-        // developer fee
-        (bool df, ) = (msg.sender).call{value: address(this).balance * 4 / 100}("");
+        // developer fee = ? 
+        (bool df, ) = (devWallet).call{value: address(this).balance * 4 / 100}("");
         require(df, "Developer Transfer failed.");
 
         // owner

@@ -1,26 +1,14 @@
-import "./App.css";
-import { createTheme, ThemeProvider } from "@mui/material";
-import Main from "./components/Main";
-
-const theme = createTheme({
-  typography: {
-    fontFamily: "PlayfairDisplay, Arial",
-  },
-  palette: {
-    primary: {
-      main: "#175c4c",
-    },
-    secondary: {
-      main: "#efdbce",
-    },
-  },
-});
+import styles from "./App.module.scss";
+import Navbar from "./components/navbar";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Main />
-    </ThemeProvider>
+    <div className={styles.container}>
+      <div className={styles.circle}></div>
+      <div className={styles.circle}></div>
+      <div className={styles.bgLayer}></div>
+      <Navbar />
+    </div>
   );
 }
 

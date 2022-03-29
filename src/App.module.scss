@@ -1,0 +1,35 @@
+.container {
+  background-color: #1f1d2b;
+  min-height: 100vh;
+  position: relative;
+  .bgLayer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backdrop-filter: blur(60px);
+  }
+  .circle {
+    position: absolute;
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+    &:nth-child(1) {
+      background-color: #fb37ff;
+      top: 15vh;
+      right: 35%;
+    }
+    &:nth-child(2) {
+      background-color: #18b2de;
+      top: 70vh;
+      right: 10%;
+    }
+  }
+}
+
+// .font-green {
+//   color: #175c4c;
+// }
+
+// .background-beige {
+//   background-color: #efdbce;
+// }

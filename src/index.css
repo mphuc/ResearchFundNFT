@@ -1,20 +1,21 @@
-@font-face {
+/* @font-face {
   font-family: "PlayfairDisplay";
   src: local("PlayfairDisplay"),
     url("./fonts/PlayfairDisplaySC-Regular.ttf") format("truetype");
   font-weight: regular;
-}
-
+} */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;500;600;700;900&display=swap");
 body {
-  margin: 0;
-  font-family: "PlayfairDisplay", BlinkMacSystemFont, "Segoe UI", "Roboto",
-    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+button {
+  outline: none;
+  cursor: pointer;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }

@@ -1,3 +1,4 @@
+// deploys the contract on the chosen network
 async function main() {
   const baseTokenURI = "ipfs://QmZbWNKJPAjxXuNFSEaksCJVd1M6DaKQViJBYPK2BdpDEP/";
 

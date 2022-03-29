@@ -102,32 +102,32 @@ describe("RFC Tests", function () {
   // });
 
 
-  it("Testing Random number minting", async function() {
-    const [owner] = await ethers.getSigners();
-    const RFC = await ethers.getContractFactory("ResearchFundingClub");
+  // it("Testing Random number minting", async function() {
+  //   const [owner] = await ethers.getSigners();
+  //   const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
-    const rfc = await RFC.deploy("https://manishgotame.com.np/");
-    await rfc.deployed();
+  //   const rfc = await RFC.deploy("https://manishgotame.com.np/");
+  //   await rfc.deployed();
 
-    var testSupplyVal = 1;
+  //   var testSupplyVal = 1;
 
-    for (var i=0; i < 10; i++) {
-      var mintTX = await rfc.mint(1, {
-        value: 1000000000000000
-      });
-      await mintTX.wait();
-      var totalSupplyTX = await rfc.totalSupply();
-      var supplyNumber = parseInt(totalSupplyTX.toString());
+  //   for (var i=0; i < 10; i++) {
+  //     var mintTX = await rfc.mint(1, {
+  //       value: 1000000000000000
+  //     });
+  //     await mintTX.wait();
+  //     var totalSupplyTX = await rfc.totalSupply();
+  //     var supplyNumber = parseInt(totalSupplyTX.toString());
   
-      console.log(supplyNumber);
-      expect(supplyNumber).to.equal(testSupplyVal);
-      testSupplyVal++;
-    }
+  //     console.log(supplyNumber);
+  //     expect(supplyNumber).to.equal(testSupplyVal);
+  //     testSupplyVal++;
+  //   }
 
-    var mytokens = await rfc.tokensOfOwner(owner.address);
-    console.log(mytokens);
-    expect(mytokens)
-  });
+  //   var mytokens = await rfc.tokensOfOwner(owner.address);
+  //   console.log(mytokens);
+  //   expect(mytokens)
+  // });
 
 
 

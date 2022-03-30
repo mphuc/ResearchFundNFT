@@ -1,0 +1,27 @@
+.container {
+  height: 100%;
+  width: 100%;
+  padding: 150px;
+  position: relative;
+  overflow: auto;
+  overflow-x: hidden;
+  .featured {
+    height: 180px;
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background-color: #222132;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    p {
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      margin-bottom: 20px;
+    }
+  }
+}

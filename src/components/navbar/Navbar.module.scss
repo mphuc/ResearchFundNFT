@@ -1,31 +1,69 @@
 .container {
   height: 150px;
+  width: 100%;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 100px;
+  padding: 0 150px;
   .logo {
     text-transform: uppercase;
+    cursor: default;
     p {
       font-size: 32px;
       font-weight: 700;
       line-height: 30px;
-      background: -webkit-linear-gradient(0deg, #9b43ed, #3081ed);
+      background: linear-gradient(90deg, #9b43ed, #3081ed);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
   }
   .nav {
-    button {
-      background-color: transparent;
-      border: 0;
-      font-size: 20px;
-      color: #bcbcbc;
-      text-transform: uppercase;
-      margin: 0 10px;
-      letter-spacing: 1.5px;
+    ul {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      list-style-type: none;
+      li {
+        background-color: transparent;
+        border: 0;
+        font-size: 20px;
+        color: #bcbcbc;
+        text-transform: uppercase;
+        margin: 0 10px;
+        letter-spacing: 1.5px;
+        cursor: pointer;
+        transition: all 0.2s;
+        &:hover {
+          background: linear-gradient(90deg, #9b43ed, #3081ed);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          .underline {
+            background: linear-gradient(90deg, #9b43ed, #3081ed);
+            width: 100%;
+          }
+        }
+        &.active {
+          background: linear-gradient(90deg, #9b43ed, #3081ed);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-weight: 700;
+          .underline {
+            width: 100%;
+            background: linear-gradient(90deg, #9b43ed, #3081ed);
+          }
+        }
+        .underline {
+          height: 3px;
+          background-color: transparent;
+          width: 0%;
+          transition: width 0.2s, background-color 0.5s;
+          margin: 0 auto;
+        }
+      }
     }
   }
   .socials {

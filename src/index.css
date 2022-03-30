@@ -4,7 +4,7 @@
     url("./fonts/PlayfairDisplaySC-Regular.ttf") format("truetype");
   font-weight: regular;
 } */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;500;600;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700;900&display=swap");
 body {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -14,8 +14,24 @@ button {
   outline: none;
   cursor: pointer;
 }
+/* globals */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+/* scroollbar style */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #9b43ed7e, #3081ed7e);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #9b43ed, #3081ed);
 }

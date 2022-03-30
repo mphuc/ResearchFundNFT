@@ -1,8 +1,10 @@
+import { useState } from "react";
 import styles from "./Navbar.module.scss";
 import discordIcon from "../../assets/discord.png";
 import twitterIcon from "../../assets/twitter.png";
 
 export default function Navbar() {
+  const [navActive, setNavActive] = useState(0);
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -11,11 +13,43 @@ export default function Navbar() {
         </p>
       </div>
       <div className={styles.nav}>
-        <button>home</button>
-        <button>gallery</button>
-        <button>roadmap</button>
-        <button>our story</button>
-        <button>faq</button>
+        <ul>
+          <li
+            className={`${navActive === 0 ? styles.active : ""}`}
+            onClick={() => setNavActive(0)}
+          >
+            <p>home</p>
+            <div class={styles.underline}></div>
+          </li>
+          <li
+            className={`${navActive === 1 ? styles.active : ""}`}
+            onClick={() => setNavActive(1)}
+          >
+            <p>gallery</p>
+            <div class={styles.underline}></div>
+          </li>
+          <li
+            className={`${navActive === 2 ? styles.active : ""}`}
+            onClick={() => setNavActive(2)}
+          >
+            <p>roadmap</p>
+            <div class={styles.underline}></div>
+          </li>
+          <li
+            className={`${navActive === 3 ? styles.active : ""}`}
+            onClick={() => setNavActive(3)}
+          >
+            <p>our story</p>
+            <div class={styles.underline}></div>
+          </li>
+          <li
+            className={`${navActive === 4 ? styles.active : ""}`}
+            onClick={() => setNavActive(4)}
+          >
+            <p>faq</p>
+            <div class={styles.underline}></div>
+          </li>
+        </ul>
       </div>
       <div className={styles.socials}>
         <img src={discordIcon} alt="" />

@@ -1,7 +1,11 @@
 .container {
   background-color: #1f1d2b;
-  min-height: 100vh;
+  height: 100vh;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   .bgLayer {
     width: 100%;
     height: 100%;
@@ -22,6 +26,11 @@
       background-color: #18b2de;
       top: 70vh;
       right: 10%;
+    }
+    &:nth-child(3) {
+      background-color: #18b2de;
+      top: 50vh;
+      left: -2%;
     }
   }
 }

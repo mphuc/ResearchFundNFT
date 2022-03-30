@@ -1,0 +1,117 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 100px;
+  & > div:nth-child(1) {
+    width: 50%;
+    color: #fff;
+    h1 {
+      font-weight: 600;
+      font-size: 72px;
+      line-height: 82px;
+      letter-spacing: -2px;
+      margin-bottom: 30px;
+    }
+    p {
+      width: 90%;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 36px;
+      letter-spacing: 0.5px;
+      color: #e2e2e2;
+      margin-bottom: 30px;
+    }
+    .btns {
+      button {
+        color: #fff;
+        font-weight: 600;
+        font-size: 20px;
+        padding: 10px 30px;
+        border-radius: 10px;
+        border: 0;
+        transition: all 0.2s;
+        &:hover {
+          transform: scale(1.05);
+        }
+        &:active {
+          transform: scale(0.99);
+        }
+        &:nth-child(1) {
+          background: linear-gradient(90deg, #9b43ed, #3081ed);
+          margin-right: 15px;
+        }
+        &:nth-child(2) {
+          background: transparent;
+          border: 1px solid #fff;
+          color: #d7d7d7;
+        }
+      }
+    }
+  }
+  .wrapper {
+    width: 500px;
+    height: 580px;
+    background: linear-gradient(160deg, #fb37ff, #9b6fee00, #7b7fea00, #1bb2de);
+    border-radius: 35px;
+    padding: 1px;
+  }
+  .card {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-color: #1f1d2b;
+    // background: linear-gradient(
+    //   169.44deg,
+    //   rgba(58, 129, 191, 0.08) 1.85%,
+    //   rgba(65, 48, 90, 0.08) 98.72%
+    // );
+    // backdrop-filter: blur(1110px);
+    border-radius: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .infos {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 85%;
+      & > div {
+        width: 80%;
+        p {
+          color: #fff;
+          font-size: 16px;
+          font-weight: 200;
+        }
+        & > div {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 5px 0;
+          button {
+            background: transparent;
+            border: 1px solid #fff;
+            border-radius: 8px;
+            padding: 5px 15px;
+            color: #fff;
+          }
+          &:nth-child(1) {
+            border-bottom: 1px solid #c4c4c483;
+            p {
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+    & > img {
+      width: 440px;
+      height: 440px;
+      border-radius: 20px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+  }
+}

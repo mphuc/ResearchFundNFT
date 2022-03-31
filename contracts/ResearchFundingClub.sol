@@ -10,6 +10,9 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "hardhat/console.sol";
 
+/*
+    https://gateway.pinata.cloud/ipfs/QmV8MxrRVzwSGSszqx1qcisz7esenPpq9QFmFBTBWa3vVS/
+ */
 
 contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, ReentrancyGuard {
     string public baseTokenURI;

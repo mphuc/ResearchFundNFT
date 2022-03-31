@@ -1,9 +1,9 @@
 // deploys the contract on the chosen network
 async function main() {
-  const baseTokenURI = "ipfs://QmZbWNKJPAjxXuNFSEaksCJVd1M6DaKQViJBYPK2BdpDEP/";
+  const baseTokenURI = "https://gateway.pinata.cloud/ipfs/QmV8MxrRVzwSGSszqx1qcisz7esenPpq9QFmFBTBWa3vVS/";
 
   const contractFactory = await hre.ethers.getContractFactory(
-    "ResearchFundingClub3"
+    "ResearchFundingClub"
   );
 
   const contract = await contractFactory.deploy(baseTokenURI);

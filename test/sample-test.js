@@ -144,7 +144,7 @@ describe("RFC Tests", function () {
     // mint all of them before changing the drop
     var testSupplyVal = 1;
 
-    for (var i=0; i < 10; i++) {
+    for (var i=0; i < 5; i++) {
       var mintTX = await rfc.mint(1, {
         value: 1000000000000000
       });

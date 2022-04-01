@@ -2,9 +2,9 @@ import styles from "./Home.module.scss";
 import previewImg from "../../nfts/MomDadBlue.png";
 import heartIcon from "../../assets/heart.png";
 
-export default function Home() {
+export default function Home({ id }) {
   return (
-    <div className={styles.container}>
+    <div ref={id} className={styles.container}>
       <div>
         <h1>
           Research <br /> Funding Club NFT

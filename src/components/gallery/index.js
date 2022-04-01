@@ -2,7 +2,7 @@ import styles from "./Gallery.module.scss";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Card from "./card";
-import { list1, list2, list3 } from "./nfts";
+import { momDad, momDad2, dad, mom, dad2 } from "./nfts";
 
 const responsive = {
   superLargeDesktop: {
@@ -24,7 +24,7 @@ const responsive = {
   },
 };
 
-export default function Gallery() {
+export default function Gallery({ id }) {
   return (
     <div className={styles.container}>
       <h1>Gallery</h1>
@@ -32,8 +32,55 @@ export default function Gallery() {
         className={styles.carousel}
         responsive={responsive}
         infinite={true}
+        autoPlay={true}
+        autoPlaySpeed={5000}
       >
-        {list1.map((item, index) => (
+        {momDad.map((item, index) => (
+          <Card key={index} img={item.image} name={item.name} />
+        ))}
+      </Carousel>
+      <div ref={id}></div>
+      <Carousel
+        className={styles.carousel}
+        responsive={responsive}
+        infinite={true}
+        autoPlay={true}
+        autoPlaySpeed={5000}
+      >
+        {momDad2.map((item, index) => (
+          <Card key={index} img={item.image} name={item.name} />
+        ))}
+      </Carousel>
+      <Carousel
+        className={styles.carousel}
+        responsive={responsive}
+        infinite={true}
+        autoPlay={true}
+        autoPlaySpeed={5000}
+      >
+        {dad.map((item, index) => (
+          <Card key={index} img={item.image} name={item.name} />
+        ))}
+      </Carousel>
+      <Carousel
+        className={styles.carousel}
+        responsive={responsive}
+        infinite={true}
+        autoPlay={true}
+        autoPlaySpeed={5000}
+      >
+        {mom.map((item, index) => (
+          <Card key={index} img={item.image} name={item.name} />
+        ))}
+      </Carousel>
+      <Carousel
+        className={styles.carousel}
+        responsive={responsive}
+        infinite={true}
+        autoPlay={true}
+        autoPlaySpeed={5000}
+      >
+        {dad2.map((item, index) => (
           <Card key={index} img={item.image} name={item.name} />
         ))}
       </Carousel>

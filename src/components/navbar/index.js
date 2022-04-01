@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Navbar.module.scss";
 import discordIcon from "../../assets/discord.png";
 import twitterIcon from "../../assets/twitter.png";
 
-export default function Navbar() {
+export default function Navbar({ homeRef, homeInView, galleryInView }) {
   const [navActive, setNavActive] = useState(0);
+  useEffect(() => {
+    if (homeInView) {
+      setNavActive(0);
+    }
+    if (galleryInView) {
+      setNavActive(1);
+    }
+  }, [homeInView, galleryInView]);
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -16,7 +24,10 @@ export default function Navbar() {
         <ul>
           <li
             className={`${navActive === 0 ? styles.active : ""}`}
-            onClick={() => setNavActive(0)}
+            onClick={() => {
+              homeRef.current.scrollIntoView({ behavior: "smooth" });
+              setNavActive(0);
+            }}
           >
             <p>home</p>
             <div class={styles.underline}></div>

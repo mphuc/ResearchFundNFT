@@ -3,10 +3,10 @@ import Home from "../home";
 import Gallery from "../gallery";
 import nftcalendar from "../../assets/NFTCalendar.png";
 
-export default function Main() {
+export default function Main({ homeRef, galleryRef }) {
   return (
     <div className={styles.container}>
-      <Home />
+      <Home id={homeRef} />
       <div className={styles.featured}>
         <p>Featured in</p>
         <img src={nftcalendar} alt="" />
@@ -37,7 +37,7 @@ export default function Main() {
           </div>
         </div>
       </div>
-      <Gallery />
+      <Gallery id={galleryRef} />
     </div>
   );
 }

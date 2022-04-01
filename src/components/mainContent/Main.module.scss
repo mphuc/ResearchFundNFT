@@ -24,4 +24,35 @@
       margin-bottom: 20px;
     }
   }
+  .donations {
+    margin: 130px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    & > div {
+      margin-top: 50px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      & > div {
+        width: 100%;
+        padding: 40px 0;
+        &:not(:last-child) {
+          border-right: 1px solid rgba(255, 255, 255, 0.63);
+        }
+        p {
+          text-align: center;
+          line-height: 50px;
+          font-size: 20px;
+          letter-spacing: -1px;
+          span {
+            font-size: 72px;
+          }
+        }
+      }
+    }
+  }
 }

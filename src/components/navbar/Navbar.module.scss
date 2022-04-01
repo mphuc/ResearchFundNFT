@@ -50,7 +50,10 @@
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          font-weight: 700;
+          p {
+            font-weight: 700;
+          }
+
           .underline {
             width: 100%;
             background: linear-gradient(90deg, #9b43ed, #3081ed);

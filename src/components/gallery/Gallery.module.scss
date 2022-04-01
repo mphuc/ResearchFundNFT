@@ -1,0 +1,86 @@
+.container {
+  margin: 130px 0;
+  h1 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 80px;
+  }
+  .carousel {
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    & > button:nth-child(2) {
+      transform: translateX(-120%);
+    }
+    & > button:nth-child(3) {
+      transform: translateX(150%);
+    }
+  }
+  .cardWrapper {
+    width: 380px;
+    height: 490px;
+    background: linear-gradient(160deg, #fb37ff, #9b6fee00, #7b7fea00, #1bb2de);
+    border-radius: 35px;
+    padding: 1px;
+    .card {
+      height: 100%;
+      width: 100%;
+      position: relative;
+      background-color: #1f1d2b;
+      // background: linear-gradient(
+      //   169.44deg,
+      //   rgba(58, 129, 191, 0.08) 1.85%,
+      //   rgba(65, 48, 90, 0.08) 98.72%
+      // );
+      // backdrop-filter: blur(1110px);
+      border-radius: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      .infos {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 70%;
+        & > div {
+          width: 100%;
+          p {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 200;
+          }
+          & > div {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 0;
+            button {
+              background: transparent;
+              border: 1px solid #fff;
+              border-radius: 8px;
+              padding: 5px 15px;
+              color: #fff;
+            }
+            &:nth-child(1) {
+              border-bottom: 1px solid #c4c4c483;
+              p {
+                font-weight: 600;
+              }
+            }
+          }
+        }
+      }
+      & > img {
+        width: 300px;
+        height: 310px;
+        border-radius: 20px;
+        object-fit: cover;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

@@ -14,7 +14,12 @@ import "hardhat/console.sol";
     https://gateway.pinata.cloud/ipfs/QmV8MxrRVzwSGSszqx1qcisz7esenPpq9QFmFBTBWa3vVS/
  */
 
-contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, ReentrancyGuard {
+contract ResearchFundingClub is
+    ERC721Enumerable,
+    Ownable,
+    ERC721URIStorage,
+    ReentrancyGuard
+{
     string public baseTokenURI;
 
     bool public paused = false;
@@ -29,29 +34,31 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, Ree
     // Wallets
     address public charityWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
     address public devWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
-    address public medicalCharityWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
-
 
     constructor(string memory baseURI) ERC721("Research Funding Club", "RFC") {
         setBaseURI(baseURI);
     }
-    
-    // ERC721URIStorage override functions 
-    function _beforeTokenTransfer(address from, address to, uint256 tokenId)
-        internal
-        override(ERC721, ERC721Enumerable)
-    {
+
+    // ERC721URIStorage override functions
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal override(ERC721, ERC721Enumerable) {
         super._beforeTokenTransfer(from, to, tokenId);
     }
 
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+    function _burn(uint256 tokenId)
+        internal
+        override(ERC721, ERC721URIStorage)
+    {
         super._burn(tokenId);
     }
 
     function tokenURI(uint256 tokenId)
-        public 
-        view 
-        virtual 
+        public
+        view
+        virtual
         override(ERC721, ERC721URIStorage)
         returns (string memory)
     {
@@ -60,12 +67,12 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, Ree
             "ERC721URIStorage: URI query for nonexistent token"
         );
 
-        if (!revealed && tokenId > MIN_SUPPLY ) {
+        if (!revealed && tokenId > MIN_SUPPLY) {
             // console.log("this is the token id: ", tokenId);
             // console.log("min supply:", MIN_SUPPLY);
             return notRevealedURI;
         }
-        
+
         return super.tokenURI(tokenId);
     }
 
@@ -78,7 +85,9 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, Ree
         return super.supportsInterface(interfaceId);
     }
 
-    function _baseURI() internal pure override returns (string memory) {return "";}
+    function _baseURI() internal pure override returns (string memory) {
+        return "";
+    }
 
     function tokensOfOwner(address _owner)
         external
@@ -106,10 +115,19 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, Ree
         // require(_mintAmount <= MAX_PER_MINT, "max NFT per address exceeded");
 
         uint256 mintNumber = supply + _mintAmount;
-        require(msg.value >= PRICE * _mintAmount, "insufficient funds");  
-        
+        require(msg.value >= PRICE * _mintAmount, "insufficient funds");
+
         _safeMint(msg.sender, mintNumber);
-        _setTokenURI(mintNumber, string(abi.encodePacked(baseTokenURI, Strings.toString(mintNumber - (MIN_SUPPLY)), baseExtension)));
+        _setTokenURI(
+            mintNumber,
+            string(
+                abi.encodePacked(
+                    baseTokenURI,
+                    Strings.toString(mintNumber - (MIN_SUPPLY)),
+                    baseExtension
+                )
+            )
+        );
     }
 
     /*
@@ -117,16 +135,22 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, Ree
         @description - Set the next NFT collection drop: increase max supply and the base uri
         @params - updated max mint supply, new base uri
     */
-    function newDrop(uint256 _newMaxSupply, string memory _newBaseURI) public onlyOwner {
-        require(totalSupply() == MAX_SUPPLY, "Previous drop sales has not finished yet.");
+    function newDrop(uint256 _newMaxSupply, string memory _newBaseURI)
+        public
+        onlyOwner
+    {
+        require(
+            totalSupply() == MAX_SUPPLY,
+            "Previous drop sales has not finished yet."
+        );
         MIN_SUPPLY = MAX_SUPPLY;
         MAX_SUPPLY = _newMaxSupply;
         setBaseURI(_newBaseURI);
         revealed = false;
     }
-    
+
     function reveal() public onlyOwner {
-      revealed = true;
+        revealed = true;
     }
 
     function setmaxMintAmount(uint256 _limit) public onlyOwner {
@@ -146,12 +170,13 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, Ree
     }
 
     function setBaseURI(string memory _baseTokenURI) public onlyOwner {
-    
         baseTokenURI = _baseTokenURI;
     }
 
-
-    function setBaseExtension(string memory _newBaseExtension) public onlyOwner {
+    function setBaseExtension(string memory _newBaseExtension)
+        public
+        onlyOwner
+    {
         baseExtension = _newBaseExtension;
     }
 
@@ -162,17 +187,15 @@ contract ResearchFundingClub is ERC721Enumerable, Ownable, ERC721URIStorage, Ree
     function withdraw() public onlyOwner nonReentrant {
         uint256 balance = address(this).balance;
         require(balance > 0, "No ether left to withdraw.");
-        
-        // charity = 5%
-        (bool cw, ) = (charityWallet).call{value: address(this).balance * 5 / 100}("");
+
+        (bool cw, ) = (charityWallet).call{
+            value: (address(this).balance * 10) / 100
+        }("");
         require(cw, "Charity Transfer failed.");
 
-        // medical field charity = 10%
-        (bool mfc, ) = (medicalCharityWallet).call{value: address(this).balance * 10 / 100}("");
-        require(mfc, "Medical Field Charity Transfer failed.");
-
-        // developer fee = ? 
-        (bool df, ) = (devWallet).call{value: address(this).balance * 4 / 100}("");
+        (bool df, ) = (devWallet).call{
+            value: (address(this).balance * 5) / 100
+        }("");
         require(df, "Developer Transfer failed.");
 
         // owner

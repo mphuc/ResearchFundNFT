@@ -3,16 +3,39 @@ import styles from "./Navbar.module.scss";
 import discordIcon from "../../assets/discord.png";
 import twitterIcon from "../../assets/twitter.png";
 
-export default function Navbar({ homeRef, homeInView, galleryInView }) {
+export default function Navbar({
+  roadmapId,
+  ourstoryId,
+  faqId,
+  homeId,
+  galleryId,
+  homeInView,
+  galleryInView,
+  roadmapInView,
+  ourstoryInView,
+  faqInView,
+}) {
   const [navActive, setNavActive] = useState(0);
+  const [scrolling, setScrolling] = useState(false);
   useEffect(() => {
-    if (homeInView) {
-      setNavActive(0);
+    if (!scrolling) {
+      if (homeInView) {
+        setNavActive(0);
+      }
+      if (galleryInView) {
+        setNavActive(1);
+      }
+      if (roadmapInView) {
+        setNavActive(2);
+      }
+      if (ourstoryInView) {
+        setNavActive(3);
+      }
+      if (faqInView) {
+        setNavActive(4);
+      }
     }
-    if (galleryInView) {
-      setNavActive(1);
-    }
-  }, [homeInView, galleryInView]);
+  }, [homeInView, galleryInView, roadmapInView, ourstoryInView, faqInView]);
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -25,8 +48,8 @@ export default function Navbar({ homeRef, homeInView, galleryInView }) {
           <li
             className={`${navActive === 0 ? styles.active : ""}`}
             onClick={() => {
-              homeRef.current.scrollIntoView({ behavior: "smooth" });
-              setNavActive(0);
+              homeId.current.scrollIntoView({ behavior: "smooth" });
+              //setNavActive(0);
             }}
           >
             <p>home</p>
@@ -34,28 +57,40 @@ export default function Navbar({ homeRef, homeInView, galleryInView }) {
           </li>
           <li
             className={`${navActive === 1 ? styles.active : ""}`}
-            onClick={() => setNavActive(1)}
+            onClick={() => {
+              galleryId.current.scrollIntoView({ behavior: "smooth" });
+              // setNavActive(1);
+            }}
           >
             <p>gallery</p>
             <div class={styles.underline}></div>
           </li>
           <li
             className={`${navActive === 2 ? styles.active : ""}`}
-            onClick={() => setNavActive(2)}
+            onClick={() => {
+              roadmapId.current.scrollIntoView({ behavior: "smooth" });
+              // setNavActive(2);
+            }}
           >
             <p>roadmap</p>
             <div class={styles.underline}></div>
           </li>
           <li
             className={`${navActive === 3 ? styles.active : ""}`}
-            onClick={() => setNavActive(3)}
+            onClick={() => {
+              ourstoryId.current.scrollIntoView({ behavior: "smooth" });
+              // setNavActive(3);
+            }}
           >
             <p>our story</p>
             <div class={styles.underline}></div>
           </li>
           <li
             className={`${navActive === 4 ? styles.active : ""}`}
-            onClick={() => setNavActive(4)}
+            onClick={() => {
+              faqId.current.scrollIntoView({ behavior: "smooth" });
+              // setNavActive(4);
+            }}
           >
             <p>faq</p>
             <div class={styles.underline}></div>

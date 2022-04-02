@@ -24,9 +24,9 @@ const responsive = {
   },
 };
 
-export default function Gallery({ id }) {
+export default function Gallery({ id, linkId }) {
   return (
-    <div className={styles.container}>
+    <div ref={linkId} className={styles.container}>
       <h1>Gallery</h1>
       <Carousel
         className={styles.carousel}

@@ -1,12 +1,25 @@
 import styles from "./Main.module.scss";
 import Home from "../home";
 import Gallery from "../gallery";
+import Roadmap from "../roadmap";
+import Ourstory from "../ourstory";
 import nftcalendar from "../../assets/NFTCalendar.png";
 
-export default function Main({ homeRef, galleryRef }) {
+export default function Main({
+  homeRef,
+  galleryRef,
+  roadmapRef,
+  ourstoryRef,
+  faqRef,
+  roadmapId,
+  ourstoryId,
+  faqId,
+  homeId,
+  galleryId,
+}) {
   return (
     <div className={styles.container}>
-      <Home id={homeRef} />
+      <Home id={homeRef} linkId={homeId} />
       <div className={styles.featured}>
         <p>Featured in</p>
         <img src={nftcalendar} alt="" />
@@ -37,7 +50,9 @@ export default function Main({ homeRef, galleryRef }) {
           </div>
         </div>
       </div>
-      <Gallery id={galleryRef} />
+      <Gallery id={galleryRef} linkId={galleryId} />
+      <Roadmap id={roadmapRef} linkId={roadmapId} />
+      <Ourstory id={ourstoryRef} linkId={ourstoryId} />
     </div>
   );
 }

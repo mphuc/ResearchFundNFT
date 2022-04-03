@@ -4,6 +4,7 @@ import Gallery from "../gallery";
 import Roadmap from "../roadmap";
 import Ourstory from "../ourstory";
 import Faq from "../faq";
+import Footer from "../footer";
 import nftcalendar from "../../assets/NFTCalendar.png";
 
 export default function Main({
@@ -55,6 +56,7 @@ export default function Main({
       <Roadmap id={roadmapRef} linkId={roadmapId} />
       <Ourstory id={ourstoryRef} linkId={ourstoryId} />
       <Faq id={faqRef} linkId={faqId} />
+      <Footer />
     </div>
   );
 }

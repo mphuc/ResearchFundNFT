@@ -1,0 +1,51 @@
+.container {
+  margin-top: 130px;
+  .logo {
+    text-transform: uppercase;
+    cursor: default;
+    margin-bottom: 20px;
+    p {
+      width: max-content;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 30px;
+      background: linear-gradient(90deg, #9b43ed, #3081ed);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  & > div:nth-child(2) {
+    border-bottom: 1px solid #f2f2f2;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    p {
+      width: 40%;
+    }
+  }
+  & > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .socials {
+      width: 80px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      img {
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+    p {
+      color: #828282;
+      span {
+        margin-left: 30px;
+      }
+    }
+  }
+}

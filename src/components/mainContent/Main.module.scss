@@ -5,6 +5,12 @@
   position: relative;
   overflow: auto;
   overflow-x: hidden;
+  @media screen and (max-width: 1440px) {
+    padding: 120px;
+  }
+  @media screen and (max-width: 1024px) {
+    padding: 80px;
+  }
   .featured {
     height: 180px;
     width: 100vw;

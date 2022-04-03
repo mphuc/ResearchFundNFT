@@ -14,9 +14,15 @@
     }
     & > button:nth-child(2) {
       transform: translateX(-120%);
+      @media screen and (max-width: 1440px) {
+        transform: none;
+      }
     }
     & > button:nth-child(3) {
       transform: translateX(150%);
+      @media screen and (max-width: 1440px) {
+        transform: none;
+      }
     }
   }
   .cardWrapper {
@@ -25,6 +31,10 @@
     background: linear-gradient(160deg, #fb37ff, #9b6fee00, #7b7fea00, #1bb2de);
     border-radius: 35px;
     padding: 1px;
+    @media screen and (max-width: 1440px) {
+      width: 340px;
+      height: 440px;
+    }
     .card {
       height: 100%;
       width: 100%;
@@ -45,7 +55,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 70%;
+        width: 75%;
+        @media screen and (max-width: 1440px) {
+          width: 80%;
+        }
         & > div {
           width: 100%;
           p {
@@ -76,9 +89,9 @@
         }
       }
       & > img {
-        width: 300px;
-        height: 310px;
-        border-radius: 20px;
+        width: 80%;
+        height: 70%;
+        border-radius: 10px;
         object-fit: cover;
         margin-bottom: 10px;
       }

@@ -11,19 +11,33 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "assert": "^2.0.0",
     "dotenv": "^16.0.0",
     "ethers": "^5.6.0",
+    "fs": "0.0.1-security",
+    "https-browserify": "^1.0.0",
+    "os": "^0.1.2",
+    "os-browserify": "^0.3.0",
     "react": "^17.0.2",
+    "react-app-rewired": "^2.2.1",
     "react-dom": "^17.0.2",
     "react-material-ui-carousel": "^3.2.0",
+    "react-redux": "^7.2.8",
     "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
+    "redux-thunk": "^2.4.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "web-vitals": "^2.1.4",
+    "web3": "^1.5.1",
+    "web3-eth-contract": "^1.5.2",
+    "webpack": "^5.71.0",
+    "webpack-cli": "^4.9.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
     "extends": [

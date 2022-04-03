@@ -1,6 +1,7 @@
 import "./App.css";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Main from "./components/Main";
+import Mint from "./components/Mint";
 
 const theme = createTheme({
   typography: {

@@ -1,0 +1,18 @@
+{
+  "CONTRACT_ADDRESS": "0xD2d225BB5be7b1eA58808ce2a4581676Cc17F61f",
+  "SCAN_LINK": "https://etherscan.io/address/0xD2d225BB5be7b1eA58808ce2a4581676Cc17F61f",
+  "NETWORK": {
+    "NAME": "Rinkeby Ethereum",
+    "SYMBOL": "ETH",
+    "ID": 4
+  },
+  "NFT_NAME": "Research Funding Club",
+  "SYMBOL": "RFC",
+  "MAX_SUPPLY": 10000,
+  "WEI_COST": 100000000000000,
+  "DISPLAY_COST": 0.0001,
+  "GAS_LIMIT": 285000,
+  "MARKETPLACE": "Opeansea",
+  "MARKETPLACE_LINK": "https://opensea.io/collection/#",
+  "SHOW_BACKGROUND": true
+}

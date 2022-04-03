@@ -3,6 +3,7 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import NFTCards from "./NFTCards";
 import { useEffect, useState } from "react";
 import NFTCalendarLogo from "../images/nftcalendar-500x500.png";
+import Web3 from "web3";
 
 const useStyles = makeStyles((theme) => ({
   introContent: {
@@ -42,8 +43,114 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
+// Main
 const Main = () => {
   const [currentAccount, setCurrentAccount] = useState("");
+
+  const [claimingNft, setClaimingNft] = useState(false);
+  const [mintedAmount, setMintedAmount] = useState(0);
+  const [feedback, setFeedback] = useState(
+    `Connect your wallet.`
+  );
+  
+  const [smartContract, setSmartContract] = useState(null);
+  const [totalSupply, setTotalSupply] = useState(0);
+  const [CONFIG, SET_CONFIG] = useState({
+    CONTRACT_ADDRESS: "",
+    SCAN_LINK: "",
+    NETWORK: {
+      NAME: "",
+      SYMBOL: "",
+      ID: 4,
+    },
+    NFT_NAME: "",
+    SYMBOL: "",
+    MAX_SUPPLY: 1,
+    WEI_COST: 0,
+    DISPLAY_COST: 0,
+    GAS_LIMIT: 0,
+    MARKETPLACE: "",
+    MARKETPLACE_LINK: "",
+    SHOW_BACKGROUND: false,
+  });
+
+  const loadContract = async (addr) => {
+    const { ethereum } = window;
+    let web3 = new Web3(ethereum);
+
+    const abiResponse = await fetch("/config/abi.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    const abi = await abiResponse.json();
+
+    var obj = new web3.eth.Contract(
+      abi,
+      addr
+    );
+
+    var maxSupply = await obj.methods.MAX_SUPPLY().call();
+    var minSupply = await obj.methods.MIN_SUPPLY().call();
+    var totalSupply = maxSupply - minSupply;
+    var mintedAmount = await obj.methods.totalSupply().call();
+    
+    setMintedAmount(mintedAmount);
+    setTotalSupply(totalSupply);
+    setSmartContract(obj);
+    console.log('here');
+  }
+
+  const getConfig = async () => {
+    const configResponse = await fetch("/config/config.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    const config = await configResponse.json();
+    SET_CONFIG(config);
+    loadContract(config.CONTRACT_ADDRESS);
+  }
+
+  const mint = () => {
+    var mintAmount = 1; 
+    let cost = CONFIG.WEI_COST;
+    let gasLimit = CONFIG.GAS_LIMIT;
+    let totalCostWei = String(cost * mintAmount);
+    let totalGasLimit = String(gasLimit * mintAmount);
+    console.log("Cost: ", totalCostWei);
+    console.log("Gas limit: ", totalGasLimit);
+    setFeedback(`Pending`);
+    setClaimingNft(true);
+    smartContract.methods
+      .mint(mintAmount)
+      .send({
+        gasLimit: String(totalGasLimit),
+        to: CONFIG.CONTRACT_ADDRESS,
+        from: currentAccount,
+        value: totalCostWei,
+      })
+      .once("error", (err) => {
+        console.log(err);
+        setFeedback("Sorry, something went wrong please try again later.");
+        setClaimingNft(false);
+      })
+      .then((receipt) => {
+        console.log(receipt);
+        setFeedback(`successful`);
+        setClaimingNft(false);
+        loadContract(CONFIG.CONTRACT_ADDRESS);
+      });    
+  }
+
+  useEffect(() => {
+    getConfig();
+    checkIfWalletIsConnected();
+  }, []);
 
   const classes = useStyles();
 
@@ -63,6 +170,7 @@ const Main = () => {
       const account = accounts[0];
       console.log("Found an authorized account:", account);
       setCurrentAccount(account);
+      setFeedback("Click to mint.");
     } else {
       console.log("No authorized account found");
     }
@@ -82,14 +190,11 @@ const Main = () => {
       });
 
       setCurrentAccount(accounts[0]);
+      setFeedback("Click to mint.");
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    checkIfWalletIsConnected();
-  }, []);
 
   return (
     <Container className="App">
@@ -136,10 +241,10 @@ const Main = () => {
           variant="h4"
           style={{ textAlign: "center", margin: "10px 0" }}
         >
-          Gallery
+          {feedback}
         </Typography>
         <div style={{ textAlign: "center", margin: "10px 0" }}>
-          {currentAccount === "" ? (
+          {currentAccount === "" || smartContract === "" ? (
             <Button
               onClick={connectWallet}
               className=""
@@ -149,18 +254,31 @@ const Main = () => {
               Connect to Wallet
             </Button>
           ) : (
-            <Button
-              onClick={() => {}}
-              className=""
-              color="primary"
-              variant="outlined"
-            >
-              Mint NFT
-            </Button>
+            <>
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  mint();
+                }}
+                className=""
+                color="primary"
+                variant="outlined"
+              >
+                Mint
+              </Button>              
+              <div style={{ textAlign: "center", margin: "10px 0" }}>
+              <span>
+                Only {totalSupply - mintedAmount} Left
+              </span>
+              <span> Max {totalSupply}</span>
+              </div>            
+            </>
           )}
         </div>
-        <NFTCards />
+
       </Box>
+
+      <NFTCards />
 
       <Box className={classes.card}>
         <Typography variant="h4" gutterBottom className={classes.green}>

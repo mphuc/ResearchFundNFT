@@ -3,6 +3,7 @@ import Home from "../home";
 import Gallery from "../gallery";
 import Roadmap from "../roadmap";
 import Ourstory from "../ourstory";
+import Faq from "../faq";
 import nftcalendar from "../../assets/NFTCalendar.png";
 
 export default function Main({
@@ -53,6 +54,7 @@ export default function Main({
       <Gallery id={galleryRef} linkId={galleryId} />
       <Roadmap id={roadmapRef} linkId={roadmapId} />
       <Ourstory id={ourstoryRef} linkId={ourstoryId} />
+      <Faq id={faqRef} linkId={faqId} />
     </div>
   );
 }

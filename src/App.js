@@ -10,7 +10,7 @@ function App() {
   const [galleryRef, galleryInView] = useInView({ threshold: 0.5 });
   const [roadmapRef, roadmapInView] = useInView({ threshold: 0.5 });
   const [ourstoryRef, ourstoryInView] = useInView({ threshold: 0.5 });
-  const [faqRef, faqInView] = useInView({ threshold: 0.5 });
+  const [faqRef, faqInView] = useInView({ threshold: 0.8 });
   // ref links
   const homeId = useRef();
   const galleryId = useRef();

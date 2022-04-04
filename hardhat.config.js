@@ -19,7 +19,7 @@ const ALCHEMY_API_KEY = "iAJWLiE3bAWhyZ2foX_sYLWrXAg4F76Z";
 // To export your private key from Metamask, open Metamask and
 // go to Account Details > Export Private Key
 // Be aware of NEVER putting real Ether into testing accounts
-const RINKEBY_PRIVATE_KEY = "";
+const RINKEBY_PRIVATE_KEY = "91760867b93c76bf4f592f08245baef88620299a48b38dd9f3cdf29a32c3a676";
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more

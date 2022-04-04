@@ -8,6 +8,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "hardhat/console.sol";
 
 /*
@@ -15,7 +16,8 @@ import "hardhat/console.sol";
  */
 
 contract ResearchFundingClub is
-    ERC721Enumerable,
+    ERC721Enumerable, 
+    ERC2981,
     Ownable,
     ERC721URIStorage,
     ReentrancyGuard
@@ -35,7 +37,8 @@ contract ResearchFundingClub is
     address public charityWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
     address public devWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
 
-    constructor(string memory baseURI) ERC721("Research Funding Club", "RFC") {
+    constructor(uint96 _royaltyFeesInBips, string memory baseURI) ERC721("Research Funding Club", "RFC") {
+        setRoyaltyInfo(owner(), _royaltyFeesInBips); // 2.5% = 2.5 * 100 = 250
         setBaseURI(baseURI);
     }
 
@@ -76,13 +79,22 @@ contract ResearchFundingClub is
         return super.tokenURI(tokenId);
     }
 
+    // Royalty Standard
+
+    function setRoyaltyInfo(address _receiver, uint96 _royaltyFeesInBips) public onlyOwner {
+        _setDefaultRoyalty(_receiver, _royaltyFeesInBips);
+    }
+
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(ERC721, ERC721Enumerable)
+        override(ERC721, ERC2981, ERC721Enumerable)
         returns (bool)
     {
-        return super.supportsInterface(interfaceId);
+        return (
+            interfaceId == type(IERC2981).interfaceId ||
+            super.supportsInterface(interfaceId)
+        );
     }
 
     function _baseURI() internal pure override returns (string memory) {

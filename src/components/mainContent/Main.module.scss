@@ -1,10 +1,19 @@
 .container {
   height: 100%;
   width: 100%;
-  padding: 150px;
+  padding: 150px 400px;
   position: relative;
   overflow: auto;
   overflow-x: hidden;
+  @media screen and (max-width: 2350px) {
+    padding: 150px 300px;
+  }
+  @media screen and (max-width: 2100px) {
+    padding: 150px 200px;
+  }
+  @media screen and (max-width: 1650px) {
+    padding: 140px;
+  }
   @media screen and (max-width: 1440px) {
     padding: 120px;
   }

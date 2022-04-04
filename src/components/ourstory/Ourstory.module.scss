@@ -6,5 +6,8 @@
   }
   p {
     padding: 0 130px;
+    @media screen and (max-width: 1024px) {
+      padding: 0 50px;
+    }
   }
 }

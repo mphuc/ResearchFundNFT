@@ -1,8 +1,10 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import styles from "./App.module.scss";
 import Navbar from "./components/navbar";
 import Main from "./components/mainContent";
 import { useInView } from "react-intersection-observer";
+import MenuSharpIcon from "@mui/icons-material/MenuSharp";
+import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 
 function App() {
   // hooks for scroll indicator on navbar
@@ -17,12 +19,17 @@ function App() {
   const roadmapId = useRef();
   const ourstoryId = useRef();
   const faqId = useRef();
+  //mobile navbar state
+  const [nav, setNav] = useState(false);
   return (
     <div className={styles.container}>
       <div className={styles.circle}></div>
       <div className={styles.circle}></div>
       <div className={styles.circle}></div>
       <div className={styles.bgLayer}></div>
+      <button onClick={() => setNav(!nav)} className={styles.menuBtn}>
+        {!nav ? <MenuSharpIcon color="inherit" /> : <CloseSharpIcon />}
+      </button>
       <Navbar
         homeId={homeId}
         galleryId={galleryId}
@@ -34,6 +41,8 @@ function App() {
         roadmapInView={roadmapInView}
         ourstoryInView={ourstoryInView}
         faqInView={faqInView}
+        nav={nav}
+        setNav={setNav}
       />
       <Main
         homeId={homeId}

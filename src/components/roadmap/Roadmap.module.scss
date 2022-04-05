@@ -10,6 +10,9 @@
     justify-content: center;
     &:not(:last-child) {
       margin-bottom: 40px;
+      @media screen and (max-width: 1024px) {
+        margin-bottom: 25px;
+      }
     }
     &.checked {
       & > div {
@@ -47,6 +50,13 @@
             #0013bf 147.66%
           );
           border-radius: 50%;
+          @media screen and (max-width: 1024px) {
+            width: 30px;
+            height: 30px;
+            img {
+              width: 60%;
+            }
+          }
         }
       }
       &:nth-child(2) {

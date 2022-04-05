@@ -17,8 +17,14 @@
   @media screen and (max-width: 1440px) {
     padding: 120px;
   }
-  @media screen and (max-width: 1024px) {
-    padding: 80px;
+  @media screen and (max-width: 1350px) {
+    padding: 100px;
+  }
+  @media screen and (max-width: 1100px) {
+    padding: 50px;
+  }
+  @media screen and (max-width: 768px) {
+    padding-top: 100px;
   }
   .featured {
     height: 180px;
@@ -30,6 +36,9 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    @media screen and (max-width: 1024px) {
+      height: 150px;
+    }
     p {
       color: #fff;
       text-transform: uppercase;
@@ -54,6 +63,13 @@
       & > div {
         width: 100%;
         padding: 40px 0;
+        @media screen and (max-width: 1024px) {
+          padding: 20px 0;
+        }
+        @media screen and (max-width: 425px) {
+          padding: 15px 10px;
+          height: 120px;
+        }
         &:not(:last-child) {
           border-right: 1px solid rgba(255, 255, 255, 0.63);
         }
@@ -63,8 +79,32 @@
           line-height: 50px;
           font-size: 20px;
           letter-spacing: -1px;
+          @media screen and (max-width: 1024px) {
+            font-size: 17px;
+            line-height: 40px;
+          }
+          @media screen and (max-width: 768px) {
+            font-size: 14px;
+          }
+          @media screen and (max-width: 610px) {
+            font-size: 10px;
+            line-height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+          }
           span {
             font-size: 72px;
+            @media screen and (max-width: 1024px) {
+              font-size: 55px;
+            }
+            @media screen and (max-width: 768px) {
+              font-size: 35px;
+            }
+            @media screen and (max-width: 425px) {
+              font-size: 20px;
+            }
           }
         }
       }

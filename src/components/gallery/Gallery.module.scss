@@ -14,12 +14,14 @@
     }
     & > button:nth-child(2) {
       transform: translateX(-120%);
+      z-index: 5;
       @media screen and (max-width: 1440px) {
         transform: none;
       }
     }
     & > button:nth-child(3) {
       transform: translateX(120%);
+      z-index: 5;
       @media screen and (max-width: 1440px) {
         transform: none;
       }
@@ -39,6 +41,10 @@
       width: 280px;
       height: 400px;
       border-radius: 25px;
+    }
+    @media screen and (max-width: 768px) {
+      width: 240px;
+      height: 370px;
     }
     .card {
       height: 100%;
@@ -75,6 +81,9 @@
             font-weight: 200;
             @media screen and (max-width: 1024px) {
               font-size: 13px;
+            }
+            @media screen and (max-width: 768px) {
+              font-size: 11px;
             }
           }
           & > div {

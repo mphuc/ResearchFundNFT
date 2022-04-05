@@ -33,12 +33,17 @@
       left: -2%;
     }
   }
+  .menuBtn {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    z-index: 10;
+    display: none;
+    color: #fff;
+    background: transparent;
+    border: 0;
+    @media screen and (max-width: 768px) {
+      display: block;
+    }
+  }
 }
-
-// .font-green {
-//   color: #175c4c;
-// }
-
-// .background-beige {
-//   background-color: #efdbce;
-// }

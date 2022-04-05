@@ -38,6 +38,11 @@ export default function Home({ id, linkId }) {
             </div>
           </div>
         </div>
+        <div className={styles.logo}>
+          <p>
+            research <br /> funding <br /> club nft
+          </p>
+        </div>
       </div>
     </>
   );

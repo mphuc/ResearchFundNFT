@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 require("@nomiclabs/hardhat-waffle");
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -19,7 +19,7 @@ const ALCHEMY_API_KEY = "iAJWLiE3bAWhyZ2foX_sYLWrXAg4F76Z";
 // To export your private key from Metamask, open Metamask and
 // go to Account Details > Export Private Key
 // Be aware of NEVER putting real Ether into testing accounts
-const RINKEBY_PRIVATE_KEY = "91760867b93c76bf4f592f08245baef88620299a48b38dd9f3cdf29a32c3a676";
+const RINKEBY_PRIVATE_KEY = "";
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -33,11 +33,11 @@ module.exports = {
   networks: {
     ropsten: {
       url: `https://eth-ropsten.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
-      accounts: [`${RINKEBY_PRIVATE_KEY}`]
+      accounts: [`${RINKEBY_PRIVATE_KEY}`],
     },
     rinkeby: {
       url: `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
-      accounts: [`${RINKEBY_PRIVATE_KEY}`]
+      accounts: [`${RINKEBY_PRIVATE_KEY}`],
     },
-  }
+  },
 };

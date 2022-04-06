@@ -3,6 +3,9 @@
   h1 {
     text-align: center;
     margin-bottom: 80px;
+    @media screen and (max-width: 425px) {
+      margin-bottom: 40px;
+    }
   }
   .accordion {
     border-radius: 0;
@@ -12,6 +15,9 @@
     background: rgba(66, 65, 82, 0.44);
     img {
       width: 20px;
+      @media screen and (max-width: 425px) {
+        width: 15px;
+      }
     }
   }
   .accDetails {
@@ -70,5 +76,11 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    @media screen and (max-width: 768px) {
+      font-size: 19px;
+    }
+    @media screen and (max-width: 425px) {
+      font-size: 17px;
+    }
   }
 }

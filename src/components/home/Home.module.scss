@@ -50,7 +50,7 @@
       @media screen and (max-width: 425px) {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
       }
       button {
         color: #fff;
@@ -64,7 +64,11 @@
           font-size: 17px;
           padding: 8px 20px;
         }
-
+        @media screen and (max-width: 375px) {
+          padding: 5px 15px;
+          border-radius: 5px;
+          font-size: 15px;
+        }
         &:hover {
           transform: scale(1.02);
         }
@@ -189,6 +193,9 @@
     display: none;
     @media screen and (max-width: 768px) {
       display: block;
+    }
+    @media screen and (max-width: 425px) {
+      top: 70px;
     }
     p {
       font-size: 32px;

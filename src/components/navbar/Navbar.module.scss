@@ -82,11 +82,17 @@
         letter-spacing: 1.5px;
         cursor: pointer;
         transition: all 0.2s;
+        @media screen and (max-width: 768px) {
+          margin-bottom: 20px;
+        }
         p {
           transition: all 0.2s;
           @media screen and (max-width: 768px) {
             font-size: 36px;
             font-weight: 500;
+          }
+          @media screen and (max-width: 375px) {
+            font-size: 30px;
           }
         }
         &:hover {
@@ -136,6 +142,9 @@
     @media screen and (max-width: 768px) {
       width: 200px;
     }
+    @media screen and (max-width: 425px) {
+      width: 130px;
+    }
     img {
       cursor: pointer;
       transition: all 0.3s;
@@ -145,6 +154,9 @@
       }
       @media screen and (max-width: 768px) {
         width: 70px;
+      }
+      @media screen and (max-width: 425px) {
+        width: 50px;
       }
       &:hover {
         transform: scale(1.1);

@@ -31,7 +31,7 @@
     padding-top: 150px;
   }
   .featured {
-    height: 180px;
+    padding: 40px 0;
     width: 100vw;
     margin-left: 50%;
     transform: translateX(-50%);
@@ -39,17 +39,99 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    @media screen and (max-width: 1024px) {
-      height: 150px;
+    flex-direction: row-reverse;
+    @media screen and (max-width: 768px) {
+      flex-direction: column-reverse;
     }
-    p {
-      color: #fff;
-      text-transform: uppercase;
-      font-weight: 700;
-      font-size: 12px;
-      letter-spacing: 1.5px;
-      margin-bottom: 20px;
+    .wrapper {
+      width: 370px;
+      height: 490px;
+      margin-right: 150px;
+      background: linear-gradient(
+        160deg,
+        #fb37ff,
+        #9b6fee00,
+        #7b7fea00,
+        #1bb2de
+      );
+      border-radius: 35px;
+      padding: 1px;
+      @media screen and (max-width: 1024px) {
+        height: 400px;
+        width: 300px;
+      }
+      @media screen and (max-width: 768px) {
+        margin-right: 0;
+        margin-bottom: 100px;
+      }
+      div {
+        background-color: #1f1d2b;
+        height: 100%;
+        width: 100%;
+        border-radius: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+        h2 {
+          text-align: center;
+          font-weight: 800;
+          font-size: 40px;
+          line-height: 40px;
+          letter-spacing: 1.5px;
+          background: linear-gradient(93.51deg, #9b43ed 2.84%, #3081ed 99.18%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          @media screen and (max-width: 1024px) {
+            font-size: 30px;
+            line-height: 30px;
+          }
+        }
+        p {
+          text-align: center;
+          font-size: 35px;
+          @media screen and (max-width: 1024px) {
+            font-size: 25px;
+          }
+          span {
+            color: #fb37ff;
+          }
+        }
+        button {
+          color: #fff;
+          background: linear-gradient(
+            103.91deg,
+            #9b51e0 21.01%,
+            rgba(48, 129, 237, 0.8) 100%
+          );
+          border-radius: 10px;
+          padding: 12px 30px;
+          border: 0;
+          font-weight: 600;
+          font-size: 25px;
+          background-size: 200% 100%;
+          background-position: right;
+          transition: all 0.5s ease-in-out;
+          @media screen and (max-width: 1024px) {
+            font-size: 20px;
+          }
+          &:hover {
+            background-position: left;
+          }
+        }
+      }
+    }
+    & > div:first-child {
+      p {
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
     }
   }
   .donations {

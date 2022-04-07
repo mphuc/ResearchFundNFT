@@ -71,3 +71,8 @@ p {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #9b43ed, #3081ed);
 }
+@media screen and (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+}

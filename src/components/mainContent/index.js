@@ -23,8 +23,23 @@ export default function Main({
     <div className={styles.container}>
       <Home id={homeRef} linkId={homeId} />
       <div className={styles.featured}>
-        <p>Featured in</p>
-        <img src={nftcalendar} alt="" />
+        <div>
+          <p>Featured in</p>
+          <img src={nftcalendar} alt="" />
+        </div>
+        <div className={styles.wrapper}>
+          <div>
+            <h2>
+              NFTS
+              <br />
+              MINTED
+            </h2>
+            <p>
+              3 of <span>25</span>
+            </p>
+            <button>Mint NFT</button>
+          </div>
+        </div>
       </div>
       <div className={styles.donations}>
         <h1>Donations</h1>

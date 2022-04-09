@@ -1,0 +1,53 @@
+.container {
+  background-color: #1f1d2b;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .bgLayer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backdrop-filter: blur(60px);
+  }
+  .circle {
+    position: absolute;
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+    &:nth-child(1) {
+      background-color: #fb37ff;
+      top: 15vh;
+      right: 35%;
+    }
+    &:nth-child(2) {
+      background-color: #18b2de;
+      top: 70vh;
+      right: 10%;
+    }
+    &:nth-child(3) {
+      background-color: #18b2de;
+      top: 50vh;
+      left: -2%;
+    }
+  }
+  .menuBtn {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    z-index: 10;
+    display: none;
+    color: #fff;
+    background: transparent;
+    border: 0;
+    @media screen and (max-width: 768px) {
+      display: block;
+    }
+    @media screen and (max-width: 425px) {
+      right: 35px;
+      top: 70px;
+    }
+  }
+}

@@ -16,8 +16,13 @@ export default function Home({ id, linkId }) {
             institutions studying the world’s deadliest diseases.
           </p>
           <div className={styles.btns}>
-            <button>Join Discord</button>
-            <button>Learn More</button>
+            <button
+              onClick={() =>
+                (window.location.href = "https://discord.gg/urDZcwnXTF")
+              }
+            >
+              Join Discord
+            </button>
           </div>
         </div>
         <div className={styles.wrapper}>
@@ -26,12 +31,8 @@ export default function Home({ id, linkId }) {
             <div className={styles.infos}>
               <div>
                 <div>
-                  <p>Lorem Ipsum</p>
-                  <p>0.51 RFC</p>
-                </div>
-                <div>
-                  <p>Ends in 56.44.45</p>
-                  <button>Bid</button>
+                  <p>Mom Dad Blue #1</p>
+                  <p>0.2 ETH</p>
                 </div>
               </div>
               <img src={heartIcon} alt="" />

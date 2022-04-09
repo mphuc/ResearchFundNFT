@@ -22,8 +22,12 @@ export default function Footer() {
           <span> Copyright 2022 All Rights Reserved</span>
         </p>
         <div className={styles.socials}>
-          <img src={discordIcon} alt="" />
-          <img src={twitterIcon} alt="" />
+          <a href="https://discord.gg/urDZcwnXTF">
+            <img src={discordIcon} alt="" />
+          </a>
+          <a href="https://twitter.com/ResearchFundNFT">
+            <img src={twitterIcon} alt="" />
+          </a>
         </div>
       </div>
     </footer>

@@ -48,12 +48,11 @@ export default function Roadmap({ id, linkId }) {
               <span>Q3 2022</span>
               <br />
               Drop the first collection and make our first donations to charity.
-              Continue to market the vision of becoming the world's largest
-              donor to research institutions. Build a display on our website
-              that has a ticker for how much money we've donated. Decide on a
-              voting system for our NFT holders to vote on where to donate the
-              revenue. Use some of the money to hire new artists for creating
-              the art for the next NFT drop.
+              Decide on a voting system for our NFT holders to vote on where to
+              donate future revenue. Use some of the money to hire new artists
+              for creating the art for the next NFT drop. The next drop will be
+              a 10,000 NFT drop. The art is undecided, but may be based on
+              famous artists/musicians/actors/etc. who've passed away.
             </p>
           </div>
         </div>
@@ -67,9 +66,9 @@ export default function Roadmap({ id, linkId }) {
             <p>
               <span>Q4 2022 </span>
               <br />
-              Drop a second collection and make more donations to charity.
-              Continue marketing our vision. Expand business model to allow
-              people to commemorate their lost loved ones using our NFT
+              Drop the second collection of 10,000 NFT's and make more donations
+              to charity. Continue marketing our vision. Expand business model
+              to allow people to commemorate their lost loved ones using our NFT
               platform. Customers would be able to commission us to create art
               that commemorates their lost loved one, and we'll work with them
               to create their own unique NFT drop.
@@ -102,7 +101,8 @@ export default function Roadmap({ id, linkId }) {
               <span>Q2 2023 and beyond </span>
               <br />
               Continue commissioning artists to create more NFTs and continue
-              doing drops and donating money.
+              doing drops and donating money. Define our tokenomics to be able
+              to bring more value to our community.
             </p>
           </div>
         </div>

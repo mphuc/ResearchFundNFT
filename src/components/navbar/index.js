@@ -49,7 +49,6 @@ export default function Navbar({
             onClick={() => {
               homeId.current.scrollIntoView({ behavior: "smooth" });
               setNav(false);
-              //setNavActive(0);
             }}
           >
             <p>home</p>
@@ -60,7 +59,6 @@ export default function Navbar({
             onClick={() => {
               galleryId.current.scrollIntoView({ behavior: "smooth" });
               setNav(false);
-              // setNavActive(1);
             }}
           >
             <p>gallery</p>
@@ -71,7 +69,6 @@ export default function Navbar({
             onClick={() => {
               roadmapId.current.scrollIntoView({ behavior: "smooth" });
               setNav(false);
-              // setNavActive(2);
             }}
           >
             <p>roadmap</p>
@@ -82,7 +79,6 @@ export default function Navbar({
             onClick={() => {
               ourstoryId.current.scrollIntoView({ behavior: "smooth" });
               setNav(false);
-              // setNavActive(3);
             }}
           >
             <p>our story</p>
@@ -93,7 +89,6 @@ export default function Navbar({
             onClick={() => {
               faqId.current.scrollIntoView({ behavior: "smooth" });
               setNav(false);
-              // setNavActive(4);
             }}
           >
             <p>faq</p>
@@ -102,8 +97,12 @@ export default function Navbar({
         </ul>
       </div>
       <div className={styles.socials}>
-        <img src={discordIcon} alt="" />
-        <img src={twitterIcon} alt="" />
+        <a href="https://discord.gg/urDZcwnXTF">
+          <img src={discordIcon} alt="" />
+        </a>
+        <a href="https://twitter.com/ResearchFundNFT">
+          <img src={twitterIcon} alt="" />
+        </a>
       </div>
     </div>
   );

@@ -1,20 +1,78 @@
-@font-face {
+/* @font-face {
   font-family: "PlayfairDisplay";
   src: local("PlayfairDisplay"),
     url("./fonts/PlayfairDisplaySC-Regular.ttf") format("truetype");
   font-weight: regular;
-}
-
+} */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700;900&display=swap");
 body {
-  margin: 0;
-  font-family: "PlayfairDisplay", BlinkMacSystemFont, "Segoe UI", "Roboto",
-    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/* globals */
+button {
+  outline: none;
+  cursor: pointer;
+}
+h1 {
+  font-weight: 600;
+  font-size: 72px;
+  color: #fff;
+}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+p {
+  font-weight: 400;
+  font-size: 24px;
+  color: #e2e2e2;
+}
+@media screen and (max-width: 1440px) {
+  h1 {
+    font-size: 60px;
+  }
+  p {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  h1 {
+    font-size: 50px;
+  }
+}
+@media screen and (max-width: 425px) {
+  h1 {
+    font-size: 35px;
+  }
+  p {
+    font-size: 15px;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.refDummy {
+  position: absolute;
+  top: 0;
+}
+/* scroollbar style */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #9b43ed7e, #3081ed7e);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #9b43ed, #3081ed);
+}
+@media screen and (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
 }

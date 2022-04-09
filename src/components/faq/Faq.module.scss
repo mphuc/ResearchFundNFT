@@ -1,0 +1,86 @@
+.container {
+  margin: 130px 0;
+  h1 {
+    text-align: center;
+    margin-bottom: 80px;
+    @media screen and (max-width: 425px) {
+      margin-bottom: 40px;
+    }
+  }
+  .accordion {
+    border-radius: 0;
+    background: transparent;
+  }
+  .accTitle {
+    background: rgba(66, 65, 82, 0.44);
+    img {
+      width: 20px;
+      @media screen and (max-width: 425px) {
+        width: 15px;
+      }
+    }
+  }
+  .accDetails {
+    background: rgba(66, 65, 82, 0.2);
+    padding: 40px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    @media screen and (max-width: 1024px) {
+      padding: 25px;
+    }
+    p {
+      position: relative;
+      width: 100%;
+      &:not(:last-child) {
+        margin-bottom: 50px;
+        @media screen and (max-width: 1024px) {
+          margin-bottom: 25px;
+        }
+      }
+      &.dotted {
+        width: calc(100% - 50px);
+      }
+      span {
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        top: 10px;
+        left: -50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 600;
+        background: linear-gradient(
+          127.99deg,
+          #a859ff -27.18%,
+          #0013bf 147.66%
+        );
+        @media screen and (max-width: 1024px) {
+          transform: scale(0.8);
+        }
+        &.smallDot {
+          height: 20px;
+          width: 20px;
+        }
+      }
+    }
+  }
+  h3 {
+    font-weight: 700;
+    font-size: 22px;
+    background: linear-gradient(180deg, #9b43ed 0%, #3081ed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    @media screen and (max-width: 768px) {
+      font-size: 19px;
+    }
+    @media screen and (max-width: 425px) {
+      font-size: 17px;
+    }
+  }
+}

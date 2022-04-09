@@ -22,7 +22,7 @@ export default function Main({
 
   const [claimingNft, setClaimingNft] = useState(false);
   const [mintedAmount, setMintedAmount] = useState(0);
-  const [feedback, setFeedback] = useState(`Connect your wallet.`);
+  const [feedback, setFeedback] = useState(`Connect`);
 
   const [smartContract, setSmartContract] = useState(null);
   const [totalSupply, setTotalSupply] = useState(0);
@@ -49,6 +49,13 @@ export default function Main({
     const { ethereum } = window;
     let web3 = new Web3(ethereum);
 
+    var networkId = await web3.eth.net.getId();
+
+    if (networkId !== CONFIG["NETWORK"]["ID"]) {
+      setFeedback("Change to " + CONFIG["NETWORK"]["NAME"]);
+      return;
+    }
+
     const abiResponse = await fetch("/config/abi.json", {
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +74,7 @@ export default function Main({
     setMintedAmount(mintedAmount);
     setTotalSupply(totalSupply);
     setSmartContract(obj);
-    console.log("here");
+    // console.log("here", maxSupply, minSupply, mintedAmount);
   };
 
   const getConfig = async () => {
@@ -78,11 +85,13 @@ export default function Main({
       },
     });
     const config = await configResponse.json();
+    
     SET_CONFIG(config);
     loadContract(config.CONTRACT_ADDRESS);
   };
 
   const mint = () => {
+    console.log("i am here");
     var mintAmount = 1;
     let cost = CONFIG.WEI_COST;
     let gasLimit = CONFIG.GAS_LIMIT;
@@ -92,6 +101,7 @@ export default function Main({
     console.log("Gas limit: ", totalGasLimit);
     setFeedback(`Pending`);
     setClaimingNft(true);
+
     smartContract.methods
       .mint(mintAmount)
       .send({
@@ -102,14 +112,14 @@ export default function Main({
       })
       .once("error", (err) => {
         console.log(err);
-        setFeedback("Sorry, something went wrong please try again later.");
+        setFeedback("Mint Failed");
         setClaimingNft(false);
       })
       .then((receipt) => {
         console.log(receipt);
-        setFeedback(`successful`);
+        setFeedback(`Successfully Minted`);
         setClaimingNft(false);
-        loadContract(CONFIG.CONTRACT_ADDRESS);
+        getConfig();
       });
   };
 
@@ -134,7 +144,7 @@ export default function Main({
       const account = accounts[0];
       console.log("Found an authorized account:", account);
       setCurrentAccount(account);
-      setFeedback("Click to mint.");
+      setFeedback("Mint");
     } else {
       console.log("No authorized account found");
     }
@@ -154,7 +164,7 @@ export default function Main({
       });
 
       setCurrentAccount(accounts[0]);
-      setFeedback("Click to mint.");
+      setFeedback("Mint");
     } catch (error) {
       console.log(error);
     }
@@ -169,6 +179,7 @@ export default function Main({
           <img src={nftcalendar} alt="" />
         </div>
         <div className={styles.wrapper}>
+          
           <div>
             <h2>
               NFTS
@@ -176,21 +187,23 @@ export default function Main({
               MINTED
             </h2>
             <p>
-              0 of <span>25</span>
+              {mintedAmount} of <span> {totalSupply} </span>
             </p>
             {currentAccount === "" || smartContract === "" ? (
               <button onClick={connectWallet}>Connect Wallet</button>
             ) : (
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  mint();
-                }}
-              >
-                Mint NFT
-              </button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    mint();
+                  }}
+                >
+                  {feedback}
+                </button>
             )}
           </div>
+        
+        
         </div>
       </div>
       <div className={styles.donations}>

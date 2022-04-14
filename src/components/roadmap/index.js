@@ -52,7 +52,16 @@ export default function Roadmap({ id, linkId }) {
               donate future revenue. Use some of the money to hire new artists
               for creating the art for the next NFT drop. The next drop will be
               a 10,000 NFT drop. The art is undecided, but may be based on
-              famous artists/musicians/actors/etc. who've passed away.
+              famous artists/musicians/actors/etc. who we've lost. Something
+              like the famous{" "}
+              <a
+                href="https://knowyourmeme.com/memes/meme-heaven"
+                rel="noreferrer"
+                target="_blank"
+              >
+                meme heaven
+              </a>
+              .
             </p>
           </div>
         </div>

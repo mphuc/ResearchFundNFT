@@ -5,6 +5,7 @@ import Roadmap from "../roadmap";
 import Faq from "../faq";
 import Footer from "../footer";
 import nftcalendar from "../../assets/NFTCalendar.png";
+import Ourstory from "../ourstory";
 
 export default function Main({
   homeRef,
@@ -15,6 +16,8 @@ export default function Main({
   faqId,
   homeId,
   galleryId,
+  ourstoryRef,
+  ourstoryId,
 }) {
   return (
     <div className={styles.container}>
@@ -34,7 +37,7 @@ export default function Main({
             <p>
               0 of <span>25</span>
             </p>
-            <button>Mint NFT</button>
+            <button disabled>Mint Coming Soon</button>
           </div>
         </div>
       </div>
@@ -64,6 +67,7 @@ export default function Main({
           </div>
         </div>
       </div>
+      <Ourstory id={ourstoryRef} linkId={ourstoryId} />
       <Gallery id={galleryRef} linkId={galleryId} />
       <Roadmap id={roadmapRef} linkId={roadmapId} />
       <Faq id={faqRef} linkId={faqId} />

@@ -101,6 +101,35 @@ describe("RFC Tests", function () {
   //   }
   // });
 
+  it("Single mint test", async function() {
+    const [owner] = await ethers.getSigners();
+    const RFC = await ethers.getContractFactory("ResearchFundingClub");
+
+    const rfc = await RFC.deploy(120, "https://manishgotame.com.np/");
+    await rfc.deployed(); 
+
+    var testSupplyVal = 1;
+    // mint single nft
+    var mintTX = await rfc.mint(1, {
+      value: 1000000000000000
+    });
+    await mintTX.wait();
+    var totalSupplyTX = await rfc.totalSupply();
+    var supplyNumber = parseInt(totalSupplyTX.toString());
+
+    console.log(supplyNumber);
+    expect(supplyNumber).to.equal(testSupplyVal); 
+
+    var mintTX = await rfc.mint(1, {
+      value: 1000000000000000
+    });
+    await mintTX.wait();
+    var totalSupplyTX = await rfc.totalSupply();
+    var supplyNumber = parseInt(totalSupplyTX.toString());
+
+    console.log(supplyNumber);
+  });
+
 
   // it("Testing Random number minting", async function() {
   //   const [owner] = await ethers.getSigners();
@@ -131,139 +160,139 @@ describe("RFC Tests", function () {
 
 
 
-  it("Multi drop Mint testing", async function() {
-    const [owner] = await ethers.getSigners();
-    const RFC = await ethers.getContractFactory("ResearchFundingClub");
+  // it("Multi drop Mint testing", async function() {
+  //   const [owner] = await ethers.getSigners();
+  //   const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
-    const rfc = await RFC.deploy("https://manishgotame.com.np/");
-    var reveal = await rfc.deployed();
+  //   const rfc = await RFC.deploy(120, "https://manishgotame.com.np/");
+  //   var reveal = await rfc.deployed();
 
-    var currentBaseUri = await rfc.baseTokenURI();
-    console.log("curren uri: ", currentBaseUri);
+  //   var currentBaseUri = await rfc.baseTokenURI();
+  //   console.log("curren uri: ", currentBaseUri);
 
-    // mint all of them before changing the drop
-    var testSupplyVal = 1;
+  //   // mint all of them before changing the drop
+  //   var testSupplyVal = 1;
 
-    for (var i=0; i < 5; i++) {
-      var mintTX = await rfc.mint(1, {
-        value: 1000000000000000
-      });
-      await mintTX.wait();
-      var totalSupplyTX = await rfc.totalSupply();
-      var supplyNumber = parseInt(totalSupplyTX.toString());
+  //   for (var i=0; i < 10; i++) {
+  //     var mintTX = await rfc.mint(1, {
+  //       value: 1000000000000000
+  //     });
+  //     await mintTX.wait();
+  //     var totalSupplyTX = await rfc.totalSupply();
+  //     var supplyNumber = parseInt(totalSupplyTX.toString());
   
-      console.log(supplyNumber);
-      expect(supplyNumber).to.equal(testSupplyVal);
-      testSupplyVal++;
-    }
+  //     console.log(supplyNumber);
+  //     expect(supplyNumber).to.equal(testSupplyVal);
+  //     testSupplyVal++;
+  //   }
 
-    var userOwner = await rfc.tokensOfOwner(owner.address);
-    // await rfc.reveal();
-    for (var i=0; i < userOwner.length; i++) {
-      var eachtokenId = userOwner[i].toString();
+  //   var userOwner = await rfc.tokensOfOwner(owner.address);
+  //   // await rfc.reveal();
+  //   for (var i=0; i < userOwner.length; i++) {
+  //     var eachtokenId = userOwner[i].toString();
 
-      const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log(eachtokenId, ": changed uri: ",tokenURI);
-    }
+  //     const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
+  //     console.log(eachtokenId, ": changed uri: ",tokenURI);
+  //   }
 
 
-    // new drop
+  //   // new drop
 
-    var newdrop = await rfc.newDrop(20, "https://newone.io/");
+  //   var newdrop = await rfc.newDrop(20, "https://newone.io/");
 
-    var testSupplyVal = 11;
+  //   var testSupplyVal = 11;
 
-    for (var i=0; i < 10; i++) {
-      var mintTX = await rfc.mint(1, {
-        value: 1000000000000000
-      });
-      await mintTX.wait();
-      var totalSupplyTX = await rfc.totalSupply();
-      var supplyNumber = parseInt(totalSupplyTX.toString());
+  //   for (var i=0; i < 10; i++) {
+  //     var mintTX = await rfc.mint(1, {
+  //       value: 1000000000000000
+  //     });
+  //     await mintTX.wait();
+  //     var totalSupplyTX = await rfc.totalSupply();
+  //     var supplyNumber = parseInt(totalSupplyTX.toString());
   
-      console.log(supplyNumber);
-      expect(supplyNumber).to.equal(testSupplyVal);
-      testSupplyVal++;
-    }
+  //     console.log(supplyNumber);
+  //     expect(supplyNumber).to.equal(testSupplyVal);
+  //     testSupplyVal++;
+  //   }
 
-    console.log("==== not revealed ====");
-    var userOwner = await rfc.tokensOfOwner(owner.address);
-    // await rfc.reveal();
+  //   console.log("==== not revealed ====");
+  //   var userOwner = await rfc.tokensOfOwner(owner.address);
+  //   // await rfc.reveal();
 
-    for (var i=0; i < userOwner.length; i++) {
-      var eachtokenId = userOwner[i].toString();
+  //   for (var i=0; i < userOwner.length; i++) {
+  //     var eachtokenId = userOwner[i].toString();
 
-      const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log(eachtokenId, ": changed uri: ",tokenURI);
-    }
+  //     const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
+  //     console.log(eachtokenId, ": changed uri: ",tokenURI);
+  //   }
 
-    console.log("==== revealed ====");
-    var userOwner = await rfc.tokensOfOwner(owner.address);
-    var reveal = await rfc.reveal();
+  //   console.log("==== revealed ====");
+  //   var userOwner = await rfc.tokensOfOwner(owner.address);
+  //   var reveal = await rfc.reveal();
 
-    for (var i=0; i < userOwner.length; i++) {
-      var eachtokenId = userOwner[i].toString();
+  //   for (var i=0; i < userOwner.length; i++) {
+  //     var eachtokenId = userOwner[i].toString();
 
-      const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log(eachtokenId, ": changed uri: ",tokenURI);
-    }
+  //     const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
+  //     console.log(eachtokenId, ": changed uri: ",tokenURI);
+  //   }
 
-    // third drop
+  //   // third drop
 
-    var newdrop = await rfc.newDrop(45, "https://whatthehellisthis.io/");
+  //   var newdrop = await rfc.newDrop(45, "https://whatthehellisthis.io/");
 
-    var testSupplyVal = 21;
+  //   var testSupplyVal = 21;
 
-    for (var i=0; i < 20; i++) {
-      var mintTX = await rfc.mint(1, {
-        value: 1000000000000000
-      });
-      await mintTX.wait();
-      var totalSupplyTX = await rfc.totalSupply();
-      var supplyNumber = parseInt(totalSupplyTX.toString());
+  //   for (var i=0; i < 20; i++) {
+  //     var mintTX = await rfc.mint(1, {
+  //       value: 1000000000000000
+  //     });
+  //     await mintTX.wait();
+  //     var totalSupplyTX = await rfc.totalSupply();
+  //     var supplyNumber = parseInt(totalSupplyTX.toString());
   
-      console.log(supplyNumber);
-      expect(supplyNumber).to.equal(testSupplyVal);
-      testSupplyVal++;
-    }
+  //     console.log(supplyNumber);
+  //     expect(supplyNumber).to.equal(testSupplyVal);
+  //     testSupplyVal++;
+  //   }
 
-    var userOwner = await rfc.tokensOfOwner(owner.address);
+  //   var userOwner = await rfc.tokensOfOwner(owner.address);
 
-    for (var i=0; i < userOwner.length; i++) {
-      var eachtokenId = userOwner[i].toString();
+  //   for (var i=0; i < userOwner.length; i++) {
+  //     var eachtokenId = userOwner[i].toString();
 
-      const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log(eachtokenId, ": changed uri: ",tokenURI);
-    }
+  //     const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
+  //     console.log(eachtokenId, ": changed uri: ",tokenURI);
+  //   }
 
-    var revealIt = await rfc.reveal();
-    var userOwner = await rfc.tokensOfOwner(owner.address);
+  //   var revealIt = await rfc.reveal();
+  //   var userOwner = await rfc.tokensOfOwner(owner.address);
 
-    for (var i=0; i < userOwner.length; i++) {
-      var eachtokenId = userOwner[i].toString();
+  //   for (var i=0; i < userOwner.length; i++) {
+  //     var eachtokenId = userOwner[i].toString();
 
-      const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log(eachtokenId, ": changed uri: ",tokenURI);
-    }
+  //     const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
+  //     console.log(eachtokenId, ": changed uri: ",tokenURI);
+  //   }
 
 
-    // ends here
+  //   // ends here
 
-    // var testSupplyVal = 1;
+  //   // var testSupplyVal = 1;
 
-    // for (var i=0; i < 100; i++) {
-    //   var mintTX = await rfc.mint(1, {
-    //     value: 1000000000000000
-    //   });
-    //   await mintTX.wait();
-    //   var totalSupplyTX = await rfc.totalSupply();
-    //   var supplyNumber = parseInt(totalSupplyTX.toString());
+  //   // for (var i=0; i < 100; i++) {
+  //   //   var mintTX = await rfc.mint(1, {
+  //   //     value: 1000000000000000
+  //   //   });
+  //   //   await mintTX.wait();
+  //   //   var totalSupplyTX = await rfc.totalSupply();
+  //   //   var supplyNumber = parseInt(totalSupplyTX.toString());
   
-    //   console.log(supplyNumber);
-    //   expect(supplyNumber).to.equal(testSupplyVal);
-    //   testSupplyVal++;
-    // }
-  });
+  //   //   console.log(supplyNumber);
+  //   //   expect(supplyNumber).to.equal(testSupplyVal);
+  //   //   testSupplyVal++;
+  //   // }
+  // });
 
   /** 
 

@@ -1,8 +1,8 @@
 {
-  "CONTRACT_ADDRESS": "0xD2d225BB5be7b1eA58808ce2a4581676Cc17F61f",
-  "SCAN_LINK": "https://etherscan.io/address/0xD2d225BB5be7b1eA58808ce2a4581676Cc17F61f",
+  "CONTRACT_ADDRESS": "0xa5db8a79654e0Ee45cb52195979d165EC1C66c4e",
+  "SCAN_LINK": "https://etherscan.io/address/0xa5db8a79654e0Ee45cb52195979d165EC1C66c4e",
   "NETWORK": {
-    "NAME": "Rinkeby Ethereum",
+    "NAME": "Rinkeby Test Network",
     "SYMBOL": "ETH",
     "ID": 4
   },
@@ -13,6 +13,6 @@
   "DISPLAY_COST": 0.0001,
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
-  "MARKETPLACE_LINK": "https://opensea.io/collection/#",
+  "MARKETPLACE_LINK": "https://opensea.io/collection/0xa5db8a79654e0Ee45cb52195979d165EC1C66c4e/",
   "SHOW_BACKGROUND": true
 }

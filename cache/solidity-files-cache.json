@@ -594,8 +594,8 @@
       ]
     },
     "G:\\dapps\\rfc-nft\\contracts\\RFC.sol": {
-      "lastModificationDate": 1647706579215,
-      "contentHash": "55f78ea3e01541a55024f9af58e2a34c",
+      "lastModificationDate": 1649960203248,
+      "contentHash": "e07ab44f89c36b8c8e8cd7c266dacdd9",
       "sourceName": "contracts/RFC.sol",
       "solcConfig": {
         "version": "0.8.7",
@@ -620,27 +620,27 @@
           }
         }
       },
-      "imports": [
-        "hardhat/console.sol"
-      ],
+      "imports": [],
       "versionPragmas": [
         "^0.8.7"
       ],
       "artifacts": [
         "Address",
         "Context",
-        "Counters",
         "ERC165",
+        "ERC2981",
         "ERC721",
         "ERC721Enumerable",
         "ERC721URIStorage",
         "IERC165",
+        "IERC2981",
         "IERC721",
         "IERC721Enumerable",
         "IERC721Metadata",
         "IERC721Receiver",
         "Ownable",
-        "ResearchFundingClub3",
+        "ReentrancyGuard",
+        "ResearchFundingClub2",
         "Strings"
       ]
     },

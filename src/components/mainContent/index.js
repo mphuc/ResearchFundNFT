@@ -45,14 +45,14 @@ export default function Main({
     SHOW_BACKGROUND: false,
   });
 
-  const loadContract = async (addr) => {
+  const loadContract = async (addr, config) => {
     const { ethereum } = window;
     let web3 = new Web3(ethereum);
 
     var networkId = await web3.eth.net.getId();
 
-    if (networkId !== CONFIG["NETWORK"]["ID"]) {
-      setFeedback("Change to " + CONFIG["NETWORK"]["NAME"]);
+    if (networkId !== config["NETWORK"]["ID"]) {
+      setFeedback("Change to "+ config["NETWORK"]["NAME"]);
       return;
     }
 
@@ -87,7 +87,7 @@ export default function Main({
     const config = await configResponse.json();
     
     SET_CONFIG(config);
-    loadContract(config.CONTRACT_ADDRESS);
+    loadContract(config.CONTRACT_ADDRESS, config);
   };
 
   const mint = () => {
@@ -202,8 +202,6 @@ export default function Main({
                 </button>
             )}
           </div>
-        
-        
         </div>
       </div>
       <div className={styles.donations}>

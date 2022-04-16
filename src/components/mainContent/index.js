@@ -7,6 +7,7 @@ import Roadmap from "../roadmap";
 import Faq from "../faq";
 import Footer from "../footer";
 import nftcalendar from "../../assets/NFTCalendar.png";
+import Ourstory from "../ourstory";
 
 export default function Main({
   homeRef,
@@ -17,6 +18,8 @@ export default function Main({
   faqId,
   homeId,
   galleryId,
+  ourstoryRef,
+  ourstoryId,
 }) {
   const [currentAccount, setCurrentAccount] = useState("");
 
@@ -52,7 +55,7 @@ export default function Main({
     var networkId = await web3.eth.net.getId();
 
     if (networkId !== config["NETWORK"]["ID"]) {
-      setFeedback("Change to "+ config["NETWORK"]["NAME"]);
+      setFeedback("Change to " + config["NETWORK"]["NAME"]);
       return;
     }
 
@@ -85,7 +88,7 @@ export default function Main({
       },
     });
     const config = await configResponse.json();
-    
+
     SET_CONFIG(config);
     loadContract(config.CONTRACT_ADDRESS, config);
   };
@@ -179,7 +182,6 @@ export default function Main({
           <img src={nftcalendar} alt="" />
         </div>
         <div className={styles.wrapper}>
-          
           <div>
             <h2>
               NFTS
@@ -192,14 +194,14 @@ export default function Main({
             {currentAccount === "" || smartContract === "" ? (
               <button onClick={connectWallet}>Connect Wallet</button>
             ) : (
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    mint();
-                  }}
-                >
-                  {feedback}
-                </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  mint();
+                }}
+              >
+                {feedback}
+              </button>
             )}
           </div>
         </div>
@@ -230,6 +232,7 @@ export default function Main({
           </div>
         </div>
       </div>
+      <Ourstory id={ourstoryRef} linkId={ourstoryId} />
       <Gallery id={galleryRef} linkId={galleryId} />
       <Roadmap id={roadmapRef} linkId={roadmapId} />
       <Faq id={faqRef} linkId={faqId} />

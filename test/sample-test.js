@@ -100,6 +100,43 @@ describe("RFC Tests", function () {
   //     console.log("changed uri: ",tokenURI);
   //   }
   // });
+  
+  // it("Set multiple collections", async function() {
+  //   const [owner] = await ethers.getSigners();
+  //   const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+
+  //   const rfc = await RFC.deploy(120, "notrevealed/");
+  //   await rfc.deployed(); 
+
+  //   // get first collection
+
+  //   var firstCollection = await rfc.showCollections();
+  //   console.log(firstCollection);
+
+  //   expect(firstCollection.length).to.equal(1);
+
+  //   // set second collection
+
+  //   await rfc.setCollection(11, 20);
+
+  //   var firstCollection = await rfc.showCollections();
+  //   console.log(firstCollection);
+
+  //   expect(firstCollection.length).to.equal(2);
+  // });
+
+
+  it("Token Query does not exist", async function() {
+    const [owner] = await ethers.getSigners();
+    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+
+    const rfc = await RFC.deploy(120, "notrevealed/");
+    await rfc.deployed(); 
+
+    await expect(
+      rfc.tokenURI(0)
+    ).to.be.revertedWith("reverted with custom error 'URIQueryForNonexistentTokenRFC()'");
+  });
 
   it("Single mint test", async function() {
     const [owner] = await ethers.getSigners();
@@ -137,8 +174,158 @@ describe("RFC Tests", function () {
       const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
       console.log(eachtokenId, ": changed uri: ",tokenURI);
     }
-  
+
+    // reveal and set base uri
+
+    await rfc.reveal("https://newbase/");
+
+    var userOwner = await rfc.tokensOfOwner(owner.address);
+    // await rfc.reveal();
+    for (var i=0; i < userOwner.length; i++) {
+      var eachtokenId = userOwner[i].toString();
+
+      const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
+      console.log(eachtokenId, ": changed uri: ",tokenURI);
+    }
   });
+
+  it("Mint Incomplete during new collection set", async function() {
+    const [owner] = await ethers.getSigners();
+    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+
+    const rfc = await RFC.deploy(120, "notrevealed/");
+    await rfc.deployed(); 
+
+    var testSupplyVal = 1;
+    // mint single nft
+    var mintTX = await rfc.mint(9, {
+      value: 9* 1000000000000000
+    });
+    await mintTX.wait();
+    var totalSupplyTX = await rfc.totalSupply();
+    var supplyNumber = parseInt(totalSupplyTX.toString());
+
+    console.log(supplyNumber);
+
+    expect(supplyNumber).to.equal(9);
+
+    await rfc.reveal("https://aaaaaa/");
+
+    await expect(
+      rfc.newDrop(20, "notrevealedagain")
+    ).to.be.revertedWith("reverted with custom error 'SaleIncomplete()'");
+
+    // mint
+
+    var mintTX = await rfc.mint(1, {
+      value: 9* 1000000000000000
+    });
+    await mintTX.wait();
+    var totalSupplyTX = await rfc.totalSupply();
+    var supplyNumber = parseInt(totalSupplyTX.toString());
+
+    console.log(supplyNumber);
+
+    expect(supplyNumber).to.equal(10);
+
+    await rfc.newDrop(20, "wasssuppp");
+
+    var minSupply = await rfc.MIN_SUPPLY();
+    var maxSupply = await rfc.MAX_SUPPLY();
+
+    expect(minSupply).to.equal(10);
+    expect(maxSupply).to.equal(20);
+
+    // mint again
+
+    var mintTX = await rfc.mint(5, {
+      value: 1000000000000000
+    });
+    await mintTX.wait();
+    var totalSupplyTX = await rfc.totalSupply();
+    var supplyNumber = parseInt(totalSupplyTX.toString());
+
+    console.log(supplyNumber);
+
+    var userOwner = await rfc.tokensOfOwner(owner.address);
+    // await rfc.reveal();
+    for (var i=0; i < userOwner.length; i++) {
+      var eachtokenId = userOwner[i].toString();
+
+      const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
+      console.log(eachtokenId, ": changed uri: ",tokenURI);
+    }
+
+    // reveal and set base uri
+
+    await rfc.reveal("https://bbbbbb/");
+
+    var userOwner = await rfc.tokensOfOwner(owner.address);
+    // await rfc.reveal();
+    for (var i=0; i < userOwner.length; i++) {
+      var eachtokenId = userOwner[i].toString();
+
+      const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
+      console.log(eachtokenId, ": changed uri: ",tokenURI);
+    }
+
+  });
+
+  // it("Multi Collection Test", async function() {
+  //   const [owner] = await ethers.getSigners();
+  //   const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+
+  //   const rfc = await RFC.deploy(120, "notrevealed/");
+  //   await rfc.deployed(); 
+
+  //   var testSupplyVal = 1;
+  //   // mint single nft
+  //   var mintTX = await rfc.mint(1, {
+  //     value: 1000000000000000
+  //   });
+  //   await mintTX.wait();
+  //   var totalSupplyTX = await rfc.totalSupply();
+  //   var supplyNumber = parseInt(totalSupplyTX.toString());
+
+  //   console.log(supplyNumber);
+
+
+
+
+  //   expect(supplyNumber).to.equal(testSupplyVal); 
+
+  //   var mintTX = await rfc.mint(1, {
+  //     value: 1000000000000000
+  //   });
+  //   await mintTX.wait();
+  //   var totalSupplyTX = await rfc.totalSupply();
+  //   var supplyNumber = parseInt(totalSupplyTX.toString());
+
+  //   console.log(supplyNumber);
+
+  //   var userOwner = await rfc.tokensOfOwner(owner.address);
+  //   // await rfc.reveal();
+  //   for (var i=0; i < userOwner.length; i++) {
+  //     var eachtokenId = userOwner[i].toString();
+
+  //     const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
+  //     console.log(eachtokenId, ": changed uri: ",tokenURI);
+  //   }
+
+  //   // reveal and set base uri
+
+  //   await rfc.reveal("https://newbase/");
+
+  //   var userOwner = await rfc.tokensOfOwner(owner.address);
+  //   // await rfc.reveal();
+  //   for (var i=0; i < userOwner.length; i++) {
+  //     var eachtokenId = userOwner[i].toString();
+
+  //     const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
+  //     console.log(eachtokenId, ": changed uri: ",tokenURI);
+  //   }
+  // });
+
 
 
   // it("Testing Random number minting", async function() {

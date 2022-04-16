@@ -103,9 +103,9 @@ describe("RFC Tests", function () {
 
   it("Single mint test", async function() {
     const [owner] = await ethers.getSigners();
-    const RFC = await ethers.getContractFactory("ResearchFundingClub");
+    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
 
-    const rfc = await RFC.deploy(120, "https://manishgotame.com.np/");
+    const rfc = await RFC.deploy(120, "notrevealed/");
     await rfc.deployed(); 
 
     var testSupplyVal = 1;
@@ -128,6 +128,16 @@ describe("RFC Tests", function () {
     var supplyNumber = parseInt(totalSupplyTX.toString());
 
     console.log(supplyNumber);
+
+    var userOwner = await rfc.tokensOfOwner(owner.address);
+    // await rfc.reveal();
+    for (var i=0; i < userOwner.length; i++) {
+      var eachtokenId = userOwner[i].toString();
+
+      const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
+      console.log(eachtokenId, ": changed uri: ",tokenURI);
+    }
+  
   });
 
 

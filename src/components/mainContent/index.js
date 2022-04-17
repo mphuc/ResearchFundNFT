@@ -99,10 +99,10 @@ const onboard = Onboard({
     }
   ],
   appMetadata: {
-    name: 'My App',
-    icon: '<SVG_ICON_STRING>',
-    logo: '<SVG_LOGO_STRING>',
-    description: 'My app using Onboard',
+    name: 'Research Funding Club NFT',
+    icon: 'favicon.ico',
+    logo: 'favicon.ico',
+    description: 'The NFT project dedicated to becoming the largest donor to research institutions studying the world’s deadliest diseases.',
     recommendedInjectedWallets: [ 
       { name: 'Coinbase', url: 'https://wallet.coinbase.com/' },
       { name: 'MetaMask', url: 'https://metamask.io' }
@@ -242,20 +242,27 @@ export default function Main({
       console.log("We have the ethereum object", ethereum);
     }
 
-    const accounts = await ethereum.request({ method: "eth_accounts" });
+    // const accounts = await ethereum.request({ method: "eth_accounts" });
 
-    if (accounts.length !== 0) {
-      const account = accounts[0];
-      console.log("Found an authorized account:", account);
-      setCurrentAccount(account);
-      setFeedback("Mint");
-    } else {
-      console.log("No authorized account found");
-    }
+    // if (accounts.length !== 0) {
+    //   const account = accounts[0];
+    //   console.log("Found an authorized account:", account);
+    //   setCurrentAccount(account);
+    //   setFeedback("Mint");
+    // } else {
+    //   console.log("No authorized account found");
+    // }
   };
 
   const connectWallet = async () => {
-    await onboard.connectWallet()
+    var wallet = await onboard.connectWallet();
+    var address = (wallet[0]["accounts"][0]["address"]);
+
+    console.log(wallet);
+    console.log(address);
+
+    setCurrentAccount(address);
+    setFeedback("Mint");
   }
 
   const connectWallet2 = async () => {

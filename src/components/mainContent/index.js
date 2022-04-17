@@ -8,6 +8,107 @@ import Faq from "../faq";
 import Footer from "../footer";
 import nftcalendar from "../../assets/NFTCalendar.png";
 import Ourstory from "../ourstory";
+// import OnBoard from "bnc-onboard";
+
+import Onboard from '@web3-onboard/core';
+import injectedModule from '@web3-onboard/injected-wallets';
+import gnosisModule from '@web3-onboard/gnosis';
+import mewModule from '@web3-onboard/mew';
+import fortmaticModule from "@web3-onboard/fortmatic";
+import portisModule from '@web3-onboard/portis';
+import torusModule from '@web3-onboard/torus';
+import walletConnectModule from '@web3-onboard/walletconnect';
+import walletLinkModule from '@web3-onboard/walletlink';
+import ledgerModule from '@web3-onboard/ledger';
+import trezorModule from '@web3-onboard/trezor';
+import keystoneModule from '@web3-onboard/keystone';
+
+
+const RPC_URL = "https://mainnet.infura.io/v3/6d881ca2000f40f1a5dd339a552bfcdd";
+const fortmatic = fortmaticModule({ apiKey: 'pk_live_8FC272D2B76AB985' });
+const injected = injectedModule();
+const gnosis = gnosisModule();
+const mew = mewModule();
+const portis = portisModule({ apiKey: '919c5693-d3a3-44ed-a070-4ecb56c92ca4' }); // not sure, this is a project id atm 
+const torus = torusModule();
+const walletConnect = walletConnectModule({
+  bridge: 'https://bridge.walletconnect.org',
+  qrcodeModalOptions: {
+    mobileLinks: ['rainbow', 'metamask', 'argent', 'trust', 'imtoken', 'pillar']
+  }
+});
+const walletLink = walletLinkModule({ darkMode: true });
+const ledger = ledgerModule();
+const trezor = trezorModule({
+  email: 'manishgt194@gmail.com',
+  appUrl: 'https://researchfundingclub.com/'
+});
+const keystone = keystoneModule();
+
+const onboard = Onboard({
+  wallets: [
+    injected,
+    fortmatic,
+    gnosis,
+    mew,
+    portis,
+    torus,
+    walletConnect,
+    walletLink,
+    ledger,
+    trezor,
+    keystone
+  ],
+  
+  chains: [
+    {
+      id: '0x1',  // chain ID must be in hexadecimel
+      token: 'ETH',  // main chain token
+      label: 'Ethereum Mainnet',
+      rpcUrl: RPC_URL  // rpcURL required for wallet balances
+    },
+    {
+      id: '0x3',
+      token: 'tROP',
+      label: 'Ethereum Ropsten Testnet',
+      rpcUrl: RPC_URL
+    },
+    {
+      id: '0x4',
+      token: 'rETH',
+      label: 'Ethereum Rinkeby Testnet',
+      rpcUrl: RPC_URL
+    },
+    {
+      id: '0x38',
+      token: 'BNB',
+      label: 'Binance Smart Chain',
+      rpcUrl: 'https://bsc-dataseed.binance.org/'
+    },
+    {
+      id: '0x89',
+      token: 'MATIC',
+      label: 'Matic Mainnet',
+      rpcUrl: 'https://matic-mainnet.chainstacklabs.com'
+    },
+    {
+      id: '0xfa',
+      token: 'FTM',
+      label: 'Fantom Mainnet',
+      rpcUrl: 'https://rpc.ftm.tools/'
+    }
+  ],
+  appMetadata: {
+    name: 'My App',
+    icon: '<SVG_ICON_STRING>',
+    logo: '<SVG_LOGO_STRING>',
+    description: 'My app using Onboard',
+    recommendedInjectedWallets: [ 
+      { name: 'Coinbase', url: 'https://wallet.coinbase.com/' },
+      { name: 'MetaMask', url: 'https://metamask.io' }
+    ]
+  }
+})
 
 export default function Main({
   homeRef,
@@ -154,6 +255,10 @@ export default function Main({
   };
 
   const connectWallet = async () => {
+    await onboard.connectWallet()
+  }
+
+  const connectWallet2 = async () => {
     try {
       const { ethereum } = window;
 

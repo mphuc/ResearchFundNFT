@@ -62,7 +62,7 @@ const Main = () => {
             color="primary"
             variant="contained"
             onClick={() =>
-              (window.location.href = "https://discord.gg/b6qdYN8zzr")
+              (window.location.href = "https://discord.gg/researchfundnft")
             }
           >
             Join Discord

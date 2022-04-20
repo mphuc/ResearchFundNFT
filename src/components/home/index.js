@@ -18,7 +18,7 @@ export default function Home({ id, linkId }) {
           <div className={styles.btns}>
             <button
               onClick={() =>
-                (window.location.href = "https://discord.gg/urDZcwnXTF")
+                (window.location.href = "https://discord.gg/researchfundnft")
               }
             >
               Join Discord

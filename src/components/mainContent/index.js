@@ -12,9 +12,94 @@ import Onboard from "bnc-onboard";
 
 let web3;
 
+const BLOCKNATIVE_KEY = "aa821374-77e8-4a14-8e84-41c98acefc7d";
+
+// the network id that your dapp runs on
+// important for deployment
+
+// const NETWORK_ID = 5777;
+const NETWORK_ID = 4; // change
+
+const FORTMATIC_KEY = "pk_live_8FC272D2B76AB985";
+const PORTIS_KEY = "919c5693-d3a3-44ed-a070-4ecb56c92ca4"; // not sure, this is a project id atm
+const INFURA_KEY = "e914976b74504e65bf8cb2864584556b";
+const APP_URL = "https://researchfundingclub.com";
+const CONTACT_EMAIL = "manishgt194@gmail.com";
+const RPC_URL = "https://rinkeby.infura.io/v3/7894d0f19d6b45e5a31e0fbe067a3c09";
+const APP_NAME = "Research Funding Club";
+
+const wallets = [
+  { walletName: "coinbase", preferred: true },
+  { walletName: "trust", preferred: true, rpcUrl: RPC_URL },
+  { walletName: "metamask", preferred: true },
+  { walletName: "authereum" },
+  {
+    walletName: "trezor",
+    appUrl: APP_URL,
+    email: CONTACT_EMAIL,
+    rpcUrl: RPC_URL,
+  },
+  {
+    walletName: "ledger",
+    rpcUrl: RPC_URL,
+  },
+  {
+    walletName: "lattice",
+    rpcUrl: RPC_URL,
+    appName: APP_NAME,
+  },
+  {
+    walletName: "keepkey",
+    rpcUrl: RPC_URL,
+  },
+  {
+    walletName: "cobovault",
+    rpcUrl: RPC_URL,
+    appName: APP_NAME,
+  },
+  {
+    walletName: "keystone",
+    rpcUrl: RPC_URL,
+    appName: APP_NAME,
+  },
+  {
+    walletName: "fortmatic",
+    apiKey: FORTMATIC_KEY,
+    preferred: true,
+  },
+  {
+    walletName: "walletConnect",
+    infuraKey: INFURA_KEY,
+  },
+  { walletName: "opera" },
+  { walletName: "operaTouch" },
+  { walletName: "torus" },
+  { walletName: "status" },
+  { walletName: "walletLink", rpcUrl: RPC_URL, appName: APP_NAME },
+  { walletName: "imToken", rpcUrl: RPC_URL },
+  { walletName: "meetone" },
+  { walletName: "mykey", rpcUrl: RPC_URL },
+  { walletName: "huobiwallet", rpcUrl: RPC_URL },
+  { walletName: "hyperpay" },
+  { walletName: "wallet.io", rpcUrl: RPC_URL },
+  { walletName: "atoken" },
+  { walletName: "frame" },
+  { walletName: "ownbit" },
+  { walletName: "alphawallet" },
+  { walletName: "gnosis" },
+  { walletName: "xdefi" },
+  { walletName: "bitpie" },
+  { walletName: "binance" },
+  { walletName: "liquality" },
+];
+
 const onboard = Onboard({
-  dappId: "aa821374-77e8-4a14-8e84-41c98acefc7d",
-  networkId: 4,
+  dappId: BLOCKNATIVE_KEY,
+  networkId: NETWORK_ID,
+  darkMode: true,
+  walletSelect: {
+    wallets: wallets,
+  },
   subscriptions: {
     wallet: wallet => {
       // instantiate web3 when the user has selected a wallet
@@ -22,7 +107,7 @@ const onboard = Onboard({
       console.log(`${wallet.name} connected!`)
     }
   }
-})
+});
 
 
 export default function Main({
@@ -38,10 +123,9 @@ export default function Main({
   ourstoryId,
 }) {
   const [currentAccount, setCurrentAccount] = useState("");
-
   const [claimingNft, setClaimingNft] = useState(false);
   const [mintedAmount, setMintedAmount] = useState(0);
-  const [feedback, setFeedback] = useState(`Connect`);
+  const [feedback, setFeedback] = useState(`Connect Wallet`);
 
   const [smartContract, setSmartContract] = useState(null);
   const [totalSupply, setTotalSupply] = useState(0);
@@ -64,16 +148,9 @@ export default function Main({
     SHOW_BACKGROUND: false,
   });
 
-  const loadContract = async (addr, config) => {
-    const { ethereum } = window;
-    let web3 = new Web3(ethereum);
+  const loadContract = async () => {
 
-    var networkId = await web3.eth.net.getId();
-
-    if (networkId !== config["NETWORK"]["ID"]) {
-      setFeedback("Change to " + config["NETWORK"]["NAME"]);
-      return;
-    }
+    console.log("yayyyy", web3);
 
     const abiResponse = await fetch("/config/abi.json", {
       headers: {
@@ -83,7 +160,7 @@ export default function Main({
     });
     const abi = await abiResponse.json();
 
-    var obj = new web3.eth.Contract(abi, addr);
+    var obj = new web3.eth.Contract(abi, CONFIG.CONTRACT_ADDRESS);
 
     var maxSupply = await obj.methods.MAX_SUPPLY().call();
     var minSupply = await obj.methods.MIN_SUPPLY().call();
@@ -106,7 +183,7 @@ export default function Main({
     const config = await configResponse.json();
 
     SET_CONFIG(config);
-    loadContract(config.CONTRACT_ADDRESS, config);
+    // loadContract(config.CONTRACT_ADDRESS, config);
   };
 
   const mint = () => {
@@ -144,52 +221,18 @@ export default function Main({
 
   useEffect(() => {
     getConfig();
-    // checkIfWalletIsConnected();
   }, []);
 
-  const checkIfWalletIsConnected = async () => {
-    const { ethereum } = window;
-
-    if (!ethereum) {
-      console.log("Make sure you have metamask!");
-      return;
-    } else {
-      console.log("We have the ethereum object", ethereum);
-    }
-
-    const accounts = await ethereum.request({ method: "eth_accounts" });
-
-    if (accounts.length !== 0) {
-      const account = accounts[0];
-      console.log("Found an authorized account:", account);
-      setCurrentAccount(account);
-      setFeedback("Mint");
-    } else {
-      console.log("No authorized account found");
-    }
-  };
-
   const connectWallet = async () => {
-    var wallet = await onboard.walletSelect();
+    await onboard.walletSelect();
+    await onboard.walletCheck();
 
-    console.log(wallet);
-    // try {
-    //   const { ethereum } = window;
+    // set the account
+    const accounts = await web3.eth.getAccounts();
+    loadContract();
+    setCurrentAccount(accounts[0]);
+    setFeedback("Mint");
 
-    //   if (!ethereum) {
-    //     alert("Get MetaMask!");
-    //     return;
-    //   }
-
-    //   const accounts = await ethereum.request({
-    //     method: "eth_requestAccounts",
-    //   });
-
-    //   setCurrentAccount(accounts[0]);
-    //   setFeedback("Mint");
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   return (
@@ -211,7 +254,7 @@ export default function Main({
               {mintedAmount} of <span> {totalSupply} </span>
             </p>
             {currentAccount === "" || smartContract === "" ? (
-              <button onClick={connectWallet}>Connect Wallet</button>
+              <button onClick={connectWallet}>{feedback}</button>
             ) : (
               <button
                 onClick={(e) => {

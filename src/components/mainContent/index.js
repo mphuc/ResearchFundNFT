@@ -149,9 +149,6 @@ export default function Main({
   });
 
   const loadContract = async () => {
-
-    console.log("yayyyy", web3);
-
     const abiResponse = await fetch("/config/abi.json", {
       headers: {
         "Content-Type": "application/json",
@@ -183,11 +180,35 @@ export default function Main({
     const config = await configResponse.json();
 
     SET_CONFIG(config);
+    loadSupplyData(config.CONTRACT_ADDRESS);
     // loadContract(config.CONTRACT_ADDRESS, config);
   };
 
+  const loadSupplyData = async(addr) => {
+    // only for the total supply data : quick fix
+    const { ethereum } = window;
+    let web3 = new Web3(ethereum);
+    
+    const abiResponse = await fetch("/config/abi.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    const abi = await abiResponse.json();
+
+    var obj = new web3.eth.Contract(abi, addr);
+
+    var maxSupply = await obj.methods.MAX_SUPPLY().call();
+    var minSupply = await obj.methods.MIN_SUPPLY().call();
+    var totalSupply = maxSupply - minSupply;
+    var mintedAmount = await obj.methods.totalSupply().call();
+
+    setMintedAmount(mintedAmount);
+    setTotalSupply(totalSupply);
+  }
+
   const mint = () => {
-    console.log("i am here");
     var mintAmount = 1;
     let cost = CONFIG.WEI_COST;
     let gasLimit = CONFIG.GAS_LIMIT;
@@ -232,7 +253,6 @@ export default function Main({
     loadContract();
     setCurrentAccount(accounts[0]);
     setFeedback("Mint");
-
   };
 
   return (

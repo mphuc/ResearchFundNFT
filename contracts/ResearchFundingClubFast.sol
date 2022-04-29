@@ -21,7 +21,7 @@ error CollectionNotRevealedYet();
 error ContractPaused();
 error ZeroMintFailed();
 error MaxPerNFTAddrExceeded();
-error MaxNFTLimit();
+error SoldOut();
 error InsufficientFunds();
 
 contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
@@ -46,8 +46,6 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     uint256 public PRICE = 0.0001 ether;
     uint256 public MAX_PER_MINT = 1;
     bool public revealed = false;
-
-    // CollectionData[] public collections; 
 
     uint256 public collectionID = 1;
     mapping(uint256 => CollectionData) public collections;
@@ -106,11 +104,11 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
     function mint(uint256 _mintAmount) external payable {
-        if (paused == true) revert ContractPaused();
+        if (paused) revert ContractPaused();
         if (_mintAmount == 0) revert ZeroMintFailed();
         if (_mintAmount > MAX_PER_MINT) revert MaxPerNFTAddrExceeded();
         uint256 supply = totalSupply();
-        if (supply + _mintAmount > MAX_SUPPLY) revert MaxNFTLimit();
+        if (supply + _mintAmount > MAX_SUPPLY) revert SoldOut();
         if (msg.value < PRICE * _mintAmount) revert InsufficientFunds();
 
         _safeMint(msg.sender, _mintAmount);
@@ -156,7 +154,7 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     {   
         console.log("total supply: ", totalSupply());
         if (totalSupply() != MAX_SUPPLY) revert SaleIncomplete();
-        if (revealed == false) revert CollectionNotRevealedYet();
+        if (!revealed) revert CollectionNotRevealedYet();
 
         MIN_SUPPLY = MAX_SUPPLY;
         MAX_SUPPLY = _newMaxSupply;

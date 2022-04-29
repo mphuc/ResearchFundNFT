@@ -81,7 +81,7 @@ describe("Minting Tests", function() {
     
     await expect(
       rfc.connect(owner).mint(1, {value: 9* 1000000000000000})
-    ).to.be.revertedWith("MaxNFTLimit()"); 
+    ).to.be.revertedWith("SoldOut()"); 
   });
 
   it("Cannot mint more than the supply", async function() {

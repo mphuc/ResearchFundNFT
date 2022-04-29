@@ -1,5 +1,11 @@
 # Research Funding Club
 
+## BASE URI
+
+```shell
+ipfs://QmNUmrdwgi8XA7JURVEqgXNp2CVGHPsB34vxJAggJJ4MpT
+```
+
 ## Mystery NFT url
 
 ```shell

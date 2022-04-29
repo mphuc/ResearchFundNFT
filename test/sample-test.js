@@ -335,11 +335,11 @@ describe("RFC Tests", function () {
     var maxSupply = await rfc.MAX_SUPPLY();
 
     expect(minSupply).to.equal(10);
-    expect(maxSupply).to.equal(50);
+    expect(maxSupply).to.equal(60);
 
     // mint again
 
-    for(var i=0; i < 40; i++) {
+    for(var i=0; i < 50; i++) {
       var mintTX = await rfc.mint(1, {
         value: 1000000000000000
       });

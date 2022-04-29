@@ -157,7 +157,7 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         if (!revealed) revert CollectionNotRevealedYet();
 
         MIN_SUPPLY = MAX_SUPPLY;
-        MAX_SUPPLY = _newMaxSupply;
+        MAX_SUPPLY +=_newMaxSupply;
         
         revealed = false;
     }

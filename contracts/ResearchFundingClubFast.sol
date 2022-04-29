@@ -18,11 +18,15 @@ import "hardhat/console.sol";
 error URIQueryForNonexistentTokenRFC();
 error SaleIncomplete();
 error CollectionNotRevealedYet();
+error ContractPaused();
+error ZeroMintFailed();
+error MaxPerNFTAddrExceeded();
+error MaxNFTLimit();
+error InsufficientFunds();
 
 contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     using Strings for uint256;
 
-    // every collection we will lauch will be stored here
     // should also have owner address so the amount goes to that owner?
     struct CollectionData {
         uint256 minSupply;
@@ -31,7 +35,7 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
     string public baseTokenURI;
-    bool public paused = false;
+    bool public paused = true;
     string public baseExtension = ".json";
     string public notRevealedURI;
     string public baseURI;
@@ -43,7 +47,10 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     uint256 public MAX_PER_MINT = 1;
     bool public revealed = false;
 
-    CollectionData[] public collections;
+    // CollectionData[] public collections; 
+
+    uint256 public collectionID = 1;
+    mapping(uint256 => CollectionData) public collections;
 
     // Wallets
     address public charityWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
@@ -58,7 +65,6 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         return baseURI;
     }
 
-    // this function will not cost any gas
     function tokenURI(uint256 tokenId)
         public
         view
@@ -72,13 +78,11 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
             return notRevealedURI;
         }
 
-        CollectionData[] memory _collections = collections;
-
-        for (uint256 i; i < _collections.length; i++) {
-            if (tokenId < _collections[i].maxSupply) {
-                console.log("THE URI:", _collections[i].baseURI);
-                tokenId = tokenId - _collections[i].minSupply;
-                return string(abi.encodePacked(_collections[i].baseURI, tokenId.toString(), baseExtension));
+        for (uint256 i=1; i <= collectionID; i++) {
+            if (tokenId < collections[i].maxSupply) {
+                console.log("THE URI:", collections[i].baseURI);
+                tokenId = tokenId - collections[i].minSupply;
+                return string(abi.encodePacked(collections[i].baseURI, tokenId.toString(), baseExtension));
             }
         }
 
@@ -101,9 +105,15 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         );
     }
 
-    function mint(uint256 quantity) external payable {
-        // _safeMint's second argument now takes in a quantity, not a tokenId.
-        _safeMint(msg.sender, quantity);
+    function mint(uint256 _mintAmount) external payable {
+        if (paused == true) revert ContractPaused();
+        if (_mintAmount == 0) revert ZeroMintFailed();
+        if (_mintAmount > MAX_PER_MINT) revert MaxPerNFTAddrExceeded();
+        uint256 supply = totalSupply();
+        if (supply + _mintAmount > MAX_SUPPLY) revert MaxNFTLimit();
+        if (msg.value < PRICE * _mintAmount) revert InsufficientFunds();
+
+        _safeMint(msg.sender, _mintAmount);
     }
 
     function tokensOfOwner(address _owner)
@@ -120,30 +130,31 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         return tokensId;
     }
 
-    function showCollections() external view returns(CollectionData[] memory) {
-        return collections;
+    function getCollectionInfo(uint256 _id) external view returns(CollectionData memory) {
+        return collections[_id];
     }
 
     function reveal(string memory _newBaseURI) external onlyOwner {
-        // collections[collections.length -1].baseURI = "reveal now";
         CollectionData memory collection;
         collection.minSupply = MIN_SUPPLY;
         collection.maxSupply = MAX_SUPPLY;
         collection.baseURI = _newBaseURI;
 
-        collections.push(collection);
+        collections[collectionID] = collection;
         revealed = true;
+        collectionID++;
     }
 
     /*
         @function newDrop()
         @description - Set the next NFT collection drop: increase max supply and the base uri
-        @params - updated max mint supply, new base uri
+        @params - updated max mint supply
     */
-    function newDrop(uint256 _newMaxSupply, string memory _notRevealedURI)
+    function newDrop(uint256 _newMaxSupply)
         external 
         onlyOwner
-    {
+    {   
+        console.log("total supply: ", totalSupply());
         if (totalSupply() != MAX_SUPPLY) revert SaleIncomplete();
         if (revealed == false) revert CollectionNotRevealedYet();
 
@@ -170,8 +181,6 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         notRevealedURI = _notRevealedURI;
     }
     
-
-    // update the base uri of the current collection -- only after revealing
     function setBaseURI(string memory _baseTokenURI) public onlyOwner {
         baseTokenURI = _baseTokenURI;
     }
@@ -181,6 +190,10 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         onlyOwner
     {
         baseExtension = _newBaseExtension;
+    }
+
+    function pause(bool _state) public onlyOwner {
+        paused = _state;
     }
 
     function withdraw() public onlyOwner nonReentrant {

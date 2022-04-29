@@ -6,6 +6,100 @@ const { ethers } = require("hardhat");
   - Tests need to written for:
     -
 */
+
+describe("Minting Tests", function() {
+  it("Should not allow minting when paused", async function () {
+    const [owner, a1, a2, a3] = await ethers.getSigners();
+    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+
+    const rfc = await RFC.deploy(120, "notrevealed/");
+    await rfc.deployed(); 
+    
+    await expect(
+      rfc.connect(owner).mint(1, {value: 9* 1000000000000000})
+    ).to.be.revertedWith("ContractPaused()");
+  });
+
+  it("Cannot mint 0", async function() {
+    const [owner, a1, a2, a3] = await ethers.getSigners();
+    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+
+    const rfc = await RFC.deploy(120, "notrevealed/");
+    await rfc.deployed(); 
+    await rfc.pause(false);
+
+    expect(await rfc.paused()).to.equal(false);
+
+    await expect(
+      rfc.connect(owner).mint(0, {value: 9* 1000000000000000})
+    ).to.be.revertedWith("ZeroMintFailed()");    
+  });
+
+  it("it cannot mint more than the limit", async function() {
+    const [owner, a1, a2, a3] = await ethers.getSigners();
+    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+
+    const rfc = await RFC.deploy(120, "notrevealed/");
+    await rfc.deployed(); 
+    await rfc.pause(false);
+
+    expect(await rfc.paused()).to.equal(false);
+
+    await expect(
+      rfc.connect(owner).mint(2, {value: 9* 1000000000000000})
+    ).to.be.revertedWith("MaxPerNFTAddrExceeded()");  
+
+    var mintTX = await rfc.mint(1, {
+      value: 1000000000000000
+    });
+    await mintTX.wait();
+    var totalSupplyTX = await rfc.totalSupply();
+
+    expect(totalSupplyTX).to.equal(1);
+  });
+
+  it("Cannot mint more than the supply", async function() {
+    const [owner, a1, a2, a3] = await ethers.getSigners();
+    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+
+    const rfc = await RFC.deploy(120, "notrevealed/");
+    await rfc.deployed(); 
+    await rfc.pause(false);
+
+    expect(await rfc.paused()).to.equal(false);
+
+    for(var i=0; i < 10; i++) {
+      var mintTX = await rfc.mint(1, {
+        value: 1000000000000000
+      });
+      await mintTX.wait();
+    }
+
+    var totalSupplyTX = await rfc.totalSupply();
+
+    expect(totalSupplyTX).to.equal(10);
+    
+    await expect(
+      rfc.connect(owner).mint(1, {value: 9* 1000000000000000})
+    ).to.be.revertedWith("MaxNFTLimit()"); 
+  });
+
+  it("Cannot mint more than the supply", async function() {
+    const [owner, a1, a2, a3] = await ethers.getSigners();
+    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+
+    const rfc = await RFC.deploy(120, "notrevealed/");
+    await rfc.deployed(); 
+    await rfc.pause(false);
+
+    expect(await rfc.paused()).to.equal(false);
+
+    await expect(
+      rfc.connect(owner).mint(1, {value: 10})
+    ).to.be.revertedWith("InsufficientFunds()"); 
+  });
+});
+
 describe("RFC Tests", function () {
 
   // it("Should return the new greeting once it's changed", async function () {
@@ -125,13 +219,13 @@ describe("RFC Tests", function () {
   //   expect(firstCollection.length).to.equal(2);
   // });
 
-
   it("Token Query does not exist", async function() {
     const [owner] = await ethers.getSigners();
     const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
 
     const rfc = await RFC.deploy(120, "notrevealed/");
     await rfc.deployed(); 
+    await rfc.pause(false);
 
     await expect(
       rfc.tokenURI(0)
@@ -144,6 +238,7 @@ describe("RFC Tests", function () {
 
     const rfc = await RFC.deploy(120, "notrevealed/");
     await rfc.deployed(); 
+    await rfc.pause(false);
 
     var testSupplyVal = 1;
     // mint single nft
@@ -195,13 +290,19 @@ describe("RFC Tests", function () {
 
     const rfc = await RFC.deploy(120, "notrevealed/");
     await rfc.deployed(); 
+    await rfc.pause(false);
+
 
     var testSupplyVal = 1;
     // mint single nft
-    var mintTX = await rfc.mint(9, {
-      value: 9* 1000000000000000
-    });
-    await mintTX.wait();
+
+    for(var i=0; i < 9; i++) {
+      var mintTX = await rfc.mint(1, {
+        value: 9* 1000000000000000
+      });
+      await mintTX.wait();
+    }
+
     var totalSupplyTX = await rfc.totalSupply();
     var supplyNumber = parseInt(totalSupplyTX.toString());
 
@@ -212,8 +313,8 @@ describe("RFC Tests", function () {
     await rfc.reveal("https://aaaaaa/");
 
     await expect(
-      rfc.newDrop(20, "notrevealedagain")
-    ).to.be.revertedWith("reverted with custom error 'SaleIncomplete()'");
+      rfc.newDrop(20)
+    ).to.be.revertedWith("SaleIncomplete()");
 
     // mint
 
@@ -228,20 +329,23 @@ describe("RFC Tests", function () {
 
     expect(supplyNumber).to.equal(10);
 
-    await rfc.newDrop(20, "wasssuppp");
+    await rfc.newDrop(50);
 
     var minSupply = await rfc.MIN_SUPPLY();
     var maxSupply = await rfc.MAX_SUPPLY();
 
     expect(minSupply).to.equal(10);
-    expect(maxSupply).to.equal(20);
+    expect(maxSupply).to.equal(50);
 
     // mint again
 
-    var mintTX = await rfc.mint(5, {
-      value: 1000000000000000
-    });
-    await mintTX.wait();
+    for(var i=0; i < 40; i++) {
+      var mintTX = await rfc.mint(1, {
+        value: 1000000000000000
+      });
+      await mintTX.wait();
+    }
+
     var totalSupplyTX = await rfc.totalSupply();
     var supplyNumber = parseInt(totalSupplyTX.toString());
 

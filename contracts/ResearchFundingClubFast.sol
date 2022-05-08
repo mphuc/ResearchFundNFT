@@ -34,16 +34,15 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         string baseURI;   
     }
 
-    string public baseTokenURI;
     bool public paused = true;
     string public baseExtension = ".json";
     string public notRevealedURI;
-    string public baseURI;
+    string public baseTokenURI;
 
     uint256 public MIN_SUPPLY = 0; // only used for multi-drop reveals
-    uint256 public MAX_SUPPLY = 10;
+    uint256 public MAX_SUPPLY = 3;
     
-    uint256 public PRICE = 0.0001 ether;
+    uint256 public PRICE = 0.0000001 ether;
     uint256 public MAX_PER_MINT = 1;
     bool public revealed = false;
 
@@ -57,10 +56,6 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     constructor(uint96 _royaltyFeesInBips, string memory _notRevealedURI) ERC721A("Research Funding Club", "RFC") {
         setRoyaltyInfo(msg.sender, _royaltyFeesInBips); // 2.5% = 2.5 * 100 = 250
         notRevealedURI = _notRevealedURI;
-    }
-
-    function _baseURI() internal view virtual override returns (string memory) {
-        return baseURI;
     }
 
     function tokenURI(uint256 tokenId)
@@ -102,14 +97,17 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
             super.supportsInterface(interfaceId)
         );
     }
-
+  
     function mint(uint256 _mintAmount) external payable {
-        if (paused) revert ContractPaused();
-        if (_mintAmount == 0) revert ZeroMintFailed();
-        if (_mintAmount > MAX_PER_MINT) revert MaxPerNFTAddrExceeded();
+        if (msg.sender != owner()) {
+            if (paused) revert ContractPaused();
+            if (_mintAmount == 0) revert ZeroMintFailed();
+            if (_mintAmount > MAX_PER_MINT) revert MaxPerNFTAddrExceeded();
+            if (msg.value < PRICE * _mintAmount) revert InsufficientFunds();
+        }
+
         uint256 supply = totalSupply();
         if (supply + _mintAmount > MAX_SUPPLY) revert SoldOut();
-        if (msg.value < PRICE * _mintAmount) revert InsufficientFunds();
 
         _safeMint(msg.sender, _mintAmount);
     }
@@ -140,20 +138,16 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
 
         collections[collectionID] = collection;
         revealed = true;
+        paused = true; 
         collectionID++;
     }
 
-    /*
-        @function newDrop()
-        @description - Set the next NFT collection drop: increase max supply and the base uri
-        @params - updated max mint supply
-    */
     function newDrop(uint256 _newMaxSupply)
         external 
         onlyOwner
     {   
         console.log("total supply: ", totalSupply());
-        if (totalSupply() != MAX_SUPPLY) revert SaleIncomplete();
+        if (totalSupply() != MAX_SUPPLY) revert SaleIncomplete(); // this might be problematic
         if (!revealed) revert CollectionNotRevealedYet();
 
         MIN_SUPPLY = MAX_SUPPLY;
@@ -163,38 +157,42 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
 
-    function setmaxMintAmount(uint256 _limit) public onlyOwner {
+    function setmaxMintAmount(uint256 _limit) external onlyOwner {
         MAX_PER_MINT = _limit;
     }
 
-    function setmaxSupply(uint256 _limit) public onlyOwner {
+    function setmaxSupply(uint256 _limit) external onlyOwner {
         MAX_SUPPLY = _limit;
     }
 
-    function setCost(uint256 _newCost) public onlyOwner {
+    function setCost(uint256 _newCost) external onlyOwner {
         PRICE = _newCost;
     }
 
-    function setNotRevealedURI(string memory _notRevealedURI) public onlyOwner {
+    function setNotRevealedURI(string memory _notRevealedURI) external onlyOwner {
         notRevealedURI = _notRevealedURI;
     }
     
-    function setBaseURI(string memory _baseTokenURI) public onlyOwner {
-        baseTokenURI = _baseTokenURI;
+    function setBaseURI(uint256 _collectionID, string memory _baseTokenURI) external onlyOwner {
+        collections[_collectionID].baseURI = _baseTokenURI;
+    }
+
+    function baseURI(uint256 _collectionID) external view returns(string memory) {
+        return collections[_collectionID].baseURI;
     }
     
     function setBaseExtension(string memory _newBaseExtension)
-        public
+        external
         onlyOwner
     {
         baseExtension = _newBaseExtension;
     }
 
-    function pause(bool _state) public onlyOwner {
+    function pause(bool _state) external onlyOwner {
         paused = _state;
     }
 
-    function withdraw() public onlyOwner nonReentrant {
+    function withdraw() external onlyOwner nonReentrant {
         uint256 balance = address(this).balance;
         require(balance > 0, "No ether left to withdraw.");
 

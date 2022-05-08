@@ -20,7 +20,7 @@ const ALCHEMY_API_KEY = "iAJWLiE3bAWhyZ2foX_sYLWrXAg4F76Z";
 // To export your private key from Metamask, open Metamask and
 // go to Account Details > Export Private Key
 // Be aware of NEVER putting real Ether into testing accounts
-const RINKEBY_PRIVATE_KEY = "";
+
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -28,8 +28,20 @@ const RINKEBY_PRIVATE_KEY = "";
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
+
+
 module.exports = {
   solidity: "0.8.1",
   solidity: "0.8.7",
-
+  solidity: "0.8.4",
+  networks: {
+    polygon: {
+      url: `https://rpc-mumbai.maticvigil.com`,
+      accounts: [`${POLYGON_PRIVATE_KEY}`]
+    },
+    rinkeby: {
+      url: `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
+      accounts: [`${RINKEBY_PRIVATE_KEY}`]
+    }
+  }
 };

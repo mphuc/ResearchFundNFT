@@ -2,11 +2,11 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "G:\\dapps\\rfc-nft\\contracts\\ResearchFundingClub.sol": {
-      "lastModificationDate": 1649071444634,
-      "contentHash": "0d0e8cfb53f3c376a092ac7bd936e176",
+      "lastModificationDate": 1651910212122,
+      "contentHash": "f747b4b6ce560e8ecfdeaaaf345fd0da",
       "sourceName": "contracts/ResearchFundingClub.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -39,7 +39,7 @@
         "hardhat/console.sol"
       ],
       "versionPragmas": [
-        "^0.8.7"
+        "^0.8.4"
       ],
       "artifacts": [
         "ResearchFundingClub"
@@ -50,7 +50,7 @@
       "contentHash": "9c54c6c065d9e590fdcdd72c451425b9",
       "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -85,7 +85,7 @@
       "contentHash": "74654e3ae5d7f39555055dfe244dab7a",
       "sourceName": "@openzeppelin/contracts/utils/Counters.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -120,7 +120,7 @@
       "contentHash": "8398972af73b4e9e5ff3b31cad86234f",
       "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -157,7 +157,7 @@
       "contentHash": "88095889e59d16821879a8083f906503",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -195,7 +195,7 @@
       "contentHash": "580a443491d9d70eb064b0130fc3cd01",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -228,11 +228,11 @@
       ]
     },
     "G:\\dapps\\rfc-nft\\node_modules\\hardhat\\console.sol": {
-      "lastModificationDate": 1647513630335,
+      "lastModificationDate": 1649496396206,
       "contentHash": "cc4777addd464ea56fa35b1c45df0591",
       "sourceName": "hardhat/console.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -267,7 +267,7 @@
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -302,7 +302,7 @@
       "contentHash": "49295810dc45f300e5f84b4b50d88a59",
       "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -345,7 +345,7 @@
       "contentHash": "f4dd06783f321aa26179bc2b6e361c29",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -382,7 +382,7 @@
       "contentHash": "27d219ec6f69478d065fdbfa7931da68",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -419,7 +419,7 @@
       "contentHash": "592df588492d45fdcf46b3cb608c0fbf",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -454,7 +454,7 @@
       "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -491,7 +491,7 @@
       "contentHash": "ad714a6368ee7d43cded6bbe8af0b155",
       "sourceName": "@openzeppelin/contracts/utils/Address.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -526,7 +526,7 @@
       "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
       "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -563,7 +563,7 @@
       "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -594,11 +594,11 @@
       ]
     },
     "G:\\dapps\\rfc-nft\\contracts\\RFC.sol": {
-      "lastModificationDate": 1649960203248,
-      "contentHash": "e07ab44f89c36b8c8e8cd7c266dacdd9",
+      "lastModificationDate": 1651910230214,
+      "contentHash": "3d9febde3b38a9c7aa9cd98911811290",
       "sourceName": "contracts/RFC.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -622,7 +622,7 @@
       },
       "imports": [],
       "versionPragmas": [
-        "^0.8.7"
+        "0.8.4"
       ],
       "artifacts": [
         "Address",
@@ -649,7 +649,7 @@
       "contentHash": "92f9448b23a90ea3bb932ee55cc3ccce",
       "sourceName": "@openzeppelin/contracts/security/ReentrancyGuard.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -684,7 +684,7 @@
       "contentHash": "6c248867533a1681002eb524a1c41eb0",
       "sourceName": "@openzeppelin/contracts/token/common/ERC2981.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -722,7 +722,7 @@
       "contentHash": "f9d0c9d72cbaa5a4e76fa4cfa5fc5ff9",
       "sourceName": "@openzeppelin/contracts/interfaces/IERC2981.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -759,7 +759,7 @@
       "contentHash": "ee9624272968c23d93d4c2e39f06e6e2",
       "sourceName": "@openzeppelin/contracts/interfaces/IERC165.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -790,11 +790,11 @@
       "artifacts": []
     },
     "G:\\dapps\\rfc-nft\\contracts\\ERC721A.sol": {
-      "lastModificationDate": 1650096409409,
+      "lastModificationDate": 1650170719507,
       "contentHash": "fd1925fafe37f78866d8ace3d59695d1",
       "sourceName": "contracts/ERC721A.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -834,11 +834,11 @@
       ]
     },
     "G:\\dapps\\rfc-nft\\contracts\\ResearchFundingClubFast.sol": {
-      "lastModificationDate": 1651230380969,
-      "contentHash": "2c4dd3b983ca39682fbcc52c790a03e8",
+      "lastModificationDate": 1651911768062,
+      "contentHash": "37da64e5b1401ada499f94ec53c87089",
       "sourceName": "contracts/ResearchFundingClubFast.sol",
       "solcConfig": {
-        "version": "0.8.7",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,

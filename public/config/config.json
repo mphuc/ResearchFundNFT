@@ -1,6 +1,6 @@
 {
-  "CONTRACT_ADDRESS": "0xa5db8a79654e0Ee45cb52195979d165EC1C66c4e",
-  "SCAN_LINK": "https://etherscan.io/address/0xa5db8a79654e0Ee45cb52195979d165EC1C66c4e",
+  "CONTRACT_ADDRESS": "0xF6a2c69163001d58a2A5825A52155ce0579e7012",
+  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0xF6a2c69163001d58a2A5825A52155ce0579e7012",
   "NETWORK": {
     "NAME": "Rinkeby Test Network",
     "SYMBOL": "ETH",
@@ -9,10 +9,10 @@
   "NFT_NAME": "Research Funding Club",
   "SYMBOL": "RFC",
   "MAX_SUPPLY": 10000,
-  "WEI_COST": 100000000000000,
-  "DISPLAY_COST": 0.0001,
+  "WEI_COST": 1000000000000,
+  "DISPLAY_COST": 0.000001,
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
-  "MARKETPLACE_LINK": "https://opensea.io/collection/0xa5db8a79654e0Ee45cb52195979d165EC1C66c4e/",
+  "MARKETPLACE_LINK": "https://opensea.io/collection/0xF6a2c69163001d58a2A5825A52155ce0579e7012/",
   "SHOW_BACKGROUND": true
 }

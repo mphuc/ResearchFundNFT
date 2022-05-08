@@ -16,7 +16,7 @@ describe("Minting Tests", function() {
     await rfc.deployed(); 
     
     await expect(
-      rfc.connect(owner).mint(1, {value: 9* 1000000000000000})
+      rfc.connect(a1).mint(1, {value: 9* 1000000000000000})
     ).to.be.revertedWith("ContractPaused()");
   });
 
@@ -31,7 +31,7 @@ describe("Minting Tests", function() {
     expect(await rfc.paused()).to.equal(false);
 
     await expect(
-      rfc.connect(owner).mint(0, {value: 9* 1000000000000000})
+      rfc.connect(a1).mint(0, {value: 9* 1000000000000000})
     ).to.be.revertedWith("ZeroMintFailed()");    
   });
 
@@ -46,7 +46,7 @@ describe("Minting Tests", function() {
     expect(await rfc.paused()).to.equal(false);
 
     await expect(
-      rfc.connect(owner).mint(2, {value: 9* 1000000000000000})
+      rfc.connect(a1).mint(2, {value: 9* 1000000000000000})
     ).to.be.revertedWith("MaxPerNFTAddrExceeded()");  
 
     var mintTX = await rfc.mint(1, {
@@ -69,7 +69,7 @@ describe("Minting Tests", function() {
     expect(await rfc.paused()).to.equal(false);
 
     for(var i=0; i < 10; i++) {
-      var mintTX = await rfc.mint(1, {
+      var mintTX = await rfc.connect(a1).mint(1, {
         value: 1000000000000000
       });
       await mintTX.wait();
@@ -80,7 +80,7 @@ describe("Minting Tests", function() {
     expect(totalSupplyTX).to.equal(10);
     
     await expect(
-      rfc.connect(owner).mint(1, {value: 9* 1000000000000000})
+      rfc.connect(a1).mint(1, {value: 9* 1000000000000000})
     ).to.be.revertedWith("SoldOut()"); 
   });
 
@@ -95,7 +95,7 @@ describe("Minting Tests", function() {
     expect(await rfc.paused()).to.equal(false);
 
     await expect(
-      rfc.connect(owner).mint(1, {value: 10})
+      rfc.connect(a1).mint(1, {value: 10})
     ).to.be.revertedWith("InsufficientFunds()"); 
   });
 });
@@ -372,6 +372,31 @@ describe("RFC Tests", function () {
       const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
       console.log(eachtokenId, ": changed uri: ",tokenURI);
     }
+
+  });
+
+
+  it("can change the base uri of any collection", async function() {
+    const [owner, a1, a2, a3] = await ethers.getSigners();
+    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+
+    const rfc = await RFC.deploy(120, "notrevealed/");
+    await rfc.deployed(); 
+    await rfc.pause(false);
+
+    expect(await rfc.paused()).to.equal(false);
+
+    for(var i=0; i < 10; i++) {
+      var mintTX = await rfc.mint(1, {
+        value: 1000000000000000
+      });
+      await mintTX.wait();
+    }
+
+    var totalSupplyTX = await rfc.totalSupply();
+
+    expect(totalSupplyTX).to.equal(10);
+    await rfc.reveal("https://aaaaaa/");
 
   });
 

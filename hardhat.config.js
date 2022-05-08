@@ -21,7 +21,6 @@ const ALCHEMY_API_KEY = "iAJWLiE3bAWhyZ2foX_sYLWrXAg4F76Z";
 // go to Account Details > Export Private Key
 // Be aware of NEVER putting real Ether into testing accounts
 
-
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
@@ -35,6 +34,11 @@ module.exports = {
   solidity: "0.8.7",
   solidity: "0.8.4",
   networks: {
+    hardhat: {
+      forking: {
+        url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_API_KEY}`
+      }
+    },
     polygon: {
       url: `https://rpc-mumbai.maticvigil.com`,
       accounts: [`${POLYGON_PRIVATE_KEY}`]

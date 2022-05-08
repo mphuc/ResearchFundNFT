@@ -40,7 +40,7 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     string public baseTokenURI;
 
     uint256 public MIN_SUPPLY = 0; // only used for multi-drop reveals
-    uint256 public MAX_SUPPLY = 3;
+    uint256 public MAX_SUPPLY = 10;
     
     uint256 public PRICE = 0.0000001 ether;
     uint256 public MAX_PER_MINT = 1;

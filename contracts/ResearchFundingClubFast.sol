@@ -2,12 +2,6 @@
 
 pragma solidity ^0.8.4;
 
-/*
- We are going to optimize this contract as much as possible
-
- I am still not confident about the unchecked funtionality but will learn and implement it someday
- */
-
 import "./ERC721A.sol";
 import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
@@ -27,7 +21,6 @@ error InsufficientFunds();
 contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     using Strings for uint256;
 
-    // should also have owner address so the amount goes to that owner?
     struct CollectionData {
         uint256 minSupply;
         uint256 maxSupply;
@@ -51,7 +44,7 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
 
     // Wallets
     address public charityWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
-    address public devWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
+    address public devWallet = 0x81E3CBA331c2036044A62B54524a44D319D0E1ae;
 
     constructor(uint96 _royaltyFeesInBips, string memory _notRevealedURI) ERC721A("Research Funding Club", "RFC") {
         setRoyaltyInfo(msg.sender, _royaltyFeesInBips); // 2.5% = 2.5 * 100 = 250
@@ -73,7 +66,6 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
 
         for (uint256 i=1; i <= collectionID; i++) {
             if (tokenId < collections[i].maxSupply) {
-                console.log("THE URI:", collections[i].baseURI);
                 tokenId = tokenId - collections[i].minSupply;
                 return string(abi.encodePacked(collections[i].baseURI, tokenId.toString(), baseExtension));
             }
@@ -131,12 +123,7 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     }
 
     function reveal(string memory _newBaseURI) external onlyOwner {
-        CollectionData memory collection;
-        collection.minSupply = MIN_SUPPLY;
-        collection.maxSupply = MAX_SUPPLY;
-        collection.baseURI = _newBaseURI;
-
-        collections[collectionID] = collection;
+        collections[collectionID] = CollectionData(MIN_SUPPLY, MAX_SUPPLY, _newBaseURI);
         revealed = true;
         paused = true; 
         collectionID++;
@@ -146,13 +133,11 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         external 
         onlyOwner
     {   
-        console.log("total supply: ", totalSupply());
-        if (totalSupply() != MAX_SUPPLY) revert SaleIncomplete(); // this might be problematic
+        if (totalSupply() != MAX_SUPPLY) revert SaleIncomplete(); 
         if (!revealed) revert CollectionNotRevealedYet();
 
         MIN_SUPPLY = MAX_SUPPLY;
         MAX_SUPPLY +=_newMaxSupply;
-        
         revealed = false;
     }
 

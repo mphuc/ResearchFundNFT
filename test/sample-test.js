@@ -249,7 +249,7 @@ describe("RFC Tests", function () {
     var totalSupplyTX = await rfc.totalSupply();
     var supplyNumber = parseInt(totalSupplyTX.toString());
 
-    console.log(supplyNumber);
+    // console.log(supplyNumber);
     expect(supplyNumber).to.equal(testSupplyVal); 
 
     var mintTX = await rfc.mint(1, {
@@ -259,7 +259,7 @@ describe("RFC Tests", function () {
     var totalSupplyTX = await rfc.totalSupply();
     var supplyNumber = parseInt(totalSupplyTX.toString());
 
-    console.log(supplyNumber);
+    // console.log(supplyNumber);
 
     var userOwner = await rfc.tokensOfOwner(owner.address);
     // await rfc.reveal();
@@ -267,7 +267,7 @@ describe("RFC Tests", function () {
       var eachtokenId = userOwner[i].toString();
 
       const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log(eachtokenId, ": changed uri: ",tokenURI);
+      // console.log(eachtokenId, ": changed uri: ",tokenURI);
     }
 
     // reveal and set base uri
@@ -280,7 +280,7 @@ describe("RFC Tests", function () {
       var eachtokenId = userOwner[i].toString();
 
       const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log(eachtokenId, ": changed uri: ",tokenURI);
+      // console.log(eachtokenId, ": changed uri: ",tokenURI);
     }
   });
 
@@ -306,7 +306,7 @@ describe("RFC Tests", function () {
     var totalSupplyTX = await rfc.totalSupply();
     var supplyNumber = parseInt(totalSupplyTX.toString());
 
-    console.log(supplyNumber);
+    // console.log(supplyNumber);
 
     expect(supplyNumber).to.equal(9);
 
@@ -325,7 +325,7 @@ describe("RFC Tests", function () {
     var totalSupplyTX = await rfc.totalSupply();
     var supplyNumber = parseInt(totalSupplyTX.toString());
 
-    console.log(supplyNumber);
+    // console.log(supplyNumber);
 
     expect(supplyNumber).to.equal(10);
 
@@ -349,7 +349,7 @@ describe("RFC Tests", function () {
     var totalSupplyTX = await rfc.totalSupply();
     var supplyNumber = parseInt(totalSupplyTX.toString());
 
-    console.log(supplyNumber);
+    // console.log(supplyNumber);
 
     var userOwner = await rfc.tokensOfOwner(owner.address);
     // await rfc.reveal();
@@ -357,7 +357,7 @@ describe("RFC Tests", function () {
       var eachtokenId = userOwner[i].toString();
 
       const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log(eachtokenId, ": changed uri: ",tokenURI);
+      // console.log(eachtokenId, ": changed uri: ",tokenURI);
     }
 
     // reveal and set base uri
@@ -370,7 +370,7 @@ describe("RFC Tests", function () {
       var eachtokenId = userOwner[i].toString();
 
       const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      console.log(eachtokenId, ": changed uri: ",tokenURI);
+      // console.log(eachtokenId, ": changed uri: ",tokenURI);
     }
 
   });

@@ -13,37 +13,37 @@ async function main() {
   const contract = await contractFactory.deploy(250, hiddenURI);
   await contract.deployed();
   console.log("Contract deployed to:", contract.address);
-  await contract.pause(false);
+  // await contract.pause(false);
 
-  // mint one
+  // // mint one
 
-  var mintTX = await contract.mint(1, {
-    value: 100000000000
-  });
+  // var mintTX = await contract.mint(1, {
+  //   value: 100000000000
+  // });
 
-  await mintTX.wait();
+  // await mintTX.wait();
 
-  var mintTX = await contract.mint(1, {
-    value: 100000000000
-  });
+  // var mintTX2 = await contract.mint(1, {
+  //   value: 100000000000
+  // });
 
-  await mintTX.wait();
+  // await mintTX2.wait();
   
-  var mintTX = await contract.mint(1, {
-    value: 100000000000
-  });
+  // var mintTX3 = await contract.mint(1, {
+  //   value: 100000000000
+  // });
 
-  await mintTX.wait();
+  // await mintTX3.wait();
 
 
-  // reveal
+  // // reveal
 
-  await contract.reveal(baseTokenURI);
-  console.log("nft has been revealed");
+  // await contract.reveal(baseTokenURI);
+  // console.log("nft has been revealed");
 
-  // set up new collection
+  // // set up new collection
 
-  await contract.newDrop(2);
+  // await contract.newDrop(2);
 }
 
 main()

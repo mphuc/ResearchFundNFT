@@ -1,5 +1,6 @@
 require("dotenv").config();
 require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-etherscan");
 require("hardhat-gas-reporter");
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -20,6 +21,9 @@ const ALCHEMY_API_KEY = "iAJWLiE3bAWhyZ2foX_sYLWrXAg4F76Z";
 // To export your private key from Metamask, open Metamask and
 // go to Account Details > Export Private Key
 // Be aware of NEVER putting real Ether into testing accounts
+const RINKEBY_PRIVATE_KEY = "";
+const POLYGON_PRIVATE_KEY = "";
+
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -30,9 +34,37 @@ const ALCHEMY_API_KEY = "iAJWLiE3bAWhyZ2foX_sYLWrXAg4F76Z";
 
 
 module.exports = {
-  solidity: "0.8.1",
-  solidity: "0.8.7",
-  solidity: "0.8.4",
+  solidity: {
+    compilers: [
+      {
+        version: "0.8.1",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          }
+        },
+      },
+      {
+        version: "0.8.7",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          }
+        },
+      },
+      {
+        version: "0.8.4",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          }
+        },
+      },
+    ]
+  },
   networks: {
     hardhat: {
       forking: {
@@ -47,5 +79,8 @@ module.exports = {
       url: `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
       accounts: [`${RINKEBY_PRIVATE_KEY}`]
     }
+  },
+  etherscan: {
+    apiKey: "PSXD1G3KX4XBG6A1HA7IX55CFD9KCRC67Q"
   }
 };

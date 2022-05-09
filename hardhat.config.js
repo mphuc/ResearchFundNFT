@@ -65,22 +65,22 @@ module.exports = {
       },
     ]
   },
-  networks: {
-    hardhat: {
-      forking: {
-        url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_API_KEY}`
-      }
-    },
-    polygon: {
-      url: `https://rpc-mumbai.maticvigil.com`,
-      accounts: [`${POLYGON_PRIVATE_KEY}`]
-    },
-    rinkeby: {
-      url: `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
-      accounts: [`${RINKEBY_PRIVATE_KEY}`]
-    }
-  },
-  etherscan: {
-    apiKey: "PSXD1G3KX4XBG6A1HA7IX55CFD9KCRC67Q"
-  }
+  // networks: {
+  //   hardhat: {
+  //     forking: {
+  //       url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_API_KEY}`
+  //     }
+  //   },
+  //   polygon: {
+  //     url: `https://rpc-mumbai.maticvigil.com`,
+  //     accounts: [`${POLYGON_PRIVATE_KEY}`]
+  //   },
+  //   rinkeby: {
+  //     url: `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
+  //     accounts: [`${RINKEBY_PRIVATE_KEY}`]
+  //   }
+  // },
+  // etherscan: {
+  //   apiKey: "PSXD1G3KX4XBG6A1HA7IX55CFD9KCRC67Q"
+  // }
 };

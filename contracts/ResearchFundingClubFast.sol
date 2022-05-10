@@ -134,7 +134,6 @@ contract ResearchFundingClub is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     function reveal(string memory _newBaseURI) external onlyOwner {
         collections[collectionID] = CollectionData(MIN_SUPPLY, MAX_SUPPLY, _newBaseURI);
         revealed = true;
-        paused = true; 
         collectionID++;
     }
 
@@ -148,6 +147,7 @@ contract ResearchFundingClub is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         MIN_SUPPLY = MAX_SUPPLY;
         MAX_SUPPLY +=_newMaxSupply;
         revealed = false;
+        paused = true; 
     }
 
 

@@ -739,8 +739,8 @@
       ]
     },
     "G:\\dapps\\rfc-nft\\contracts\\ResearchFundingClubFast.sol": {
-      "lastModificationDate": 1652202064209,
-      "contentHash": "37eb87cf36b4758dfd2cb17b4d4c1dac",
+      "lastModificationDate": 1652202748461,
+      "contentHash": "19d55ac420e2668caed7651239286164",
       "sourceName": "contracts/ResearchFundingClubFast.sol",
       "solcConfig": {
         "version": "0.8.7",

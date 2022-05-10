@@ -274,6 +274,24 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_mintAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "destination",
+				"type": "address"
+			}
+		],
+		"name": "airDrop",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "to",
 				"type": "address"
@@ -311,6 +329,19 @@
 	{
 		"inputs": [],
 		"name": "baseExtension",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "baseTokenURI",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -455,7 +486,7 @@
 						"type": "string"
 					}
 				],
-				"internalType": "struct ResearchFundingClubFast.CollectionData",
+				"internalType": "struct ResearchFundingClub.CollectionData",
 				"name": "",
 				"type": "tuple"
 			}

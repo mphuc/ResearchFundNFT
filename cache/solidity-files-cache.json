@@ -10,7 +10,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -45,7 +45,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -80,7 +80,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -117,7 +117,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -155,7 +155,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -192,7 +192,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -227,7 +227,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -262,7 +262,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -305,7 +305,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -342,7 +342,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -379,7 +379,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -414,7 +414,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -451,7 +451,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -486,7 +486,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -523,7 +523,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -558,7 +558,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -593,7 +593,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -631,7 +631,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -668,7 +668,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -703,7 +703,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -739,15 +739,15 @@
       ]
     },
     "G:\\dapps\\rfc-nft\\contracts\\ResearchFundingClubFast.sol": {
-      "lastModificationDate": 1652202748461,
-      "contentHash": "19d55ac420e2668caed7651239286164",
+      "lastModificationDate": 1652203647664,
+      "contentHash": "45dd2907111dad97d08d4e1c40355bdb",
       "sourceName": "contracts/ResearchFundingClubFast.sol",
       "solcConfig": {
         "version": "0.8.7",
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -789,7 +789,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {
@@ -833,7 +833,7 @@
         "settings": {
           "optimizer": {
             "enabled": true,
-            "runs": 1000
+            "runs": 500
           },
           "outputSelection": {
             "*": {

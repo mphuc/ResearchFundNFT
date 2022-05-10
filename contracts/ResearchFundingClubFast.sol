@@ -48,7 +48,7 @@ contract ResearchFundingClub is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     address public devWallet = 0x81E3CBA331c2036044A62B54524a44D319D0E1ae;
 
     constructor(uint96 _royaltyFeesInBips, string memory _notRevealedURI) ERC721A("Research Funding Club", "RFC") {
-        setRoyaltyInfo(msg.sender, _royaltyFeesInBips); // 2.5% = 2.5 * 100 = 250
+        setRoyaltyInfo(msg.sender, _royaltyFeesInBips); // 2.5% = 2.5 * 100 = 250 
         notRevealedURI = _notRevealedURI;
     }
 
@@ -105,7 +105,7 @@ contract ResearchFundingClub is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         _safeMint(msg.sender, _mintAmount);
     }
 
-    function airDrop(uint256 _mintAmount, address destination) public onlyOwner  {
+    function airDrop(uint256 _mintAmount, address destination) external onlyOwner  {
         uint256 supply = totalSupply();
         if (_mintAmount == 0) revert ZeroMintFailed();
         if (_mintAmount > MAX_PER_MINT) revert MaxPerNFTAddrExceeded();

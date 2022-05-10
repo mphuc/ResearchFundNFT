@@ -7,15 +7,15 @@ async function main() {
 
   // the fast version
   const contractFactory = await hre.ethers.getContractFactory(
-    "ResearchFundingClubFast"
+    "ResearchFundingClub"
   );
 
-  const contract = await contractFactory.deploy(250, hiddenURI);
+  const contract = await contractFactory.deploy(500, hiddenURI);
   await contract.deployed();
   console.log("Contract deployed to:", contract.address);
-  // await contract.pause(false);
+  await contract.pause(false);
 
-  // // mint one
+  // mint one
 
   // var mintTX = await contract.mint(1, {
   //   value: 100000000000
@@ -36,12 +36,12 @@ async function main() {
   // await mintTX3.wait();
 
 
-  // // reveal
+  // reveal
 
   // await contract.reveal(baseTokenURI);
   // console.log("nft has been revealed");
 
-  // // set up new collection
+  // set up new collection
 
   // await contract.newDrop(2);
 }

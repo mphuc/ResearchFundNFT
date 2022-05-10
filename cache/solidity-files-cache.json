@@ -739,8 +739,8 @@
       ]
     },
     "G:\\dapps\\rfc-nft\\contracts\\ResearchFundingClubFast.sol": {
-      "lastModificationDate": 1652199912966,
-      "contentHash": "34cdbdf5e44606762d8f488d333a352f",
+      "lastModificationDate": 1652202064209,
+      "contentHash": "37eb87cf36b4758dfd2cb17b4d4c1dac",
       "sourceName": "contracts/ResearchFundingClubFast.sol",
       "solcConfig": {
         "version": "0.8.7",
@@ -770,7 +770,8 @@
         "@openzeppelin/contracts/token/common/ERC2981.sol",
         "@openzeppelin/contracts/security/ReentrancyGuard.sol",
         "@openzeppelin/contracts/utils/Strings.sol",
-        "@openzeppelin/contracts/access/Ownable.sol"
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "hardhat/console.sol"
       ],
       "versionPragmas": [
         "^0.8.4"
@@ -780,8 +781,8 @@
       ]
     },
     "G:\\dapps\\rfc-nft\\contracts\\obsolete\\ResearchFundingClub.sol": {
-      "lastModificationDate": 1652199137706,
-      "contentHash": "7c73b058aec3c1f7b000f92fc4a70b31",
+      "lastModificationDate": 1652200435276,
+      "contentHash": "73d53fac55b9bc766fd31fddf95a143c",
       "sourceName": "contracts/obsolete/ResearchFundingClub.sol",
       "solcConfig": {
         "version": "0.8.7",

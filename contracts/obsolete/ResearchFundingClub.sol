@@ -37,8 +37,8 @@ contract ResearchFundingClubOld is
     bool public revealed = false;
 
     // Wallets
-    address public charityWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
-    address public devWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
+    address public charityWallet = 0x7158d45648167222C89351CeBF618f413Bad08fb;
+    address public devWallet = 0x6ED651A23d8a35D07BaADF816bfd8F5D78d43a64;
 
     constructor(uint96 _royaltyFeesInBips, string memory baseURI) ERC721("Research Funding Club", "RFC") {
         setRoyaltyInfo(owner(), _royaltyFeesInBips); // 2.5% = 2.5 * 100 = 250

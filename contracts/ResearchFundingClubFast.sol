@@ -8,6 +8,8 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+import "hardhat/console.sol";
+
 error URIQueryForNonexistentTokenRFC();
 error SaleIncomplete();
 error CollectionNotRevealedYet();
@@ -31,10 +33,10 @@ contract ResearchFundingClub is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     string public notRevealedURI;
     string public baseTokenURI;
 
-    uint256 public MIN_SUPPLY = 0; // only used for multi-drop reveals
-    uint256 public MAX_SUPPLY = 10;
+    uint256 public MIN_SUPPLY = 0; // only used for multi-drop reveal calculations
+    uint256 public MAX_SUPPLY = 25;
     
-    uint256 public PRICE = 0.0000001 ether;
+    uint256 public PRICE = 0.2 ether;
     uint256 public MAX_PER_MINT = 1;
     bool public revealed = false;
 
@@ -42,7 +44,7 @@ contract ResearchFundingClub is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     mapping(uint256 => CollectionData) public collections;
 
     // Wallets
-    address public charityWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
+    address public charityWallet = 0x7158d45648167222C89351CeBF618f413Bad08fb;
     address public devWallet = 0x81E3CBA331c2036044A62B54524a44D319D0E1ae;
 
     constructor(uint96 _royaltyFeesInBips, string memory _notRevealedURI) ERC721A("Research Funding Club", "RFC") {
@@ -188,11 +190,13 @@ contract ResearchFundingClub is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         uint256 balance = address(this).balance;
         require(balance > 0, "No ether left to withdraw.");
 
+        // charity
         (bool cw, ) = (charityWallet).call{
             value: (address(this).balance * 10) / 100
         }("");
         require(cw, "Charity Transfer failed.");
 
+        // developer
         (bool df, ) = (devWallet).call{
             value: (address(this).balance * 5) / 100
         }("");
@@ -200,6 +204,6 @@ contract ResearchFundingClub is ERC721A, ERC2981, Ownable, ReentrancyGuard {
 
         // owner
         (bool success, ) = (msg.sender).call{value: address(this).balance}("");
-        require(success, "Transfer failed.");
+        require(success, "Owner Transfer failed.");
     }
 }

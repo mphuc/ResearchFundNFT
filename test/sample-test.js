@@ -68,19 +68,19 @@ describe("Minting Tests", function() {
 
     expect(await rfc.paused()).to.equal(false);
 
-    for(var i=0; i < 10; i++) {
+    for(var i=0; i < 25; i++) {
       var mintTX = await rfc.connect(a1).mint(1, {
-        value: 1000000000000000
+        value: ethers.utils.parseEther("0.2")
       });
       await mintTX.wait();
     }
 
     var totalSupplyTX = await rfc.totalSupply();
 
-    expect(totalSupplyTX).to.equal(10);
+    expect(totalSupplyTX).to.equal(25);
     
     await expect(
-      rfc.connect(a1).mint(1, {value: 9* 1000000000000000})
+      rfc.connect(a1).mint(1, {value: ethers.utils.parseEther("0.2")})
     ).to.be.revertedWith("SoldOut()"); 
   });
 
@@ -312,7 +312,7 @@ describe("RFC Tests", function () {
   });
 
   it("Mint Incomplete during new collection set", async function() {
-    const [owner] = await ethers.getSigners();
+    const [owner, a1, a2] = await ethers.getSigners();
     const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
     const rfc = await RFC.deploy(120, "notrevealed/");
@@ -323,9 +323,9 @@ describe("RFC Tests", function () {
     var testSupplyVal = 1;
     // mint single nft
 
-    for(var i=0; i < 9; i++) {
-      var mintTX = await rfc.mint(1, {
-        value: 9* 1000000000000000
+    for(var i=0; i < 24; i++) {
+      var mintTX = await rfc.connect(a1).mint(1, {
+        value: ethers.utils.parseEther("0.2")
       });
       await mintTX.wait();
     }
@@ -335,9 +335,7 @@ describe("RFC Tests", function () {
 
     // console.log(supplyNumber);
 
-    expect(supplyNumber).to.equal(9);
-
-    await rfc.reveal("https://aaaaaa/");
+    expect(supplyNumber).to.equal(24);
 
     await expect(
       rfc.newDrop(20)
@@ -345,30 +343,33 @@ describe("RFC Tests", function () {
 
     // mint
 
-    var mintTX = await rfc.mint(1, {
-      value: 9* 1000000000000000
+    var mintTX = await rfc.connect(a1).mint(1, {
+      value: ethers.utils.parseEther("0.2")
     });
     await mintTX.wait();
     var totalSupplyTX = await rfc.totalSupply();
     var supplyNumber = parseInt(totalSupplyTX.toString());
 
+    await rfc.reveal("https://aaaaaa/");
+
     // console.log(supplyNumber);
 
-    expect(supplyNumber).to.equal(10);
+    expect(supplyNumber).to.equal(25);
 
     await rfc.newDrop(50);
+    await rfc.pause(false);
 
     var minSupply = await rfc.MIN_SUPPLY();
     var maxSupply = await rfc.MAX_SUPPLY();
 
-    expect(minSupply).to.equal(10);
-    expect(maxSupply).to.equal(60);
+    expect(minSupply).to.equal(25);
+    expect(maxSupply).to.equal(75);
 
     // mint again
 
     for(var i=0; i < 50; i++) {
-      var mintTX = await rfc.mint(1, {
-        value: 1000000000000000
+      var mintTX = await rfc.connect(a1).mint(1, {
+        value: ethers.utils.parseEther("0.2")
       });
       await mintTX.wait();
     }
@@ -378,26 +379,26 @@ describe("RFC Tests", function () {
 
     // console.log(supplyNumber);
 
-    var userOwner = await rfc.tokensOfOwner(owner.address);
+    var userOwner = await rfc.tokensOfOwner(a1.address);
     // await rfc.reveal();
     for (var i=0; i < userOwner.length; i++) {
       var eachtokenId = userOwner[i].toString();
 
       const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      // console.log(eachtokenId, ": changed uri: ",tokenURI);
+      console.log(eachtokenId, ": changed uri: ",tokenURI);
     }
 
     // reveal and set base uri
 
     await rfc.reveal("https://bbbbbb/");
 
-    var userOwner = await rfc.tokensOfOwner(owner.address);
+    var userOwner = await rfc.tokensOfOwner(a1.address);
     // await rfc.reveal();
     for (var i=0; i < userOwner.length; i++) {
       var eachtokenId = userOwner[i].toString();
 
       const tokenURI = await rfc.tokenURI(parseInt(eachtokenId));
-      // console.log(eachtokenId, ": changed uri: ",tokenURI);
+      console.log(eachtokenId, ": changed uri: ",tokenURI);
     }
 
   });

@@ -13,7 +13,6 @@ async function main() {
   const contract = await contractFactory.deploy(500, hiddenURI);
   await contract.deployed();
   console.log("Contract deployed to:", contract.address);
-  await contract.pause(false);
 
   // mint one
 

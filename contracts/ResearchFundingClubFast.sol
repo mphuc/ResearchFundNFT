@@ -8,8 +8,6 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-import "hardhat/console.sol";
-
 error URIQueryForNonexistentTokenRFC();
 error SaleIncomplete();
 error CollectionNotRevealedYet();
@@ -33,7 +31,7 @@ contract ResearchFundingClub is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     string public notRevealedURI;
     string public baseTokenURI;
 
-    uint256 public MIN_SUPPLY = 0; // only used for multi-drop reveal calculations
+    uint256 public MIN_SUPPLY = 0; // only used for multi-drop reveal check
     uint256 public MAX_SUPPLY = 25;
     
     uint256 public PRICE = 0.2 ether;

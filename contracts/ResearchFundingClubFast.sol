@@ -7,7 +7,6 @@ import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "hardhat/console.sol";
 
 error URIQueryForNonexistentTokenRFC();
 error SaleIncomplete();
@@ -18,7 +17,7 @@ error MaxPerNFTAddrExceeded();
 error SoldOut();
 error InsufficientFunds();
 
-contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
+contract ResearchFundingClub is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     using Strings for uint256;
 
     struct CollectionData {
@@ -102,6 +101,14 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         if (supply + _mintAmount > MAX_SUPPLY) revert SoldOut();
 
         _safeMint(msg.sender, _mintAmount);
+    }
+
+    function airDrop(uint256 _mintAmount, address destination) public onlyOwner  {
+        uint256 supply = totalSupply();
+        if (_mintAmount == 0) revert ZeroMintFailed();
+        if (_mintAmount > MAX_PER_MINT) revert MaxPerNFTAddrExceeded();
+        if (supply + _mintAmount > MAX_SUPPLY) revert SoldOut();
+        _safeMint(destination, _mintAmount);
     }
 
     function tokensOfOwner(address _owner)

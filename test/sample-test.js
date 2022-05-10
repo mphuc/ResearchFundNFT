@@ -10,7 +10,7 @@ const { ethers } = require("hardhat");
 describe("Minting Tests", function() {
   it("Should not allow minting when paused", async function () {
     const [owner, a1, a2, a3] = await ethers.getSigners();
-    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+    const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
     const rfc = await RFC.deploy(120, "notrevealed/");
     await rfc.deployed(); 
@@ -22,7 +22,7 @@ describe("Minting Tests", function() {
 
   it("Cannot mint 0", async function() {
     const [owner, a1, a2, a3] = await ethers.getSigners();
-    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+    const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
     const rfc = await RFC.deploy(120, "notrevealed/");
     await rfc.deployed(); 
@@ -37,7 +37,7 @@ describe("Minting Tests", function() {
 
   it("it cannot mint more than the limit", async function() {
     const [owner, a1, a2, a3] = await ethers.getSigners();
-    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+    const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
     const rfc = await RFC.deploy(120, "notrevealed/");
     await rfc.deployed(); 
@@ -60,7 +60,7 @@ describe("Minting Tests", function() {
 
   it("Cannot mint more than the supply", async function() {
     const [owner, a1, a2, a3] = await ethers.getSigners();
-    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+    const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
     const rfc = await RFC.deploy(120, "notrevealed/");
     await rfc.deployed(); 
@@ -86,7 +86,7 @@ describe("Minting Tests", function() {
 
   it("Cannot mint more than the supply", async function() {
     const [owner, a1, a2, a3] = await ethers.getSigners();
-    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+    const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
     const rfc = await RFC.deploy(120, "notrevealed/");
     await rfc.deployed(); 
@@ -98,6 +98,33 @@ describe("Minting Tests", function() {
       rfc.connect(a1).mint(1, {value: 10})
     ).to.be.revertedWith("InsufficientFunds()"); 
   });
+
+
+  it("can airdrop to other addresses", async function() {
+    const [owner, a1, a2, a3] = await ethers.getSigners();
+    const RFC = await ethers.getContractFactory("ResearchFundingClub");
+
+    const rfc = await RFC.deploy(120, "notrevealed/");
+    await rfc.deployed(); 
+    await rfc.pause(false);
+
+    expect(await rfc.paused()).to.equal(false);
+
+    var mintTX = await rfc.connect(owner).airDrop(1, a1.address);
+    await mintTX.wait();  
+    
+    var userOwner = await rfc.tokensOfOwner(a1.address);
+    expect(userOwner.length).to.equal(1);
+
+    var mintTX = await rfc.connect(owner).airDrop(1, a1.address);
+    await mintTX.wait();  
+    
+    var userOwner = await rfc.tokensOfOwner(a1.address);
+    expect(userOwner.length).to.equal(2);
+  });
+
+
+
 });
 
 describe("RFC Tests", function () {
@@ -197,7 +224,7 @@ describe("RFC Tests", function () {
   
   // it("Set multiple collections", async function() {
   //   const [owner] = await ethers.getSigners();
-  //   const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+  //   const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
   //   const rfc = await RFC.deploy(120, "notrevealed/");
   //   await rfc.deployed(); 
@@ -221,7 +248,7 @@ describe("RFC Tests", function () {
 
   it("Token Query does not exist", async function() {
     const [owner] = await ethers.getSigners();
-    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+    const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
     const rfc = await RFC.deploy(120, "notrevealed/");
     await rfc.deployed(); 
@@ -234,7 +261,7 @@ describe("RFC Tests", function () {
 
   it("Single mint test", async function() {
     const [owner] = await ethers.getSigners();
-    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+    const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
     const rfc = await RFC.deploy(120, "notrevealed/");
     await rfc.deployed(); 
@@ -286,7 +313,7 @@ describe("RFC Tests", function () {
 
   it("Mint Incomplete during new collection set", async function() {
     const [owner] = await ethers.getSigners();
-    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+    const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
     const rfc = await RFC.deploy(120, "notrevealed/");
     await rfc.deployed(); 
@@ -378,7 +405,7 @@ describe("RFC Tests", function () {
 
   it("can change the base uri of any collection", async function() {
     const [owner, a1, a2, a3] = await ethers.getSigners();
-    const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+    const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
     const rfc = await RFC.deploy(120, "notrevealed/");
     await rfc.deployed(); 
@@ -402,7 +429,7 @@ describe("RFC Tests", function () {
 
   // it("Multi Collection Test", async function() {
   //   const [owner] = await ethers.getSigners();
-  //   const RFC = await ethers.getContractFactory("ResearchFundingClubFast");
+  //   const RFC = await ethers.getContractFactory("ResearchFundingClub");
 
   //   const rfc = await RFC.deploy(120, "notrevealed/");
   //   await rfc.deployed(); 

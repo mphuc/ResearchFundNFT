@@ -15,15 +15,13 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
 // Go to https://www.alchemyapi.io, sign up, create
 // a new App in its dashboard, and replace "KEY" with its key
-const ALCHEMY_API_KEY = "iAJWLiE3bAWhyZ2foX_sYLWrXAg4F76Z";
+var ALCHEMY_API_KEY = "1mpbe8q90IiM7TZeykJDLP7OzzcmNA18";
 
 // Replace this private key with your Ropsten account private key
 // To export your private key from Metamask, open Metamask and
 // go to Account Details > Export Private Key
 // Be aware of NEVER putting real Ether into testing accounts
-const RINKEBY_PRIVATE_KEY = "";
-const POLYGON_PRIVATE_KEY = "";
-
+const PRIVATE_KEY = "";
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -32,6 +30,7 @@ const POLYGON_PRIVATE_KEY = "";
  * @type import('hardhat/config').HardhatUserConfig
  */
 
+//  ALCHEMY_API_KEY = "iAJWLiE3bAWhyZ2foX_sYLWrXAg4F76Z"; 
 
 module.exports = {
   solidity: {
@@ -65,22 +64,27 @@ module.exports = {
       },
     ]
   },
-  // networks: {
-  //   hardhat: {
-  //     forking: {
-  //       url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_API_KEY}`
-  //     }
-  //   },
-  //   polygon: {
-  //     url: `https://rpc-mumbai.maticvigil.com`,
-  //     accounts: [`${POLYGON_PRIVATE_KEY}`]
-  //   },
-  //   rinkeby: {
-  //     url: `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
-  //     accounts: [`${RINKEBY_PRIVATE_KEY}`]
-  //   }
-  // },
-  // etherscan: {
-  //   apiKey: "PSXD1G3KX4XBG6A1HA7IX55CFD9KCRC67Q"
-  // }
+  networks: {
+    // hardhat: {
+    //   forking: {
+    //     url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_API_KEY}`
+    //   }
+    // },
+    polygon: {
+      url: `https://rpc-mumbai.maticvigil.com`,
+      accounts: [`${PRIVATE_KEY}`]
+    },
+    rinkeby: {
+      url: `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
+      accounts: [`${PRIVATE_KEY}`]
+    },
+    mainnet: {
+      url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
+      accounts: [`${PRIVATE_KEY}`]
+    },
+    
+  },
+  etherscan: {
+    apiKey: "PSXD1G3KX4XBG6A1HA7IX55CFD9KCRC67Q"
+  }
 };

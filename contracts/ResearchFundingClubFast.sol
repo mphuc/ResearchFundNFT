@@ -7,7 +7,6 @@ import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "hardhat/console.sol";
 
 error URIQueryForNonexistentTokenRFC();
 error SaleIncomplete();
@@ -18,7 +17,7 @@ error MaxPerNFTAddrExceeded();
 error SoldOut();
 error InsufficientFunds();
 
-contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
+contract ResearchFundingClub is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     using Strings for uint256;
 
     struct CollectionData {
@@ -32,10 +31,10 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     string public notRevealedURI;
     string public baseTokenURI;
 
-    uint256 public MIN_SUPPLY = 0; // only used for multi-drop reveals
-    uint256 public MAX_SUPPLY = 10;
+    uint256 public MIN_SUPPLY = 0; // only used for multi-drop reveal check
+    uint256 public MAX_SUPPLY = 25;
     
-    uint256 public PRICE = 0.0000001 ether;
+    uint256 public PRICE = 0.2 ether;
     uint256 public MAX_PER_MINT = 1;
     bool public revealed = false;
 
@@ -43,11 +42,11 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     mapping(uint256 => CollectionData) public collections;
 
     // Wallets
-    address public charityWallet = 0xf9351CFAB08d72e873424708A817A067fA33F45F;
+    address public charityWallet = 0x7158d45648167222C89351CeBF618f413Bad08fb;
     address public devWallet = 0x81E3CBA331c2036044A62B54524a44D319D0E1ae;
 
     constructor(uint96 _royaltyFeesInBips, string memory _notRevealedURI) ERC721A("Research Funding Club", "RFC") {
-        setRoyaltyInfo(msg.sender, _royaltyFeesInBips); // 2.5% = 2.5 * 100 = 250
+        setRoyaltyInfo(msg.sender, _royaltyFeesInBips); // 2.5% = 2.5 * 100 = 250 
         notRevealedURI = _notRevealedURI;
     }
 
@@ -104,6 +103,14 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         _safeMint(msg.sender, _mintAmount);
     }
 
+    function airDrop(uint256 _mintAmount, address destination) external onlyOwner  {
+        uint256 supply = totalSupply();
+        if (_mintAmount == 0) revert ZeroMintFailed();
+        if (_mintAmount > MAX_PER_MINT) revert MaxPerNFTAddrExceeded();
+        if (supply + _mintAmount > MAX_SUPPLY) revert SoldOut();
+        _safeMint(destination, _mintAmount);
+    }
+
     function tokensOfOwner(address _owner)
         external
         view
@@ -125,7 +132,6 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
     function reveal(string memory _newBaseURI) external onlyOwner {
         collections[collectionID] = CollectionData(MIN_SUPPLY, MAX_SUPPLY, _newBaseURI);
         revealed = true;
-        paused = true; 
         collectionID++;
     }
 
@@ -139,6 +145,7 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         MIN_SUPPLY = MAX_SUPPLY;
         MAX_SUPPLY +=_newMaxSupply;
         revealed = false;
+        paused = true; 
     }
 
 
@@ -181,11 +188,13 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
         uint256 balance = address(this).balance;
         require(balance > 0, "No ether left to withdraw.");
 
+        // charity
         (bool cw, ) = (charityWallet).call{
             value: (address(this).balance * 10) / 100
         }("");
         require(cw, "Charity Transfer failed.");
 
+        // developer
         (bool df, ) = (devWallet).call{
             value: (address(this).balance * 5) / 100
         }("");
@@ -193,6 +202,6 @@ contract ResearchFundingClubFast is ERC721A, ERC2981, Ownable, ReentrancyGuard {
 
         // owner
         (bool success, ) = (msg.sender).call{value: address(this).balance}("");
-        require(success, "Transfer failed.");
+        require(success, "Owner Transfer failed.");
     }
 }

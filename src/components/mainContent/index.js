@@ -29,7 +29,7 @@ const PORTIS_KEY = "919c5693-d3a3-44ed-a070-4ecb56c92ca4"; // not sure, this is 
 const INFURA_KEY = "e914976b74504e65bf8cb2864584556b";
 const APP_URL = "https://researchfundingclub.com";
 const CONTACT_EMAIL = "manishgt194@gmail.com";
-const RPC_URL = "https://rinkeby.infura.io/v3/7894d0f19d6b45e5a31e0fbe067a3c09";
+const RPC_URL = "https://mainnet.infura.io/v3/7894d0f19d6b45e5a31e0fbe067a3c09";
 const APP_NAME = "Research Funding Club";
 
 const wallets = [

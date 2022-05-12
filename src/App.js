@@ -1,7 +1,8 @@
+import Main from "./components/mainContent";
+import Mint from "./components/Mint";
 import { useRef, useState } from "react";
 import styles from "./App.module.scss";
 import Navbar from "./components/navbar";
-import Main from "./components/mainContent";
 import { useInView } from "react-intersection-observer";
 import MenuSharpIcon from "@mui/icons-material/MenuSharp";
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";

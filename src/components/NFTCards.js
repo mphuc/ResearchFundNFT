@@ -135,7 +135,7 @@ function NFTCards() {
       <Carousel animation="slide" swipe autoPlay interval={5000}>
         {images.map((image, i) => (
           <div key={i}>
-            <Card style={{ width: "90%", margin: "10px auto" }}>
+            <Card style={{ width: "90%", margin: "5px auto" }}>
               <CardContent style={{ margin: "10px auto" }}>
                 <div
                   style={{

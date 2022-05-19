@@ -9,7 +9,11 @@ import Footer from "../footer";
 import nftcalendar from "../../assets/NFTCalendar.png";
 import Ourstory from "../ourstory";
 import Onboard from "bnc-onboard";
+import app from "./fire.js";
+import "firebase/compat/firestore";
+import firebase from 'firebase/compat/app';
 
+var db = app.firestore();
 let web3;
 
 const BLOCKNATIVE_KEY = "aa821374-77e8-4a14-8e84-41c98acefc7d";
@@ -18,14 +22,14 @@ const BLOCKNATIVE_KEY = "aa821374-77e8-4a14-8e84-41c98acefc7d";
 // important for deployment
 
 // const NETWORK_ID = 5777;
-const NETWORK_ID = 4; // change
+const NETWORK_ID = 1; // change
 
 const FORTMATIC_KEY = "pk_live_8FC272D2B76AB985";
 const PORTIS_KEY = "919c5693-d3a3-44ed-a070-4ecb56c92ca4"; // not sure, this is a project id atm
 const INFURA_KEY = "e914976b74504e65bf8cb2864584556b";
 const APP_URL = "https://researchfundingclub.com";
 const CONTACT_EMAIL = "manishgt194@gmail.com";
-const RPC_URL = "https://rinkeby.infura.io/v3/7894d0f19d6b45e5a31e0fbe067a3c09";
+const RPC_URL = "https://mainnet.infura.io/v3/7894d0f19d6b45e5a31e0fbe067a3c09";
 const APP_NAME = "Research Funding Club";
 
 const wallets = [
@@ -158,16 +162,14 @@ export default function Main({
     const abi = await abiResponse.json();
 
     var obj = new web3.eth.Contract(abi, CONFIG.CONTRACT_ADDRESS);
-
-    var maxSupply = await obj.methods.MAX_SUPPLY().call();
-    var minSupply = await obj.methods.MIN_SUPPLY().call();
-    var totalSupply = maxSupply - minSupply;
-    var mintedAmount = await obj.methods.totalSupply().call();
-
-    setMintedAmount(mintedAmount);
-    setTotalSupply(totalSupply);
     setSmartContract(obj);
-    // console.log("here", maxSupply, minSupply, mintedAmount);
+
+    // get mint pause state:
+    var state = await obj.methods.paused().call();
+    console.log("State: ", state);
+    if (state == true) {
+      setFeedback("Mint Paused: Tx will fail");
+    }
   };
 
   const getConfig = async () => {
@@ -180,32 +182,24 @@ export default function Main({
     const config = await configResponse.json();
 
     SET_CONFIG(config);
-    loadSupplyData(config.CONTRACT_ADDRESS);
-    // loadContract(config.CONTRACT_ADDRESS, config);
+    loadSupplyData2();
+    loadContract(config.CONTRACT_ADDRESS, config);
   };
 
-  const loadSupplyData = async(addr) => {
-    // only for the total supply data : quick fix
-    const { ethereum } = window;
-    let web3 = new Web3(ethereum);
-    
-    const abiResponse = await fetch("/config/abi.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    const abi = await abiResponse.json();
+  const loadSupplyData2 = async() => {
+    db.collection("mintedNFTS")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((res) => {
+          var data = res.data();
 
-    var obj = new web3.eth.Contract(abi, addr);
+          var mintedValue = data["count"];
+          var total = data["total"];
 
-    var maxSupply = await obj.methods.MAX_SUPPLY().call();
-    var minSupply = await obj.methods.MIN_SUPPLY().call();
-    var totalSupply = maxSupply - minSupply;
-    var mintedAmount = await obj.methods.totalSupply().call();
-
-    setMintedAmount(mintedAmount);
-    setTotalSupply(totalSupply);
+          setMintedAmount(mintedValue);
+          setTotalSupply(total);
+        });
+      });
   }
 
   const mint = () => {
@@ -229,13 +223,22 @@ export default function Main({
       })
       .once("error", (err) => {
         console.log(err);
-        setFeedback("Mint Failed");
+        setFeedback("Mint Failed: Refresh");
         setClaimingNft(false);
       })
       .then((receipt) => {
         console.log(receipt);
         setFeedback(`Successfully Minted`);
         setClaimingNft(false);
+
+        // update on database
+        db.collection("mintedNFTS")
+          .doc("z8cdvS7m0e0n3DTMpkHU")
+          .set({
+            "count": parseInt(parseInt(mintedAmount) + 1),
+            "total": parseInt(totalSupply)
+          });
+        loadSupplyData2();
         getConfig();
       });
   };

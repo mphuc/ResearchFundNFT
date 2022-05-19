@@ -56,11 +56,11 @@ module.exports = {
     ]
   },
   networks: {
-    // hardhat: {
-    //   forking: {
-    //     url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_API_KEY}`
-    //   }
-    // },
+    hardhat: {
+      forking: {
+        url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_API_KEY}`
+      }
+    },
     polygon: {
       url: `https://rpc-mumbai.maticvigil.com`,
       accounts: [`${PRIVATE_KEY}`]

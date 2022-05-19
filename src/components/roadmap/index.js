@@ -22,7 +22,7 @@ export default function Roadmap({ id, linkId }) {
             </p>
           </div>
         </div>
-        <div>
+        <div className={styles.checked}>
           <div>
             <div className={styles.done}>
               <img src={doneIcon} alt="" />
@@ -33,7 +33,8 @@ export default function Roadmap({ id, linkId }) {
               <span>Q2 2022</span>
               <br />
               Community Building. Start working on building the community and
-              marketing the project. Launch discord and twitter.
+              marketing the project. Launch discord and twitter. Drop the first
+              collection.
             </p>
           </div>
         </div>
@@ -47,7 +48,7 @@ export default function Roadmap({ id, linkId }) {
             <p>
               <span>Q3 2022</span>
               <br />
-              Drop the first collection and make our first donations to charity.
+              Sell out the first 25 NFTs. Make our first donations to charity.
               Decide on a voting system for our NFT holders to vote on where to
               donate future revenue. Use some of the money to hire new artists
               for creating the art for the next NFT drop. The next drop will be

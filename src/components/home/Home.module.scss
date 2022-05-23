@@ -46,6 +46,13 @@
         width: 100%;
       }
     }
+    .raised {
+      @media screen and (max-width: 425px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
     .btns {
       @media screen and (max-width: 425px) {
         display: flex;

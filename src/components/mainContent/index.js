@@ -11,7 +11,7 @@ import Ourstory from "../ourstory";
 import Onboard from "bnc-onboard";
 import app from "./fire.js";
 import "firebase/compat/firestore";
-import firebase from 'firebase/compat/app';
+import firebase from "firebase/compat/app";
 
 var db = app.firestore();
 let web3;
@@ -105,14 +105,13 @@ const onboard = Onboard({
     wallets: wallets,
   },
   subscriptions: {
-    wallet: wallet => {
+    wallet: (wallet) => {
       // instantiate web3 when the user has selected a wallet
-      web3 = new Web3(wallet.provider)
-      console.log(`${wallet.name} connected!`)
-    }
-  }
+      web3 = new Web3(wallet.provider);
+      console.log(`${wallet.name} connected!`);
+    },
+  },
 });
-
 
 export default function Main({
   homeRef,
@@ -130,6 +129,7 @@ export default function Main({
   const [claimingNft, setClaimingNft] = useState(false);
   const [mintedAmount, setMintedAmount] = useState(0);
   const [feedback, setFeedback] = useState(`Connect Wallet`);
+  const [currentRaised, setCurrentRaised] = useState();
 
   const [smartContract, setSmartContract] = useState(null);
   const [totalSupply, setTotalSupply] = useState(0);
@@ -186,7 +186,27 @@ export default function Main({
     loadContract(config.CONTRACT_ADDRESS, config);
   };
 
-  const loadSupplyData2 = async() => {
+  const getCurrentRaised = async () => {
+    const ethPriceResponse = await fetch(
+      "https://api.etherscan.io/api?module=stats&action=ethprice&apikey=ABA4YGGDRPS9YMM4ZY93EMV92JHBAPST1K"
+    );
+
+    const ethPrice = await ethPriceResponse.json();
+
+    const ethUsd = ethPrice.result.ethusd;
+
+    const contractValResponse = await fetch(
+      "https://api.etherscan.io/api?module=account&action=balance&address=0x39cEd238262Eb15B1409871bbcb5B89a478f68C4&tag=latest&apikey=ABA4YGGDRPS9YMM4ZY93EMV92JHBAPST1K"
+    );
+
+    const contractVal = await contractValResponse.json();
+
+    const contractValEth = parseInt(contractVal.result.slice(0, 5)) * 0.0001;
+
+    setCurrentRaised((ethUsd * contractValEth).toFixed(2));
+  };
+
+  const loadSupplyData2 = async () => {
     db.collection("mintedNFTS")
       .get()
       .then((querySnapshot) => {
@@ -200,7 +220,7 @@ export default function Main({
           setTotalSupply(total);
         });
       });
-  }
+  };
 
   const mint = () => {
     var mintAmount = 1;
@@ -235,8 +255,8 @@ export default function Main({
         db.collection("mintedNFTS")
           .doc("z8cdvS7m0e0n3DTMpkHU")
           .set({
-            "count": parseInt(parseInt(mintedAmount) + 1),
-            "total": parseInt(totalSupply)
+            count: parseInt(parseInt(mintedAmount) + 1),
+            total: parseInt(totalSupply),
           });
         loadSupplyData2();
         getConfig();
@@ -245,6 +265,7 @@ export default function Main({
 
   useEffect(() => {
     getConfig();
+    getCurrentRaised();
   }, []);
 
   const connectWallet = async () => {
@@ -260,7 +281,7 @@ export default function Main({
 
   return (
     <div className={styles.container}>
-      <Home id={homeRef} linkId={homeId} />
+      <Home id={homeRef} linkId={homeId} currentRaised={currentRaised} />
       <div className={styles.featured}>
         <div>
           <p>Featured in</p>

@@ -48,21 +48,10 @@ export default function Roadmap({ id, linkId }) {
             <p>
               <span>Q3 2022</span>
               <br />
-              Sell out the first 25 NFTs. Make our first donations to charity.
-              Decide on a voting system for our NFT holders to vote on where to
-              donate future revenue. Use some of the money to hire new artists
-              for creating the art for the next NFT drop. The next drop will be
-              a 10,000 NFT drop. The art is undecided, but may be based on
-              famous artists/musicians/actors/etc. who we've lost. Something
-              like the famous{" "}
-              <a
-                href="https://knowyourmeme.com/memes/meme-heaven"
-                rel="noreferrer"
-                target="_blank"
-              >
-                meme heaven
-              </a>
-              .
+              Sell out the first 25 NFTs. Reveal all 25 NFTs. Donate 90% of our
+              revenue to American Heart Association and American Cancer Society.
+              Use the other 10% of revenue to hire new artists for creating the
+              art for the next NFT drop.
             </p>
           </div>
         </div>

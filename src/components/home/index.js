@@ -2,7 +2,7 @@ import styles from "./Home.module.scss";
 import previewImg from "../../nfts/MomDadBlue.png";
 import heartIcon from "../../assets/heart.png";
 
-export default function Home({ id, linkId }) {
+export default function Home({ id, linkId, currentRaised }) {
   return (
     <>
       <div className="refDummy" ref={linkId}></div>
@@ -13,8 +13,22 @@ export default function Home({ id, linkId }) {
           </h1>
           <p>
             The NFT project dedicated to becoming the largest donor to research
-            institutions studying the world’s deadliest diseases.
+            institutions studying the world's deadliest diseases.
           </p>
+          <p>
+            We're donating 90% of our first drop revenue to American Cancer
+            Society and American Heart Assocation.
+          </p>
+          {currentRaised && (
+            <div className={styles.raised}>
+              <h3 style={{ marginBottom: "20px" }}>
+                Current Money Raised:{" "}
+                <span style={{ textDecoration: "underline", fontSize: "105%" }}>
+                  ${currentRaised}
+                </span>
+              </h3>
+            </div>
+          )}
           <div className={styles.btns}>
             <button
               onClick={() =>

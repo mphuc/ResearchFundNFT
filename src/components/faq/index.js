@@ -35,24 +35,12 @@ export default function Faq({ id, linkId }) {
             <h3>Why buy one of our NFTs?</h3>
           </AccordionSummary>
           <AccordionDetails className={styles.accDetails}>
-            <p className={styles.dotted}>
-              <span>1</span>
-              On our first drop, we'll donate 5% of all proceeds to the American
-              Heart Association, and another 5% to American Cancer Society. For
-              every transaction that occurs after the first drop, 5% of the
-              royalties will be set aside for donation. We'll let our owners
-              decide the institution.
-            </p>
-            <p className={styles.dotted}>
-              <span>2</span>
-              We'll eventually have a token that our owners will be able to
-              accumulate for everyday that they own one of our NFT's. That token
-              will be able to be exchanged for ETH.
-            </p>
-            <p className={styles.dotted}>
-              <span>3</span>
-              Collect all 5 versions of the same portrait, and we'll mint the
-              original photograph as an NFT and transfer it to you.
+            <p>
+              We're donating 90% of revenue to charity. On our first drop, we'll
+              donate 45% of all proceeds to the American Heart Association, and
+              another 45% to American Cancer Society. For every transaction that
+              occurs after the first drop, 5% of the royalties will be set aside
+              for donation. We'll let our owners decide the institution.
             </p>
           </AccordionDetails>
         </Accordion>
@@ -65,14 +53,14 @@ export default function Faq({ id, linkId }) {
           </AccordionSummary>
           <AccordionDetails className={styles.accDetails}>
             <p>
-              10% of the first drop proceeds will go to American Heart
+              90% of the first drop proceeds will go to American Heart
               Assocation and American Cancer Society. 5% of all royalties from
               transactions after the first drop will be set aside for charity
               and our NFT holders will help us decide where to donate.
             </p>
             <p>
-              The rest of the proceeds, and any royalties on transactions in the
-              future will go towards the following:
+              The other 10% of the proceeds, and any royalties on transactions
+              in the future will go towards the following:
             </p>
             <p className={styles.dotted}>
               <span className={styles.smallDot}></span>

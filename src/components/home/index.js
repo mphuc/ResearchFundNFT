@@ -33,15 +33,6 @@ export default function Home({ id, linkId, currentRaised }) {
               </h3>
             </div>
           )}
-          <div className={styles.btns}>
-            <button
-              onClick={() =>
-                (window.location.href = "https://discord.gg/researchfundnft")
-              }
-            >
-              Join Discord
-            </button>
-          </div>
         </div>
         <div className={styles.wrapper}>
           <div className={styles.card}>
@@ -56,11 +47,6 @@ export default function Home({ id, linkId, currentRaised }) {
               <img src={heartIcon} alt="" />
             </div>
           </div>
-        </div>
-        <div className={styles.logo}>
-          <p>
-            research <br /> funding <br /> club nft
-          </p>
         </div>
       </div>
     </>

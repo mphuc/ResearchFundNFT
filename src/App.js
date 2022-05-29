@@ -4,8 +4,6 @@ import { useRef, useState } from "react";
 import styles from "./App.module.scss";
 import Navbar from "./components/navbar";
 import { useInView } from "react-intersection-observer";
-import MenuSharpIcon from "@mui/icons-material/MenuSharp";
-import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 
 function App() {
   // hooks for scroll indicator on navbar
@@ -28,9 +26,6 @@ function App() {
       <div className={styles.circle}></div>
       <div className={styles.circle}></div>
       <div className={styles.bgLayer}></div>
-      <button onClick={() => setNav(!nav)} className={styles.menuBtn}>
-        {!nav ? <MenuSharpIcon color="inherit" /> : <CloseSharpIcon />}
-      </button>
       <Navbar
         homeId={homeId}
         galleryId={galleryId}

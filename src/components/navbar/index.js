@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import styles from "./Navbar.module.scss";
-import discordIcon from "../../assets/discord2.png";
-import twitterIcon from "../../assets/twitter2.png";
+import discordIcon from "../../assets/discord.png";
+import twitterIcon from "../../assets/icons8-twitter-circled-240.png";
+import etherscanIcon from "../../assets/etherscan-logo-circle.png";
+import openseaIcon from "../../assets/opensea.png";
 
 export default function Navbar({
   roadmapId,
@@ -35,13 +37,9 @@ export default function Navbar({
       setNavActive(4);
     }
   }, [homeInView, galleryInView, roadmapInView, ourstoryInView, faqInView]);
+
   return (
     <div className={`${styles.container} ${nav ? styles.open : ""}`}>
-      <div className={styles.logo}>
-        <p>
-          research <br /> funding <br /> club nft
-        </p>
-      </div>
       <div className={styles.nav}>
         <ul>
           <li
@@ -97,11 +95,29 @@ export default function Navbar({
         </ul>
       </div>
       <div className={styles.socials}>
-        <a href="https://discord.gg/urDZcwnXTF">
+        <a href="https://discord.gg/urDZcwnXTF" target="_blank" rel="noopener">
           <img src={discordIcon} alt="" />
         </a>
-        <a href="https://twitter.com/ResearchFundNFT">
+        <a
+          href="https://twitter.com/ResearchFundNFT"
+          target="_blank"
+          rel="noopener"
+        >
           <img src={twitterIcon} alt="" />
+        </a>
+        <a
+          href="https://etherscan.io/address/0x39cEd238262Eb15B1409871bbcb5B89a478f68C4"
+          target="_blank"
+          rel="noopener"
+        >
+          <img src={etherscanIcon} alt="" />
+        </a>
+        <a
+          href="https://opensea.io/collection/research-funding-club"
+          target="_blank"
+          rel="noopener"
+        >
+          <img src={openseaIcon} alt="" />
         </a>
       </div>
     </div>

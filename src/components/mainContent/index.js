@@ -5,7 +5,6 @@ import Home from "../home";
 import Gallery from "../gallery";
 import Roadmap from "../roadmap";
 import Faq from "../faq";
-import Footer from "../footer";
 import nftcalendar from "../../assets/NFTCalendar.png";
 import Ourstory from "../ourstory";
 import Onboard from "bnc-onboard";
@@ -342,7 +341,6 @@ export default function Main({
       <Gallery id={galleryRef} linkId={galleryId} />
       <Roadmap id={roadmapRef} linkId={roadmapId} />
       <Faq id={faqRef} linkId={faqId} />
-      <Footer />
     </div>
   );
 }

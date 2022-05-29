@@ -91,6 +91,7 @@
         p {
           text-align: center;
           font-size: 35px;
+          color: #fff;
           @media screen and (max-width: 1024px) {
             font-size: 25px;
           }
@@ -160,7 +161,6 @@
           border-right: 1px solid rgba(255, 255, 255, 0.63);
         }
         p {
-          color: #fff;
           text-align: center;
           line-height: 50px;
           font-size: 20px;

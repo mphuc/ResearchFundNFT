@@ -12,12 +12,16 @@ export default function Home({ id, linkId, currentRaised }) {
             Research <br /> Funding Club NFT
           </h1>
           <p>
-            The NFT project dedicated to becoming the largest donor to research
-            institutions studying the world's deadliest diseases.
+            Research Funding Club is a DAO raising money for charity via our NFT
+            sales.
           </p>
           <p>
             We're donating 90% of our first drop revenue to American Cancer
             Society and American Heart Assocation.
+          </p>
+          <p>
+            We will open up our future NFT drops to other charities of our
+            holders choosing.
           </p>
           {currentRaised && (
             <div className={styles.raised}>

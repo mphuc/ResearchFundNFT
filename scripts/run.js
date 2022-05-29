@@ -2,7 +2,7 @@
 async function main() {
   // const baseTokenURI = "https://gateway.pinata.cloud/ipfs/QmV8MxrRVzwSGSszqx1qcisz7esenPpq9QFmFBTBWa3vVS/";
 
-  const baseTokenURI = "https://gateway.pinata.cloud/ipfs/QmPnytScaJWApNsC86YrX2zAVGzDjPejmWLwevadmcg5AM/";
+  const baseTokenURI = "https://gateway.pinata.cloud/ipfs/Qmb1k6n6bUcdgKxoiVJSUCaX2BwvzsQJjhX5kmJ8CZkqZ1/";
   const hiddenURI = "https://gateway.pinata.cloud/ipfs/QmSJ5JkSpLdrb1sFfJZNc7xufXCvCvQ7LVxbp6jubKGddP/";
 
   // the fast version

@@ -3,7 +3,7 @@
 ## BASE URI
 
 ```shell
-ipfs://QmNUmrdwgi8XA7JURVEqgXNp2CVGHPsB34vxJAggJJ4MpT
+ipfs://Qmb1k6n6bUcdgKxoiVJSUCaX2BwvzsQJjhX5kmJ8CZkqZ1
 ```
 
 ## Mystery NFT url

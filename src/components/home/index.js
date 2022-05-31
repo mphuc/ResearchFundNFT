@@ -12,16 +12,19 @@ export default function Home({ id, linkId, currentRaised }) {
             Research <br /> Funding Club NFT
           </h1>
           <p>
-            Research Funding Club is a DAO raising money for charity via our NFT
-            sales.
+            Research Funding Club is a non-profit DAO raising money for charity
+            via NFTs.
           </p>
           <p>
-            We're donating 90% of our first drop revenue to American Cancer
-            Society and American Heart Assocation.
+            We drop NFT collections that are dedicated to lost loved ones. We
+            honor your loved one by turning photos of them into 1-of-1 NFTs, and
+            we donate 90% of the revenue from the drop to a charity of your
+            choosing.
           </p>
           <p>
-            We will open up our future NFT drops to other charities of our
-            holders choosing.
+            Our first drop is minting now. As with all of our NFT drops, we're
+            donating 90% of the revenue. We're splitting the 90% across two
+            charities - American Cancer Society and American Heart Assocation.
           </p>
           {currentRaised && (
             <div className={styles.raised}>

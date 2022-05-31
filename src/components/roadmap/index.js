@@ -82,22 +82,7 @@ export default function Roadmap({ id, linkId }) {
           </div>
           <div>
             <p>
-              <span>Q1 2023</span>
-              <br />
-              Begin working on ERC20 token that will be used to reward our NFT
-              holders. More details to come.
-            </p>
-          </div>
-        </div>
-        <div>
-          <div>
-            <div className={styles.done}>
-              <img src={doneIcon} alt="" />
-            </div>
-          </div>
-          <div>
-            <p>
-              <span>Q2 2023 and beyond </span>
+              <span>Q1 2023 and beyond</span>
               <br />
               Continue commissioning artists to create more NFTs and continue
               doing drops and donating money. Define our tokenomics to be able

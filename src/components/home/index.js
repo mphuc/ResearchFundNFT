@@ -9,11 +9,11 @@ export default function Home({ id, linkId, currentRaised }) {
       <div ref={id} className={styles.container}>
         <div>
           <h1>
-            Research <br /> Funding Club NFT
+            Research <br /> Fund NFT
           </h1>
           <p>
-            Research Funding Club is a non-profit DAO raising money for charity
-            via NFTs.
+            Research Fund NFT is a non-profit DAO raising money for charity via
+            NFTs.
           </p>
           <p>
             We drop NFT collections that are dedicated to lost loved ones. We

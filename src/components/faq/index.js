@@ -17,7 +17,7 @@ export default function Faq({ id, linkId }) {
           </AccordionSummary>
           <AccordionDetails className={styles.accDetails}>
             <p>
-              Research Funding Club are NFTs following the ERC-721 standard. The
+              Research Fund NFT are NFTs following the ERC-721 standard. The
               first drop is a collection of 25 NFT's that are portrait's of
               different photos we found of our family. There's 5 different
               portrait's in the first drop - all done by a different artist.

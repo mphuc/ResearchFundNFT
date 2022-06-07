@@ -17,8 +17,8 @@ export default function Ourstory({ id, linkId }) {
         <p>
           <br />
           According to the CDC data, heart disease is the top killer in the US,
-          followed by cancer. Our mission at Research Funding Club, is help fund
-          the science that studies these deadliest diseases, using the power of
+          followed by cancer. Our mission at Research Fund NFT, is help fund the
+          science that studies these deadliest diseases, using the power of
           NFT's.
         </p>
       </div>

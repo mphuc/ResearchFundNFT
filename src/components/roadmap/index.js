@@ -33,8 +33,7 @@ export default function Roadmap({ id, linkId }) {
               <span>Q2 2022</span>
               <br />
               Community Building. Start working on building the community and
-              marketing the project. Launch discord and twitter. Drop the first
-              collection.
+              marketing the project.
             </p>
           </div>
         </div>
@@ -46,12 +45,13 @@ export default function Roadmap({ id, linkId }) {
           </div>
           <div>
             <p>
-              <span>Q3 2022</span>
+              <span>Q3-Q4 2022</span>
               <br />
-              Sell out the first 25 NFTs. Reveal all 25 NFTs. Donate 90% of our
-              revenue to American Heart Association and American Cancer Society.
-              Use the other 10% of revenue to hire new artists for creating the
-              art for the next NFT drop.
+              Drop first collection of 25 1-of-1 NFTs. Reveal all 25 NFTs once
+              we're sold out. Donate 90% of our revenue to American Heart
+              Association and American Cancer Society. Use the other 10% of
+              revenue to hire new artists for creating the art for the next NFT
+              drop.
             </p>
           </div>
         </div>
@@ -63,7 +63,7 @@ export default function Roadmap({ id, linkId }) {
           </div>
           <div>
             <p>
-              <span>Q4 2022 </span>
+              <span>Q1 2023 and beyond </span>
               <br />
               Drop the second collection of 10,000 NFT's and make more donations
               to charity. Continue marketing our vision. Expand business model
@@ -71,22 +71,6 @@ export default function Roadmap({ id, linkId }) {
               platform. Customers would be able to commission us to create art
               that commemorates their lost loved one, and we'll work with them
               to create their own unique NFT drop.
-            </p>
-          </div>
-        </div>
-        <div>
-          <div>
-            <div className={styles.done}>
-              <img src={doneIcon} alt="" />
-            </div>
-          </div>
-          <div>
-            <p>
-              <span>Q1 2023 and beyond</span>
-              <br />
-              Continue commissioning artists to create more NFTs and continue
-              doing drops and donating money. Define our tokenomics to be able
-              to bring more value to our community.
             </p>
           </div>
         </div>

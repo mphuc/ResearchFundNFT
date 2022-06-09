@@ -95,9 +95,6 @@ export default function Navbar({
         </ul>
       </div>
       <div className={styles.socials}>
-        <a href="https://discord.gg/urDZcwnXTF" target="_blank" rel="noopener">
-          <img src={discordIcon} alt="" />
-        </a>
         <a
           href="https://twitter.com/ResearchFundNFT"
           target="_blank"

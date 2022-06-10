@@ -29,7 +29,7 @@ export default function Home({ id, linkId, currentRaised }) {
           {currentRaised && (
             <div className={styles.raised}>
               <h3 style={{ marginBottom: "20px" }}>
-                Current Raised:{" "}
+                Amount Raised:{" "}
                 <span style={{ textDecoration: "underline" }}>
                   ${currentRaised}
                 </span>

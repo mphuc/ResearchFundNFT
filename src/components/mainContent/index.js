@@ -202,7 +202,7 @@ export default function Main({
 
     const contractValEth = parseInt(contractVal.result.slice(0, 5)) * 0.0001;
 
-    setCurrentRaised((ethUsd * contractValEth).toFixed(2));
+    setCurrentRaised((ethUsd * contractValEth + 35).toFixed(2));
   };
 
   const loadSupplyData2 = async () => {
@@ -316,21 +316,21 @@ export default function Main({
         <div>
           <div>
             <p>
-              <span>-</span>
+              <span>$35</span>
               <br />
               American Heart Association
             </p>
           </div>
           <div>
             <p>
-              <span>-</span>
+              <span>$70</span>
               <br />
               Total Donations
             </p>
           </div>
           <div>
             <p>
-              <span>-</span>
+              <span>$35</span>
               <br />
               American Cancer Society
             </p>
